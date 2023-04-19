@@ -1,66 +1,92 @@
-package entities;
-
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class PlataformaStreaming {
-
-	private String nome;
-	//private Hash<Serie> serie;
-	//private Hash<Cliente> cliente;
-	private Cliente clienteAtual;
-	
-	
-	public PlataformaStreaming(String nome, Cliente clienteAtual) {
-		this.nome = nome;
-		this.clienteAtual = clienteAtual;
-	}
-
-
-	public String getNome() {
-		return nome;
-	}
-
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-
-	public Cliente getClienteAtual() {
-		return clienteAtual;
-	}
-
-
-	public void setClienteAtual(Cliente clienteAtual) {
-		this.clienteAtual = clienteAtual;
-	}
-	
-	
-	public Cliente login(String usuario, String senha) {
-		return null;
-	}
-	
-	public void adicionaSerie(Serie serie) {}
-	
-	public void adicionaCliente(Cliente cliente) {}
-	
-	public List<Serie> filtrarPorGenero(String genero) {
-		return null;
-	}
-	
-	public List<Serie> filtrarPorIdioma(String idioma) {
-		return null;
-	}
-	
-	public List<Serie> filtrarPorQtdEpisodios(int qtdEpisodios) {
-		return null;
-	}
-	
-	public void registrarAudiencia(Serie serie) {}
-	
-	public void logOff() {}
-	
-	public Serie buscarSerie(String nomeSerie) {
-		return null;
-	}
+    
+    // Variáveis de instância
+    private String nome;
+    private HashMap<String, Serie> series;
+    private HashMap<String, Cliente> clientes;
+    private Cliente clienteAtual;
+    
+    // Construtor
+    public PlataformaStreaming(String nome) {
+        this.nome = nome;
+        this.series = new HashMap<>();
+        this.clientes = new HashMap<>();
+        this.clienteAtual = null;
+    }
+    
+    // Métodos
+    public void login(String NomeDeUsuario, String senha) {
+        for (Cliente cliente : clientes.values()) {
+            if (cliente.getNomeDeUsuario().equals(NomeDeUsuario) && cliente.getSenha().equals(senha)) {
+                clienteAtual = cliente;
+                System.out.println("Login efetuado com sucesso!");
+                return;
+            }
+        }
+        System.out.println("Email ou senha incorretos!");
+    }
+    
+    public void adicionarSerie(Serie serie) {
+        series.put(serie.getNome(), serie);
+        System.out.println("Série adicionada com sucesso!");
+    }
+    
+    public void adicionarCliente(Cliente cliente) {
+        clientes.put(cliente.getNomeDeUsuario(), cliente);
+        System.out.println("Cliente adicionado com sucesso!");
+    }
+    
+    public List<Serie> filtrarPorGenero(String genero) {
+        List<Serie> seriesFiltradas = new ArrayList<>();
+        for (Serie serie : series.values()) {
+            if (serie.getGenero().equals(genero)) {
+                seriesFiltradas.add(serie);
+            }
+        }
+        return seriesFiltradas;
+    }
+    
+    public List<Serie> filtrarPorIdioma(String idioma) {
+        List<Serie> seriesFiltradas = new ArrayList<>();
+        for (Serie serie : series.values()) {
+            if (serie.getIdioma().equals(idioma)) {
+                seriesFiltradas.add(serie);
+            }
+        }
+        return seriesFiltradas;
+    }
+    
+    public List<Serie> filtrarPorQntEpisodios(int qntEpisodios) {
+        List<Serie> seriesFiltradas = new ArrayList<>();
+        for (Serie serie : series.values()) {
+            if (serie.getQuantidadeEpisodios() == qntEpisodios) {
+                seriesFiltradas.add(serie);
+            }
+        }
+        return seriesFiltradas;
+    }
+    
+    public void registrarAudiencia(String nomeSerie) {
+        Serie serie = series.get(nomeSerie);
+        if (serie != null) {
+            serie.setAudiencia(1);
+            System.out.println("Audiência registrada com sucesso!");
+        } else {
+            System.out.println("Série não encontrada!");
+        }
+    }
+    
+    public void logoff() {
+        clienteAtual = null;
+        System.out.println("Logout efetuado com sucesso!");
+    }
+    
+    public Serie buscarSerie(String nome) {
+        return series.get(nome);
+    }
+    
 }
