@@ -23,28 +23,30 @@ public class Program {
 		Scanner sc = new Scanner(System.in);
 
 		List<Cliente> list = new ArrayList<>();
-
 		
 
-		File sourceFile = new File("Cliente.txt");
+		File sourceFile = new File("C:\\Users\\Pedro\\Desktop\\Project3\\lpm_projetos_3_4_5-grupo4-g2\\codigo\\Project3\\src\\Teste.txt");
 		String sourceFolderStr = sourceFile.getParent();
 		
 		boolean success = new File(sourceFolderStr + "\\out").mkdir();
 		
 		String targetFileStr = sourceFolderStr + "\\out\\summary.csv";
+		
+		System.out.println(sourceFile.getAbsolutePath());
 
 		try (BufferedReader br = new BufferedReader(new FileReader(sourceFile))) {
-
 			String itemCsv = br.readLine();
 			while (itemCsv != null) {
 
 				String[] fields = itemCsv.split(",");
+				if(fields.length >= 2) {
 				String nome = fields[0];
 				String senha = fields[1];
 				
 
 				list.add(new Cliente(nome, senha));
 
+				}
 				itemCsv = br.readLine();
 			}
 
