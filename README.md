@@ -8,7 +8,7 @@ Escreva um ou dois parágrafos resumindo o objetivo do seu projeto.
 
 - Pedro Luis Gonçalves
 - Hitalo Silveira Porto
-- Nome completo do aluno 3
+- Vítor Lion Guimarães Rodrigues
 - Nome completo do aluno 4
 - Nome completo do aluno 4
 - Nome completo do aluno 4
