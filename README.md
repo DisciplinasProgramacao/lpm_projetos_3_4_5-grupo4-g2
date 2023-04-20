@@ -6,14 +6,13 @@ Escreva um ou dois parágrafos resumindo o objetivo do seu projeto.
 
 ## Alunos integrantes da equipe
 
-- Pedro Luis Gonçalves
 - Hitalo Silveira Porto
+- Kaio Henrique Oliveira da Silveira Barbosa
+- Pedro Luis Gonçalves
 - Vítor Lion Guimarães Rodrigues
-- Nome completo do aluno 4
-- Nome completo do aluno 4
-- Nome completo do aluno 4
+- Yghor Ribas Gomes
 
 ## Professores responsáveis
 
-- Nome completo do professor 1
-- Nome completo do professor 2
+- Cleiton Silva Tavares
+- João Caram Santos de Oliveira
