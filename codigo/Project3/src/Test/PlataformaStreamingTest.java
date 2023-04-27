@@ -1,7 +1,5 @@
 package Test;
 
-package Test;
-
 import entities.Cliente;
 import entities.PlataformaStreaming;
 import entities.Serie;

@@ -78,7 +78,7 @@ public class Cliente {
 	 * 
 	 * @return uma lista de séries que têm mais de 10 episódios
 	 */
-	public static List<Serie> filtrarPorQtdEpisodios() {
+	public List<Serie> filtrarPorQtdEpisodios() {
 
 		List<Serie> seriesFiltradas = new ArrayList<>();
 		for (Serie serie : listaJaVistas) {

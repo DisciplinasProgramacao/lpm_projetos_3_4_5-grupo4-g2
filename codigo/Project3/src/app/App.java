@@ -1,4 +1,4 @@
-package atvidade;
+package app;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
+
+import entities.Serie;
 
 public class App {
 
