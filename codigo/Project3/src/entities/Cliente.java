@@ -12,6 +12,11 @@ public class Cliente {
 
 	public Cliente(String string, String string2) {
 	}
+	
+	
+	public Cliente(String nomeDeUsuario) {
+		this.nomeDeUsuario = nomeDeUsuario;
+	}
 
 	/**
 	 * 
