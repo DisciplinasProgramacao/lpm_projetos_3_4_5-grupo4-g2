@@ -24,8 +24,12 @@ public class Cliente {
 	 * 
 	 * @param serie a série a ser adicionada
 	 */
-	public void adicionarNaLista(Serie serie) {
+	public void adicionarNaListaParaVer(Serie serie) {
 		listaParaVer.add(serie);
+	}
+	
+	public void adicionarNaListaAssistidas(Serie serie) {
+		listaJaVistas.add(serie);
 	}
 
 	/**
@@ -34,10 +38,19 @@ public class Cliente {
 	 * 
 	 * @param nomeSerie o nome da série a ser removida
 	 */
-	public void retirarDaLista(String nomeSerie) {
+	public void retirarDaListaParaver(String nomeSerie) {
 		for (Serie serie : listaParaVer) {
 			if (serie.getNome().equals(nomeSerie)) {
 				listaParaVer.remove(serie);
+				break;
+			}
+		}
+	}
+	
+	public void retirarDaListaAssistida(String nomeSerie) {
+		for (Serie serie : listaJaVistas) {
+			if (serie.getNome().equals(nomeSerie)) {
+				listaJaVistas.remove(serie);
 				break;
 			}
 		}

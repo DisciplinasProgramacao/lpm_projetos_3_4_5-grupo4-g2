@@ -123,4 +123,17 @@ public class Serie {
 	public void setAudiencia(double audiencia2) {
 		this.audiencia = audiencia2;
 	}
+
+	
+	
+	
+	
+	@Override
+	public String toString() {
+		return "Serie [nome=" + nome + ", genero=" + genero + ", idioma=" + idioma + ", quantidadeEpisodios="
+				+ quantidadeEpisodios + "]";
+	}
+	
+	
+	
 }
