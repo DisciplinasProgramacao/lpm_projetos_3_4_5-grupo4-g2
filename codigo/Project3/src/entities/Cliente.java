@@ -144,6 +144,13 @@ public class Cliente {
 	public List<Serie> getListaJaVistas() {
 		return listaJaVistas;
 	}
+	
+	public void todasAsSeries() {
+		 getListaJaVistas(); 
+		 getListaParaVer();
+	}
+	
+	
 
 	public void setListaJaVistas(List<Serie> listaJaVistas) {
 		this.listaJaVistas = listaJaVistas;

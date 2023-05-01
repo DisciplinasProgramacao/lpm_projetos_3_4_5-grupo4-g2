@@ -1,14 +1,19 @@
 package entities;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class DataLoader {
+	
+	public static List<Serie> listSeries = new ArrayList<>();
+	public static List<Cliente> listClientes = new ArrayList<>(); 
 
     /**
      * Carrega a lista de séries a partir de um arquivo.
@@ -44,6 +49,76 @@ public class DataLoader {
         return series;
     }
 
+	static String seriesSource = "C:\\Users\\Pedro\\Desktop\\Pro3\\lpm_projetos_3_4_5-grupo4-g2\\codigo\\Project3\\src\\teste.csv";
+
+	static File sourceFile = new File(seriesSource);
+	static String sourceFolderStr = sourceFile.getParent();		
+	static boolean success = new File(sourceFolderStr + "\\out").mkdir();
+	static String targetFileStr = sourceFolderStr + "\\out\\ListaDeFilmes.csv";
+    
+    public static void caregarSeries2Pedro() {
+		try (BufferedReader br = new BufferedReader(new FileReader(seriesSource))) {
+			String itemCsv = br.readLine();
+			while (itemCsv != null) {
+				String[] fields = itemCsv.split(",");
+				String nome = fields[0];
+				String genero = fields[1];
+				String idioma = fields[2];
+				int quantidadeEpisodios = Integer.parseInt(fields[3]);
+				listSeries.add(new Serie(nome, genero, idioma, quantidadeEpisodios));
+				itemCsv = br.readLine();
+			}
+
+			try (BufferedWriter bw = new BufferedWriter(new FileWriter(targetFileStr))) {
+				for (Serie serie : listSeries) {
+					bw.write("LISTA DE SERIES");
+					bw.newLine();
+					bw.write(serie.getNome() + "," + serie.getIdioma() + "," + serie.getGenero());
+					bw.newLine();
+				}
+				System.out.println(targetFileStr + " CREATED!");
+			} catch (IOException e) {
+				System.out.println("Error writing file: " + e.getMessage());
+			}
+		} catch (IOException e) {
+			System.out.println("Error reading file: " + e.getMessage());
+		}
+		
+    	
+    }
+    
+    
+    public static void carregarClientes() {
+    	String clientesSource = "C:\\Users\\Pedro\\Desktop\\Pro3\\lpm_projetos_3_4_5-grupo4-g2\\codigo\\Project3\\src\\ListaDeClientes.csv";
+		File sourceCliente = new File(clientesSource);		
+		sourceFolderStr = sourceFile.getParent();		
+		success = new File(sourceFolderStr + "\\out").mkdir();
+		targetFileStr = sourceFolderStr + "\\out\\ListaDeClientesFinal.csv";		
+		try (BufferedReader brCliente = new BufferedReader(new FileReader(sourceCliente))) {
+			String itemCsv = brCliente.readLine();
+			while (itemCsv != null) {
+				String[] fields = itemCsv.split(",");
+				String login = fields[0];
+				listClientes.add(new Cliente(login));
+				itemCsv = brCliente.readLine();
+			}
+			try (BufferedWriter bw = new BufferedWriter(new FileWriter(targetFileStr))) {
+				for (Cliente cliente : listClientes) {
+					bw.write("LISTA DE CLIENTES");
+					bw.newLine();
+					bw.write(cliente.getNomeDeUsuario());
+					bw.newLine();
+				}
+				System.out.println(targetFileStr + " CREATED!");
+			} catch (IOException e) {
+				System.out.println("Error writing file: " + e.getMessage());
+			}
+		} catch (IOException e) {
+			System.out.println("Error reading file: " + e.getMessage());
+		}
+    }
+    
+    
     /**
      * Carrega a lista de clientes a partir de um arquivo.
      * @param fileName o nome do arquivo contendo os clientes.

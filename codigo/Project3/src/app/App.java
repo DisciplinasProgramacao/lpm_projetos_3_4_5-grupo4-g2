@@ -13,6 +13,7 @@ import java.util.Locale;
 import java.util.Scanner;
 
 import entities.Cliente;
+import entities.DataLoader;
 import entities.Serie;
 
 public class App {
@@ -25,99 +26,37 @@ public class App {
 		List<Serie> listSeries = new ArrayList<>();
 		List<Cliente> listClientes = new ArrayList<>(); 
 
-		//System.out.println("Enter file path: ");
-		String seriesSource = "C:\\Users\\Pedro\\Desktop\\Pro3\\lpm_projetos_3_4_5-grupo4-g2\\codigo\\Project3\\src\\teste.csv";
-
-		File sourceFile = new File(seriesSource);
-		String sourceFolderStr = sourceFile.getParent();		
-		boolean success = new File(sourceFolderStr + "\\out").mkdir();
-		String targetFileStr = sourceFolderStr + "\\out\\ListaDeFilmes.csv";
 		/**
 		 * Cria um objeto BufferedReader para ler o arquivo de entrada CSV.
 		 *
 		 * @param sourceFileStr o caminho do arquivo de entrada CSV
 		 * @return um novo objeto BufferedReader criado a partir do arquivo de entrada
 		 */
-
-		//Bloco responsavel por ler a lista de filmes a partir do testes.csv e preencher o arquivo summary com os dados necessarios sobre cada filme
-		try (BufferedReader br = new BufferedReader(new FileReader(seriesSource))) {
-			String itemCsv = br.readLine();
-			while (itemCsv != null) {
-				String[] fields = itemCsv.split(",");
-				String nome = fields[0];
-				String genero = fields[1];
-				String idioma = fields[2];
-				int quantidadeEpisodios = Integer.parseInt(fields[3]);
-				listSeries.add(new Serie(nome, genero, idioma, quantidadeEpisodios));
-				itemCsv = br.readLine();
-			}
-
-			try (BufferedWriter bw = new BufferedWriter(new FileWriter(targetFileStr))) {
-				for (Serie serie : listSeries) {
-					bw.write("LISTA DE FILMES");
-					bw.newLine();
-					bw.write(serie.getNome() + "," + serie.getIdioma() + "," + serie.getGenero());
-					bw.newLine();
-				}
-				System.out.println(targetFileStr + " CREATED!");
-			} catch (IOException e) {
-				System.out.println("Error writing file: " + e.getMessage());
-			}
-		} catch (IOException e) {
-			System.out.println("Error reading file: " + e.getMessage());
-		}		
-		//*****************************************************
-		//Bloco responsavel por ler e armazenar os logins dos clientes
-		String clientesSource = "C:\\Users\\Pedro\\Desktop\\Pro3\\lpm_projetos_3_4_5-grupo4-g2\\codigo\\Project3\\src\\ListaDeClientes.csv";
-		File sourceCliente = new File(clientesSource);		
-		sourceFolderStr = sourceFile.getParent();		
-		success = new File(sourceFolderStr + "\\out").mkdir();
-		targetFileStr = sourceFolderStr + "\\out\\ListaDeClientesFinal.csv";		
-		try (BufferedReader brCliente = new BufferedReader(new FileReader(sourceCliente))) {
-			String itemCsv = brCliente.readLine();
-			while (itemCsv != null) {
-				String[] fields = itemCsv.split(",");
-				String login = fields[0];
-				listClientes.add(new Cliente(login));
-				itemCsv = brCliente.readLine();
-			}
-			try (BufferedWriter bw = new BufferedWriter(new FileWriter(targetFileStr))) {
-				for (Cliente cliente : listClientes) {
-					bw.write("LISTA DE CLIENTES");
-					bw.newLine();
-					bw.write(cliente.getNomeDeUsuario());
-					bw.newLine();
-				}
-				System.out.println(targetFileStr + " CREATED!");
-			} catch (IOException e) {
-				System.out.println("Error writing file: " + e.getMessage());
-			}
-		} catch (IOException e) {
-			System.out.println("Error reading file: " + e.getMessage());
-		}		
-		sc.close();
+		
+		DataLoader d1 = new DataLoader();		
+		DataLoader.caregarSeries2Pedro();
+		DataLoader.carregarClientes();		
 		
 		//testando o metodo de registrar audiencia
-		listSeries.get(0).setAudiencia(50.0);
-		listSeries.get(0).registrarAudiencia();
-		listSeries.get(0).registrarAudiencia();
-		listSeries.get(0).registrarAudiencia();
-		listSeries.get(0).registrarAudiencia();		
-		System.out.println("Audiencia da serie: " + listSeries.get(0).getAudiencia());
+		DataLoader.listSeries.get(0).setAudiencia(50.0);
+		DataLoader.listSeries.get(0).registrarAudiencia();
+		DataLoader.listSeries.get(0).registrarAudiencia();
+		DataLoader.listSeries.get(0).registrarAudiencia();
+		DataLoader.listSeries.get(0).registrarAudiencia();		
+		System.out.println("Audiencia da serie: " + DataLoader.listSeries.get(0).getAudiencia());
 		
 		//tetando os metodos em que os clientes adicionam series assistidas e para assitir
-		listClientes.get(0).adicionarNaListaParaVer(new Serie("Friends", "Comedia", "Ingles", 500));
-		listClientes.get(0).adicionarNaListaParaVer(new Serie("Breaking bad", "Drama", "Ingles", 60));
-		listClientes.get(0).adicionarNaListaParaVer(new Serie("Game of Thrones", "Ficção", "Ingles", 100));
+		DataLoader.listClientes.get(0).adicionarNaListaParaVer(new Serie("Friends", "Comedia", "Ingles", 500));
+		DataLoader.listClientes.get(0).adicionarNaListaParaVer(new Serie("Breaking bad", "Drama", "Ingles", 60));
+		DataLoader.listClientes.get(0).adicionarNaListaParaVer(new Serie("Game of Thrones", "Ficção", "Ingles", 100));
 		
-		System.out.println(listClientes.get(0).getListaParaVer());		
+		System.out.println(DataLoader.listClientes.get(0).getListaParaVer());		
 		
-		listClientes.get(0).adicionarNaListaAssistidas(new Serie("Vikings", "Ficção", "Escandinavo", 99));
-		listClientes.get(0).adicionarNaListaAssistidas(new Serie("The walking dead", "Ficção", "Ingles", 120));
-		listClientes.get(0).adicionarNaListaAssistidas(new Serie("Grays Anatomy", "Drama", "Ingles", 999));
+		DataLoader.listClientes.get(0).adicionarNaListaAssistidas(new Serie("Vikings", "Ficção", "Escandinavo", 99));
+		DataLoader.listClientes.get(0).adicionarNaListaAssistidas(new Serie("The walking dead", "Ficção", "Ingles", 120));
+		DataLoader.listClientes.get(0).adicionarNaListaAssistidas(new Serie("Grays Anatomy", "Drama", "Ingles", 999));		
 		
-		
-		System.out.println(listClientes.get(0).getListaJaVistas());		
+		System.out.println(DataLoader.listClientes.get(0).getListaJaVistas());		
 		
 		
 		
