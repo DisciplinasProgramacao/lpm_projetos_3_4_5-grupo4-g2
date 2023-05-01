@@ -118,9 +118,9 @@ public class Serie {
 	/**
 	 * Define a audiência da série.
 	 * 
-	 * @param audiencia int representando a audiência da série.
+	 * @param audiencia2 int representando a audiência da série.
 	 */
-	public void setAudiencia(int audiencia) {
-		this.audiencia = audiencia;
+	public void setAudiencia(double audiencia2) {
+		this.audiencia = audiencia2;
 	}
 }
