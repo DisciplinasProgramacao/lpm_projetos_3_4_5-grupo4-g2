@@ -7,7 +7,7 @@ public class Serie {
 	private String genero;
 	private String idioma;
 	private int quantidadeEpisodios;
-	private int audiencia;
+	private double audiencia;
 
 	public Serie(String nome, String genero, String idioma, int quantidadeEpisodios) {
 		this.nome = nome;
@@ -65,7 +65,7 @@ public class Serie {
 	 * 
 	 * @return int representando a audiência da série.
 	 */
-	public int getAudiencia() {
+	public double getAudiencia() {
 		return audiencia;
 	}
 
