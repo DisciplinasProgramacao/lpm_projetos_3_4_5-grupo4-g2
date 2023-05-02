@@ -6,7 +6,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -14,6 +17,7 @@ public class DataLoader {
 	
 	public static List<Serie> listSeries = new ArrayList<>();
 	public static List<Cliente> listClientes = new ArrayList<>(); 
+	public static List<Filme> listFilmes = new ArrayList<>(); 
 
     /**
      * Carrega a lista de séries a partir de um arquivo.
@@ -22,7 +26,6 @@ public class DataLoader {
      */
     public static List<Serie> carregarSeries(String fileName) {
         List<Serie> series = new ArrayList<>();
-
         try {
             File file = new File(fileName);
             Scanner scanner = new Scanner(file);
@@ -31,12 +34,13 @@ public class DataLoader {
                 String line = scanner.nextLine();
                 String[] fields = line.split(";");
 
-                String nome = fields[0];
-                String genero = fields[1];
-                String idioma = fields[2];
-                int quantidadeEpisodios = Integer.parseInt(fields[3]);
+                int id = Integer.parseInt(fields[0]);
+                String nome = fields[1];
+                String genero = fields[2];
+                String idioma = fields[3];
+                int quantidadeEpisodios = Integer.parseInt(fields[4]);
 
-                Serie serie = new Serie(nome, genero, idioma, quantidadeEpisodios);
+                Serie serie = new Serie(id, nome, genero, idioma, quantidadeEpisodios);
                 series.add(serie);
             }
 
@@ -49,23 +53,22 @@ public class DataLoader {
         return series;
     }
 
-	static String seriesSource = "C:\\Users\\Pedro\\Desktop\\Pro3\\lpm_projetos_3_4_5-grupo4-g2\\codigo\\Project3\\src\\teste.csv";
+	static String seriesSource = "C:\\Users\\Pedro\\Desktop\\Pro3\\lpm_projetos_3_4_5-grupo4-g2\\codigo\\Project3\\src\\series.csv";
 
 	static File sourceFile = new File(seriesSource);
 	static String sourceFolderStr = sourceFile.getParent();		
 	static boolean success = new File(sourceFolderStr + "\\out").mkdir();
-	static String targetFileStr = sourceFolderStr + "\\out\\ListaDeFilmes.csv";
+	static String targetFileStr = sourceFolderStr + "\\out\\ListaDeSeries.csv";
     
     public static void caregarSeries2Pedro() {
 		try (BufferedReader br = new BufferedReader(new FileReader(seriesSource))) {
 			String itemCsv = br.readLine();
 			while (itemCsv != null) {
 				String[] fields = itemCsv.split(",");
-				String nome = fields[0];
-				String genero = fields[1];
-				String idioma = fields[2];
-				int quantidadeEpisodios = Integer.parseInt(fields[3]);
-				listSeries.add(new Serie(nome, genero, idioma, quantidadeEpisodios));
+				int id = Integer.parseInt(fields[0]);
+				String nome = fields[1];
+				int dataDeLancamento = Integer.parseInt(fields[2]);
+				listSeries.add(new Serie(id, nome, dataDeLancamento));
 				itemCsv = br.readLine();
 			}
 
@@ -82,9 +85,46 @@ public class DataLoader {
 			}
 		} catch (IOException e) {
 			System.out.println("Error reading file: " + e.getMessage());
-		}
-		
+		}    	
+    }
+    
+    
+    
+    public static void caregarFilmes() {
     	
+    	String filmesSource = "C:\\Users\\Pedro\\Desktop\\Pro3\\lpm_projetos_3_4_5-grupo4-g2\\codigo\\Project3\\src\\filmes.csv";
+
+    	File sourceFile = new File(filmesSource);
+    	String sourceFolderStr = sourceFile.getParent();		
+    	boolean success = new File(sourceFolderStr + "\\out").mkdir();
+    	String targetFileStr = sourceFolderStr + "\\out\\ListaDeFilmes.csv";    	
+    	
+		try (BufferedReader br = new BufferedReader(new FileReader(filmesSource))) {
+			String itemCsv = br.readLine();
+			while (itemCsv != null) {
+				String[] fields = itemCsv.split(";");
+				int id = Integer.parseInt(fields[0]);
+				String nome = fields[1];
+				LocalDate dataDeLancamento = LocalDate.parse(fields[2], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+				int duracao = Integer.parseInt(fields[3]);
+				listFilmes.add(new Filme(id, nome, dataDeLancamento,duracao));
+				itemCsv = br.readLine();
+			}
+
+			try (BufferedWriter bw = new BufferedWriter(new FileWriter(targetFileStr))) {
+				bw.write("LISTA DE FILMES");
+				for (Filme filme : listFilmes) {
+					bw.newLine();
+					bw.write(filme.getNome() + "," + filme.getDataLancamento() + "," + filme.getDuracaoMinutos());
+					bw.newLine();
+				}
+				System.out.println(targetFileStr + " CREATED!");
+			} catch (IOException e) {
+				System.out.println("Error writing file: " + e.getMessage());
+			}
+		} catch (IOException e) {
+			System.out.println("Error reading file: " + e.getMessage());
+		}    	
     }
     
     
@@ -98,16 +138,18 @@ public class DataLoader {
 			String itemCsv = brCliente.readLine();
 			while (itemCsv != null) {
 				String[] fields = itemCsv.split(",");
-				String login = fields[0];
-				listClientes.add(new Cliente(login));
+				String nomeDoUsuario = fields[0];
+				String loginDoUsuario = fields[1];
+				String senha = fields[2];
+				listClientes.add(new Cliente(nomeDoUsuario, loginDoUsuario, senha));
 				itemCsv = brCliente.readLine();
 			}
 			try (BufferedWriter bw = new BufferedWriter(new FileWriter(targetFileStr))) {
+				bw.write("LISTA DE CLIENTES");
 				for (Cliente cliente : listClientes) {
-					bw.write("LISTA DE CLIENTES");
 					bw.newLine();
-					bw.write(cliente.getNomeDeUsuario());
-					bw.newLine();
+					bw.write(cliente.getNomeDoUsuario() + " | " + cliente.getLoginDoUsuario());
+				
 				}
 				System.out.println(targetFileStr + " CREATED!");
 			} catch (IOException e) {
@@ -116,6 +158,42 @@ public class DataLoader {
 		} catch (IOException e) {
 			System.out.println("Error reading file: " + e.getMessage());
 		}
+    }
+    
+    public static void caregarAudiencia() {
+    	
+    	String audienciaSource = "C:\\Users\\Pedro\\Desktop\\Pro3\\lpm_projetos_3_4_5-grupo4-g2\\codigo\\Project3\\src\\audiencia.csv";
+
+    	File sourceFile = new File(audienciaSource);
+    	String sourceFolderStr = sourceFile.getParent();		
+    	 boolean success = new File(sourceFolderStr + "\\out").mkdir();
+    	String targetFileStr = sourceFolderStr + "\\out\\AudienciaFinal.csv";
+    	
+		try (BufferedReader br = new BufferedReader(new FileReader(audienciaSource))) {
+			String itemCsv = br.readLine();
+			while (itemCsv != null) {
+				//String[] fields = itemCsv.split(",");
+				//String id = fields[0];
+				//String series = fields[1];
+				//int dataDeLancamento = Integer.parseInt(fields[2]);
+				//listSeries.add(new Serie(id, nome, dataDeLancamento));
+				itemCsv = br.readLine();
+			}
+
+			try (BufferedWriter bw = new BufferedWriter(new FileWriter(targetFileStr))) {
+				for (Serie serie : listSeries) {
+					bw.write("LISTA DE SERIES");
+					bw.newLine();
+					bw.write(serie.getNome() + "," + serie.getIdioma() + "," + serie.getGenero());
+					bw.newLine();
+				}
+				System.out.println(targetFileStr + " CREATED!");
+			} catch (IOException e) {
+				System.out.println("Error writing file: " + e.getMessage());
+			}
+		} catch (IOException e) {
+			System.out.println("Error reading file: " + e.getMessage());
+		}    	
     }
     
     
@@ -180,4 +258,6 @@ public class DataLoader {
         }
     }
     
+     
+     
 }          

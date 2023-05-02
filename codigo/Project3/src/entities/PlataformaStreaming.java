@@ -58,7 +58,7 @@ public class PlataformaStreaming {
 	 * @param cliente o cliente a ser adicionado à plataforma
 	 */
 	public void adicionarCliente(Cliente cliente) {
-		this.clientes.put(cliente.getNomeDeUsuario(), cliente);
+		this.clientes.put(cliente.getNomeDoUsuario(), cliente);
 	}
 
 	/**

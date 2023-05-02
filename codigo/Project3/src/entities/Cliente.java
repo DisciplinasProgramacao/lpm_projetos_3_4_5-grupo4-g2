@@ -5,7 +5,8 @@ import java.util.List;
 
 public class Cliente {
 
-	private String nomeDeUsuario;
+	private String nomeDoUsuario;
+	private String loginDoUsuario;
 	private String senha;
 	private List<Serie> listaParaVer = new ArrayList<Serie>(0);
 	private List<Serie> listaJaVistas = new ArrayList<Serie>();
@@ -14,8 +15,17 @@ public class Cliente {
 	}
 	
 	
+	
+	public Cliente(String nomeDoUsuario, String loginDoUsuario, String senha) {
+		this.nomeDoUsuario = nomeDoUsuario;
+		this.loginDoUsuario = loginDoUsuario;
+		this.senha = senha;
+	}
+
+
+
 	public Cliente(String nomeDeUsuario) {
-		this.nomeDeUsuario = nomeDeUsuario;
+		this.nomeDoUsuario = nomeDeUsuario;
 	}
 
 	/**
@@ -117,13 +127,26 @@ public class Cliente {
 		serie.registrarAudiencia();
 	}
 
-	public String getNomeDeUsuario() {
-		return nomeDeUsuario;
+
+	public String getNomeDoUsuario() {
+		return nomeDoUsuario;
 	}
 
-	public void setNomeDeUsuario(String nomeDeUsuario) {
-		this.nomeDeUsuario = nomeDeUsuario;
+
+	public void setNomeDoUsuario(String nomeDoUsuario) {
+		this.nomeDoUsuario = nomeDoUsuario;
 	}
+
+
+	public String getLoginDoUsuario() {
+		return loginDoUsuario;
+	}
+
+
+	public void setLoginDoUsuario(String loginDoUsuario) {
+		this.loginDoUsuario = loginDoUsuario;
+	}
+
 
 	public String getSenha() {
 		return senha;
@@ -137,9 +160,6 @@ public class Cliente {
 		return listaParaVer;
 	}
 
-	public void setListaParaVer(List<Serie> listaParaVer) {
-		this.listaParaVer = listaParaVer;
-	}
 
 	public List<Serie> getListaJaVistas() {
 		return listaJaVistas;
@@ -150,10 +170,5 @@ public class Cliente {
 		 getListaParaVer();
 	}
 	
-	
-
-	public void setListaJaVistas(List<Serie> listaJaVistas) {
-		this.listaJaVistas = listaJaVistas;
-	}
 
 }

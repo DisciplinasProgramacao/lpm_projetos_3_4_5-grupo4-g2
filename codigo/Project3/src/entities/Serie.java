@@ -3,19 +3,30 @@ package entities;
 public class Serie {
 
 	public static final String[] GENEROS = { "Ação", "Comédia", "Drama", "Terror", "Ficção científica" };
+	private int id;
 	private String nome;
 	private String genero;
 	private String idioma;
 	private int quantidadeEpisodios;
 	private double audiencia;
+	private int dataDeLancamento;
 
-	public Serie(String nome, String genero, String idioma, int quantidadeEpisodios) {
+	public Serie(int id, String nome, String genero, String idioma, int quantidadeEpisodios) {
+		this.id = id;
 		this.nome = nome;
 		this.genero = genero;
 		this.idioma = idioma;
 		this.audiencia = 0;
 		this.quantidadeEpisodios = quantidadeEpisodios;
 	}
+	
+	public Serie(int id, String nome, int dataDeLancamento) {
+		this.id = id;
+		this.nome = nome;
+		this.dataDeLancamento = dataDeLancamento;
+	}
+	
+	
 
 	/**
 	 * Método que registra uma nova audiência para a série.
@@ -125,7 +136,9 @@ public class Serie {
 	}
 
 	
-	
+	public void todasAsSeries() {
+		
+	}
 	
 	
 	@Override

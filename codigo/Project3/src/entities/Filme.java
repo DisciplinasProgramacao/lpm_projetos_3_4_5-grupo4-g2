@@ -1,5 +1,6 @@
 package entities;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
 public class Filme {
@@ -8,6 +9,8 @@ public class Filme {
     private String nome;
     private LocalDate dataLancamento;
     private int duracaoMinutos;
+    
+    private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); 
     
     public Filme(int id, String nome, LocalDate dataLancamento, int duracaoMinutos) {
         this.id = id;

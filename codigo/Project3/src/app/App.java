@@ -38,6 +38,8 @@ public class App {
 		DataLoader d1 = new DataLoader();		
 		DataLoader.caregarSeries2Pedro();
 		DataLoader.carregarClientes();		
+		DataLoader.caregarFilmes();
+		//DataLoader.caregarAudiencia();
 		
 		//testando o metodo de registrar audiencia
 		DataLoader.listSeries.get(0).setAudiencia(50.0);
@@ -48,15 +50,15 @@ public class App {
 		System.out.println("Audiencia da serie: " + DataLoader.listSeries.get(0).getAudiencia());
 		
 		//tetando os metodos em que os clientes adicionam series assistidas e para assitir
-		DataLoader.listClientes.get(0).adicionarNaListaParaVer(new Serie("Friends", "Comedia", "Ingles", 500));
-		DataLoader.listClientes.get(0).adicionarNaListaParaVer(new Serie("Breaking bad", "Drama", "Ingles", 60));
-		DataLoader.listClientes.get(0).adicionarNaListaParaVer(new Serie("Game of Thrones", "Ficção", "Ingles", 100));
+		DataLoader.listClientes.get(0).adicionarNaListaParaVer(new Serie(123,"Friends", "Comedia", "Ingles", 500));
+		DataLoader.listClientes.get(0).adicionarNaListaParaVer(new Serie(456,"Breaking bad", "Drama", "Ingles", 60));
+		DataLoader.listClientes.get(0).adicionarNaListaParaVer(new Serie(789,"Game of Thrones", "Ficção", "Ingles", 100));
 		
 		System.out.println(DataLoader.listClientes.get(0).getListaParaVer());		
 		
-		DataLoader.listClientes.get(0).adicionarNaListaAssistidas(new Serie("Vikings", "Ficção", "Escandinavo", 99));
-		DataLoader.listClientes.get(0).adicionarNaListaAssistidas(new Serie("The walking dead", "Ficção", "Ingles", 120));
-		DataLoader.listClientes.get(0).adicionarNaListaAssistidas(new Serie("Grays Anatomy", "Drama", "Ingles", 999));		
+		DataLoader.listClientes.get(0).adicionarNaListaAssistidas(new Serie(111,"Vikings", "Ficção", "Escandinavo", 99));
+		DataLoader.listClientes.get(0).adicionarNaListaAssistidas(new Serie(222,"The walking dead", "Ficção", "Ingles", 120));
+		DataLoader.listClientes.get(0).adicionarNaListaAssistidas(new Serie(333,"Grays Anatomy", "Drama", "Ingles", 999));		
 		
 		System.out.println(DataLoader.listClientes.get(0).getListaJaVistas());		
 		
