@@ -12,17 +12,13 @@ public class Cliente {
 	private List<Serie> listaJaVistas = new ArrayList<Serie>();
 
 	public Cliente(String string, String string2) {
-	}
-	
-	
+	}	
 	
 	public Cliente(String nomeDoUsuario, String loginDoUsuario, String senha) {
 		this.nomeDoUsuario = nomeDoUsuario;
 		this.loginDoUsuario = loginDoUsuario;
 		this.senha = senha;
 	}
-
-
 
 	public Cliente(String nomeDeUsuario) {
 		this.nomeDoUsuario = nomeDeUsuario;

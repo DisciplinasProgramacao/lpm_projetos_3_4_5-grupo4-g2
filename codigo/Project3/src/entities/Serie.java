@@ -24,9 +24,7 @@ public class Serie {
 		this.id = id;
 		this.nome = nome;
 		this.dataDeLancamento = dataDeLancamento;
-	}
-	
-	
+	}	
 
 	/**
 	 * Método que registra uma nova audiência para a série.
