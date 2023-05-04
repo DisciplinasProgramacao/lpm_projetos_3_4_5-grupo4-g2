@@ -7,6 +7,11 @@ import org.junit.jupiter.api.Test;
 import entities.Serie;
 
 class serieTeste {
+
+	/**
+	 * Teste para o método registrarAudiencia da classe Serie. Testa o registro de
+	 * audiência de uma série.
+	 */
 	@Test
 	public void testRegistrarAudiencia() {
 		Serie s = new Serie("The Office", "Comédia", "Inglês", 201);
@@ -15,6 +20,7 @@ class serieTeste {
 		assertEquals(1, s.getAudiencia());
 	}
 
+	// Abaixo estão os testes getters
 	@Test
 	public void testGetNome() {
 		Serie s = new Serie("Breaking Bad", "Drama", "Inglês", 62);
