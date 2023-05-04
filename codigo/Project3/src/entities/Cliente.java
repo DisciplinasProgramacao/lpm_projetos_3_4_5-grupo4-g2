@@ -2,8 +2,11 @@ package entities;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Cliente {
+
+	Scanner sc = new Scanner(System.in);
 
 	private String nomeDoUsuario;
 	private String loginDoUsuario;
@@ -168,5 +171,15 @@ public class Cliente {
 		 getListaParaVer();
 	}
 	
+
+	public Object avaliar(String resp, int avaliacao){
+		System.out.println("Deseja avaliar a midia que acabou de ver?  S || N");
+		if(resp == "S"){
+			System.out.println("Digite quantas estrelas você da a essa midia entre 1 a 5");
+			return avaliacao;
+		} else {
+		return null;
+		}
+	}
 
 }

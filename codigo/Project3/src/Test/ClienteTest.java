@@ -3,10 +3,13 @@ package Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNull;
 
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+
+import entities.Cliente;
 
 class clienteTeste {
 
@@ -81,6 +84,16 @@ class clienteTeste {
 			assertEquals(2, serie1.getAudiencia());
 			assertEquals(3, serie2.getAudiencia());
 			assertEquals(1, serie3.getAudiencia());
+		}
+
+		@Test
+		public void testCasoNaoQueiraAvaliar(){
+			cliente.avaliar("N", 0);
+			assertNull();
+		}
+
+		public void testCasoQueiraAvaliar(){
+			assertEquals(2, cliente.avaliar("S", 2));
 		}
 }
 
