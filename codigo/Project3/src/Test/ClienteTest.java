@@ -92,6 +92,7 @@ class clienteTeste {
 			assertNull();
 		}
 
+		@Test
 		public void testCasoQueiraAvaliar(){
 			assertEquals(2, cliente.avaliar("S", 2));
 		}
