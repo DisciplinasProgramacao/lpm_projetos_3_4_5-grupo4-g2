@@ -39,7 +39,7 @@ public class App {
 		DataLoader.caregarSeries2Pedro();
 		DataLoader.carregarClientes();		
 		DataLoader.caregarFilmes();
-		//DataLoader.caregarAudiencia();
+		DataLoader.caregarAudiencia();
 		
 		//testando o metodo de registrar audiencia
 		DataLoader.listSeries.get(0).setAudiencia(50.0);

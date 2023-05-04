@@ -171,15 +171,33 @@ public class DataLoader {
     	
 		try (BufferedReader br = new BufferedReader(new FileReader(audienciaSource))) {
 			String itemCsv = br.readLine();
+			itemCsv = br.readLine();
 			while (itemCsv != null) {
-				//String[] fields = itemCsv.split(",");
-				//String id = fields[0];
-				//String series = fields[1];
-				//int dataDeLancamento = Integer.parseInt(fields[2]);
-				//listSeries.add(new Serie(id, nome, dataDeLancamento));
+				String[] fields = itemCsv.split(";");
+				String login = fields[0];
+				String FouA = fields[1];
+				int id = Integer.parseInt(fields[2]);
+				
+				Serie serieAchada = null;;
+				for(Serie i : listSeries){
+					if(i.getId() == id){
+						serieAchada = i;
+						break;
+					}					
+				}
+				for(Cliente i : listClientes){
+					if(i.getLoginDoUsuario().equals(fields[1])){
+						if(fields[1].equals('A')){
+							i.getListaParaVer().add(serieAchada);
+						}
+						else{
+							i.getListaJaVistas().add(serieAchada);
+						}
+					}
+				}
 				itemCsv = br.readLine();
-			}
-
+			}			
+			
 			try (BufferedWriter bw = new BufferedWriter(new FileWriter(targetFileStr))) {
 				for (Serie serie : listSeries) {
 					bw.write("LISTA DE SERIES");

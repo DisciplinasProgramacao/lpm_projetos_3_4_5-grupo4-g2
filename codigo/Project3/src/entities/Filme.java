@@ -3,7 +3,7 @@ package entities;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
-public class Filme {
+public class Filme extends Midia{
     
     private int id;
     private String nome;

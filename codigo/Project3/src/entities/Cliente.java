@@ -151,6 +151,8 @@ public class Cliente {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+	
+	
 
 	public List<Serie> getListaParaVer() {
 		return listaParaVer;

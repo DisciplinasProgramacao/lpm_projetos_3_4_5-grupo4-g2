@@ -1,6 +1,6 @@
 package entities;
 
-public class Serie {
+public class Serie extends Midia{
 
 	public static final String[] GENEROS = { "Ação", "Comédia", "Drama", "Terror", "Ficção científica" };
 	private int id;
@@ -136,9 +136,16 @@ public class Serie {
 	
 	public void todasAsSeries() {
 		
+	}	
+	
+	public int getId() {
+		return id;
 	}
-	
-	
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	@Override
 	public String toString() {
 		return "Serie [nome=" + nome + ", genero=" + genero + ", idioma=" + idioma + ", quantidadeEpisodios="
