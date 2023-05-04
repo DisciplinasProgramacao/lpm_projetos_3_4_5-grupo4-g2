@@ -1,6 +1,6 @@
 package entities;
 
-public class Serie extends Midia{
+public class Serie {
 
 	public static final String[] GENEROS = { "Ação", "Comédia", "Drama", "Terror", "Ficção científica" };
 	private int id;
@@ -11,6 +11,17 @@ public class Serie extends Midia{
 	private double audiencia;
 	private int dataDeLancamento;
 
+	/**
+	 * Construtor da classe Serie que recebe o id, o nome, o gênero, o idioma e a
+	 * quantidade de episódios da série e os atribui ao objeto instanciado.
+	 * 
+	 * @param ido,                 id da série.
+	 * @param nome,                o nome da série.
+	 * @param genero,              o gênero da série.
+	 * @param idioma,              o idioma da série.
+	 * @param quantidadeEpisodios, a quantidade de episódios da série.
+	 */
+
 	public Serie(int id, String nome, String genero, String idioma, int quantidadeEpisodios) {
 		this.id = id;
 		this.nome = nome;
@@ -19,12 +30,20 @@ public class Serie extends Midia{
 		this.audiencia = 0;
 		this.quantidadeEpisodios = quantidadeEpisodios;
 	}
-	
+
+	/**
+	 * Construtor da classe Serie que recebe o id, o nome e a data de lançamento da
+	 * série e os atribui ao objeto instanciado.
+	 * 
+	 * @param id               o id da série.
+	 * @param nome             o nome da série.
+	 * @param dataDeLancamento a data de lançamento da série.
+	 */
 	public Serie(int id, String nome, int dataDeLancamento) {
 		this.id = id;
 		this.nome = nome;
 		this.dataDeLancamento = dataDeLancamento;
-	}	
+	}
 
 	/**
 	 * Método que registra uma nova audiência para a série.
@@ -34,124 +53,70 @@ public class Serie extends Midia{
 	}
 
 	/**
-	 * Retorna o nome da série.
-	 * 
-	 * @return String representando o nome da série.
+	 * Método criado para retornar todas as séries
 	 */
-	public String getNome() {
-		return nome;
-	}
-
-	/**
-	 * Retorna o gênero da série.
-	 * 
-	 * @return String representando o gênero da série.
-	 */
-	public String getGenero() {
-		return genero;
-	}
-
-	/**
-	 * Retorna o idioma da série.
-	 * 
-	 * @return String representando o idioma da série.
-	 */
-	public String getIdioma() {
-		return idioma;
-	}
-
-	/**
-	 * Retorna a quantidade de episódios da série.
-	 * 
-	 * @return int representando a quantidade de episódios da série.
-	 */
-	public int getQuantidadeEpisodios() {
-		return quantidadeEpisodios;
-	}
-
-	/**
-	 * Retorna a audiência da série.
-	 * 
-	 * @return int representando a audiência da série.
-	 */
-	public double getAudiencia() {
-		return audiencia;
-	}
-
-	/**
-	 * Retorna um array com os gêneros disponíveis.
-	 * 
-	 * @return String[] representando os gêneros disponíveis.
-	 */
-	public static String[] getGeneros() {
-		return GENEROS;
-	}
-
-	/**
-	 * Define o nome da série.
-	 * 
-	 * @param nome String representando o nome da série.
-	 */
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	/**
-	 * Define o gênero da série.
-	 * 
-	 * @param genero String representando o gênero da série.
-	 */
-	public void setGenero(String genero) {
-		this.genero = genero;
-	}
-
-	/**
-	 * Define o idioma da série.
-	 * 
-	 * @param idioma String representando o idioma da série.
-	 */
-	public void setIdioma(String idioma) {
-		this.idioma = idioma;
-	}
-
-	/**
-	 * Define a quantidade de episódios da série.
-	 * 
-	 * @param quantidadeEpisodios int representando a quantidade de episódios da
-	 *                            série.
-	 */
-	public void setQuantidadeEpisodios(int quantidadeEpisodios) {
-		this.quantidadeEpisodios = quantidadeEpisodios;
-	}
-
-	/**
-	 * Define a audiência da série.
-	 * 
-	 * @param audiencia2 int representando a audiência da série.
-	 */
-	public void setAudiencia(double audiencia2) {
-		this.audiencia = audiencia2;
-	}
-
-	
 	public void todasAsSeries() {
-		
-	}	
-	
-	public int getId() {
-		return id;
+
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
+	/**
+	 * Retorna uma representação em formato de string do objeto instanciado da
+	 * classe Serie, incluindo informações sobre o nome, o gênero, o idioma e a
+	 * quantidade de episódios da série.
+	 * 
+	 * @return uma string contendo informações sobre o objeto instanciado da classe
+	 *         Serie.
+	 */
 	@Override
 	public String toString() {
 		return "Serie [nome=" + nome + ", genero=" + genero + ", idioma=" + idioma + ", quantidadeEpisodios="
 				+ quantidadeEpisodios + "]";
 	}
-	
-	
-	
+
+	// Abaixo estão todos os getters e setters necessários
+
+	public String getNome() {
+		return nome;
+	}
+
+	public String getGenero() {
+		return genero;
+	}
+
+	public String getIdioma() {
+		return idioma;
+	}
+
+	public int getQuantidadeEpisodios() {
+		return quantidadeEpisodios;
+	}
+
+	public double getAudiencia() {
+		return audiencia;
+	}
+
+	public static String[] getGeneros() {
+		return GENEROS;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
+
+	public void setIdioma(String idioma) {
+		this.idioma = idioma;
+	}
+
+	public void setQuantidadeEpisodios(int quantidadeEpisodios) {
+		this.quantidadeEpisodios = quantidadeEpisodios;
+	}
+
+	public void setAudiencia(double audiencia2) {
+		this.audiencia = audiencia2;
+	}
+
 }
