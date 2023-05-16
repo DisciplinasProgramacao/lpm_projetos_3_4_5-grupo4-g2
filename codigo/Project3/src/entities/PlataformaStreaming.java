@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class PlataformaStreaming {
-    private String nome;
+     private String nome;
     private List<Serie> series;
     private Map<String, Filme> filmes;
     private Cliente clienteAtual;

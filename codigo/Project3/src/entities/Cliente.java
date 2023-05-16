@@ -1,5 +1,8 @@
 package entities;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -73,10 +76,38 @@ public class Cliente {
 
 
     public void cadastrarMidia(Midia midia) {
-        // lógica para cadastrar uma mídia
+        if (midia instanceof Serie) {
+            Serie serie = (Serie) midia;
+            List<Midia> series = new ArrayList<>();
+            series.add(serie);
+            System.out.println("Série cadastrada com sucesso: " + serie.getNome());
+        } else if (midia instanceof Filme) {
+            Filme filme = (Filme) midia;
+            String chave = Double.toString(filme.getAudiencia()); 
+            HashMap<Double, Midia> filmes;
+            filmes.put(filme.getId().toString(), filme);
+            System.out.println("Filme cadastrado com sucesso: " + filme.getNome());
+        }
     }
 
     public void carregarCSV(String arquivoCSV) {
-        // lógica para carregar dados de um arquivo CSV
+        String linha;
+        String separador = ";";
+
+        try (BufferedReader br = new BufferedReader(new FileReader(arquivoCSV))) {
+            while ((linha = br.readLine()) != null) {
+                String[] dados = linha.split(separador);
+                String id = dados[0];
+                String nome = dados[1];
+                String dataDeLancamento = dados[2];
+                int audiencia = Integer.parseInt(dados[3]);
+                String genero = dados[4];
+
+                Midia midia = new Midia(id, nome, dataDeLancamento, audiencia, genero);
+
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao ler o arquivo CSV: " + e.getMessage());
+        }
     }
 }

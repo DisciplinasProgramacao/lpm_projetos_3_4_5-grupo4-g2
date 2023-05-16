@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.ArrayList;
+import java.util.List;
 
 //Essa classe será a superclasse da classe Filme e Serie
 public class Midia {
@@ -18,6 +20,8 @@ public class Midia {
     }
 
     // getters e setters
+
+   
 
     public String getId() {
         return id;
@@ -60,7 +64,20 @@ public class Midia {
     }
 
     public double calcularMediaAvaliacao() {
-        // lógica para calcular a média de avaliação da mídia
-        return 0.0;
+        List<Integer> avaliacoes = new ArrayList<>();
+        avaliacoes.add(4);
+        avaliacoes.add(5);
+        avaliacoes.add(3);
+
+        int soma = 0;
+        for (int avaliacao : avaliacoes) {
+            soma += avaliacao;
+        }
+
+        if (avaliacoes.size() > 0) {
+            return (double) soma / avaliacoes.size();
+        } else {
+            return 0.0;
+        }
     }
 }
