@@ -1,64 +1,20 @@
 package entities;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+public class Filme extends Midia {
+    private int duracaoFilme;
 
-public class Filme {
+    public Filme(String id, String nome, String dataLancamento, int audiencia, String genero, int duracaoFilme) {
+        super(id, nome, dataLancamento, audiencia, genero);
+        this.duracaoFilme = duracaoFilme;
+    }
 
-	private int id;
-	private String nome;
-	private LocalDate dataLancamento;
-	private int duracaoMinutos;
+    // getters e setters
 
-	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    public int getDuracaoFilme() {
+        return duracaoFilme;
+    }
 
-	/**
-	 * Construtor da classe Filme que recebe o id, o nome, a data de lançamento e a
-	 * duração do filme e os atribui ao objeto instanciado.
-	 * 
-	 * @param id, o id do filme.
-	 * @param nome, o nome do filme.
-	 * @param dataLancamento, a data de lançamento do filme.
-	 * @param duracaoMinutos, a duração do filme em minutos.
-	 */
-	public Filme(int id, String nome, LocalDate dataLancamento, int duracaoMinutos) {
-		this.id = id;
-		this.nome = nome;
-		this.dataLancamento = dataLancamento;
-		this.duracaoMinutos = duracaoMinutos;
-	}
-
-	// Abaixo estão os getters e setters necessários
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public LocalDate getDataLancamento() {
-		return dataLancamento;
-	}
-
-	public void setDataLancamento(LocalDate dataLancamento) {
-		this.dataLancamento = dataLancamento;
-	}
-
-	public int getDuracaoMinutos() {
-		return duracaoMinutos;
-	}
-
-	public void setDuracaoMinutos(int duracaoMinutos) {
-		this.duracaoMinutos = duracaoMinutos;
-	}
-
+    public void setDuracaoFilme(int duracaoFilme) {
+        this.duracaoFilme = duracaoFilme;
+    }
 }

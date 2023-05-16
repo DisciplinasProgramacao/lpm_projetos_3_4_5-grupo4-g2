@@ -15,92 +15,46 @@ import java.util.Scanner;
 import entities.Cliente;
 import entities.DataLoader;
 import entities.Serie;
+import entities.Filme;
+import entities.Midia;
+import entities.PlataformaStreaming;
 
-public class App {
+public class App { public static void main(String[] args) {
+	PlataformaStreaming plataforma = new PlataformaStreaming("MinhaPlataforma");
 
-	public static void main(String[] args) throws ParseException {
+        // Creating some series and movies
+        Serie serie1 = new Serie("1", "Série 1", "2021-01-01", 100000, "Drama", 10);
+        Serie serie2 = new Serie("2", "Série 2", "2022-01-01", 150000, "Comédia", 8);
+        Filme filme1 = new Filme("1", "Filme 1", "2020-01-01", 200000, "Ação", 120);
+        Filme filme2 = new Filme("2", "Filme 2", "2019-01-01", 180000, "Romance", 90);
 
-		int opcao;
+        // Adding series and movies to the platform
+        plataforma.getSeries().add(serie1);
+        plataforma.getSeries().add(serie2);
+        plataforma.getFilmes().put(filme1.getId(), filme1);
+        plataforma.getFilmes().put(filme2.getId(), filme2);
 
-		Locale.setDefault(Locale.US);
-		Scanner sc = new Scanner(System.in);
+        // Creating a client
+        Cliente cliente = new Cliente("João", "joao123", "senha123");
 
-		List<Serie> listSeries = new ArrayList<>();
-		List<Cliente> listClientes = new ArrayList<>();
+        // Adding some media to the client
+        cliente.getListaParaVer().add(serie1);
+        cliente.getListaParaVer().add(filme1);
 
-		/**
-		 * Cria um objeto BufferedReader para ler o arquivo de entrada CSV.
-		 *
-		 * @param sourceFileStr o caminho do arquivo de entrada CSV
-		 * @return um novo objeto BufferedReader criado a partir do arquivo de entrada
-		 */
+        // Setting the current client in the platform
+        plataforma.setClienteAtual(cliente);
 
-		DataLoader d1 = new DataLoader();
-		DataLoader.caregarSeries2Pedro();
-		DataLoader.carregarClientes();
-		DataLoader.caregarFilmes();
-		// DataLoader.caregarAudiencia();
+        // Example usage of methods
+        System.out.println("Nome do cliente atual: " + plataforma.getClienteAtual().getNomeDoUsuario());
+        System.out.println("Quantidade de séries na plataforma: " + plataforma.getSeries().size());
+        System.out.println("Quantidade de filmes na plataforma: " + plataforma.getFilmes
+().size());
+    System.out.println("Média de avaliação da série 1: " + serie1.calcularMediaAvaliacao());
 
-		// Testando o metodo de registrar audiencia
-		DataLoader.listSeries.get(0).setAudiencia(50.0);
-		DataLoader.listSeries.get(0).registrarAudiencia();
-		DataLoader.listSeries.get(0).registrarAudiencia();
-		DataLoader.listSeries.get(0).registrarAudiencia();
-		DataLoader.listSeries.get(0).registrarAudiencia();
-		System.out.println("Audiencia da serie: " + DataLoader.listSeries.get(0).getAudiencia());
+    System.out.println("Lista de mídias para ver do cliente:");
+    for (Midia midia : cliente.getListaParaVer()) {
+        System.out.println(midia.getNome());
+    }
+}
 
-		// Testando os metodos em que os clientes adicionam series assistidas e para assitir
-		DataLoader.listClientes.get(0).adicionarNaListaParaVer(new Serie(123, "Friends", "Comedia", "Ingles", 500));
-		DataLoader.listClientes.get(0).adicionarNaListaParaVer(new Serie(456, "Breaking bad", "Drama", "Ingles", 60));
-		DataLoader.listClientes.get(0)
-				.adicionarNaListaParaVer(new Serie(789, "Game of Thrones", "Ficção", "Ingles", 100));
-
-		System.out.println(DataLoader.listClientes.get(0).getListaParaVer());
-
-		DataLoader.listClientes.get(0)
-				.adicionarNaListaAssistidas(new Serie(111, "Vikings", "Ficção", "Escandinavo", 99));
-		DataLoader.listClientes.get(0)
-				.adicionarNaListaAssistidas(new Serie(222, "The walking dead", "Ficção", "Ingles", 120));
-		DataLoader.listClientes.get(0)
-				.adicionarNaListaAssistidas(new Serie(333, "Grays Anatomy", "Drama", "Ingles", 999));
-
-		System.out.println(DataLoader.listClientes.get(0).getListaJaVistas());
-
-		/**
-		 * Menu de opções para o usuário, aguarda a seleção de uma opção até que o
-		 * usuário selecione a opção de sair (opção 0).
-		 * 
-		 * @return void
-		 */
-		Scanner scanner = new Scanner(System.in);
-
-		do {
-			System.out.println("Escolha uma opção:");
-			System.out.println("1 - ");
-			System.out.println("2 - ");
-			System.out.println("3 - ");
-			System.out.println("0 - Sair");
-
-			opcao = scanner.nextInt();
-
-			switch (opcao) {
-			case 1:
-
-				break;
-			case 2:
-
-				break;
-			case 3:
-
-				break;
-			case 0:
-				System.out.println("Saindo...");
-				break;
-			default:
-				System.out.println("Opção inválida!");
-			}
-		} while (opcao != 0);
-
-		scanner.close();
-	}
 }
