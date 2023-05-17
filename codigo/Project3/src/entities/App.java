@@ -32,30 +32,44 @@ public class App {
 
         // Realizar o login de um cliente
         Cliente clienteLogado = plataforma.login("Cliente1", "senha1");
-
+System.out.println();
+        System.out.println("-------- CATALOGO DE MIDIAS --------------- ");
         plataforma.mostrarFilmes();
 
         Midia midia = plataforma.buscarMidia("Estação 19");
+        System.out.println();
             clienteLogado.adicionarNaListaParaVer(midia);
             midia = plataforma.buscarMidia("Gente Grande");
             clienteLogado.adicionarNaListaParaVer(midia);
+            midia = plataforma.buscarMidia("The Big Bang Theory");
+            clienteLogado.adicionarNaListaParaVer(midia);
+            midia = plataforma.buscarMidia("Velozes e Furiosos");
+            clienteLogado.adicionarNaListaParaVer(midia);
+            System.out.println("------------------ LISTA PARA VER --------------------");
             clienteLogado.mostrarLista();
             
+            System.out.println();
             // Exemplo de retirar midia da lista para assistir
             clienteLogado.retirarNaListaParaVer(midia);
+            System.out.println("------------------ LISTA PARA VER --------------------");
             clienteLogado.mostrarLista();
 
+            
+            System.out.println();
+
+            
+            System.out.println("------------------ FILTROS --------------------");
             // Exemplo de filtrar midias por gênero
             List<Midia> midiasFiltradas = clienteLogado.filtrarPorGenero("Drama");
             System.out.print("Midias filtradas por gênero:");
             for (Midia m : midiasFiltradas) {
                 System.out.print(" " + m.getNome() + " ");
             }
-
+            
             System.out.println();
 
             // Exemplo de filtrar midias por idioma
-            List<Midia> midiasFiltradasIdioma = clienteLogado.filtrarPorIdioma("Inglês");
+            List<Midia> midiasFiltradasIdioma = clienteLogado.filtrarPorIdioma("Espanhol");
             System.out.print("Midias filtradas por idioma:");
             for (Midia m : midiasFiltradasIdioma) {
                 System.out.print(" " + m.getNome() + " ");
@@ -64,13 +78,13 @@ public class App {
             System.out.println();
 
            // Exemplo de filtrar midias por quantidade de episódios
-           List<Midia> midiasFiltradasEpisodios = clienteLogado.filtrarPorQtdEpisodios(10);
+           List<Midia> midiasFiltradasEpisodios = clienteLogado.filtrarPorQtdEpisodios(20);
            System.out.print("Mídias filtradas por quantidade de episódios:");
            for (Midia m : midiasFiltradasEpisodios) {
                if (m instanceof Serie) {
                    Serie serie = (Serie) m;
                    if (serie.getQuantidadeEpisodios() >= 10) {
-                       System.out.print(" Série: " + serie.getNome() + ", Quantidade de Episódios: " + serie.getQuantidadeEpisodios() + " ");
+                       System.out.print(" " + serie.getNome() + " ");
                    }
                }
            }
@@ -83,6 +97,8 @@ public class App {
             filme1.registrarAudiencia();
             
             System.out.println();
+            System.out.println();
+            System.out.println("------------------ MÉDIA --------------------");
             System.out.println("A média de avaliação da midia " + filme1 + " é de: " + filme1.calcularMediaAvaliacao());
 
 
