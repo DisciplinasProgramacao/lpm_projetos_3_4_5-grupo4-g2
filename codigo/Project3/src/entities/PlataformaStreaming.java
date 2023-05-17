@@ -125,8 +125,8 @@ public class PlataformaStreaming {
         return null;
     }
 
-    public void carregarCSV(String nomeArquivo) {
-        try (BufferedReader br = new BufferedReader(new FileReader(nomeArquivo))) {
+    public void carregarCSV(String caminhoArquivo, PlataformaStreaming plataforma) {
+        try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))) {
             String linha;
 
             while ((linha = br.readLine()) != null) {
@@ -136,10 +136,7 @@ public class PlataformaStreaming {
                 // Verificar o tipo de mídia (filme ou série)
                 String tipoMidia = campos[0];
 
-                PlataformaStreaming plataforma = new PlataformaStreaming(nomeArquivo);
-
                 if (tipoMidia.equalsIgnoreCase("filme")) {
-                    // Criar um objeto Filme com os dados do CSV
                     int id = Integer.parseInt(campos[1]);
                     String nome = campos[2];
                     String dataDeLancamento = campos[3];
@@ -153,7 +150,6 @@ public class PlataformaStreaming {
                     // Adicionar o filme à plataforma
                     plataforma.adicionarMidia(filme);
                 } else if (tipoMidia.equalsIgnoreCase("serie")) {
-                    // Criar um objeto Série com os dados do CSV
                     int id = Integer.parseInt(campos[1]);
                     String nome = campos[2];
                     String dataDeLancamento = campos[3];
@@ -164,6 +160,7 @@ public class PlataformaStreaming {
 
                     Midia serie = new Serie(id, nome, dataDeLancamento, audiencia, genero, quantidadeEpisodios, idioma);
 
+                    //System.out.println(serie);
                     // Adicionar a série à plataforma
                     plataforma.adicionarMidia(serie);
                 }

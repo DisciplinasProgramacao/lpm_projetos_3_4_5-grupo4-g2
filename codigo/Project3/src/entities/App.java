@@ -20,7 +20,7 @@ public class App {
         plataforma.adicionarMidia(serie2);
 
         // Carregar dados do arquivo CSV
-        plataforma.carregarCSV("dados.csv");
+        plataforma.carregarCSV("C:/Users/Assemp/lpm_projetos_3_4_5-grupo4-g2/codigo/project3/src/entities/dados.csv", plataforma);
 
         // Criar alguns clientes
         Cliente cliente1 = new Cliente("Cliente1", "senha1");
@@ -32,7 +32,7 @@ public class App {
 
         // Realizar o login de um cliente
         Cliente clienteLogado = plataforma.login("Cliente1", "senha1");
-System.out.println();
+        System.out.println();
         System.out.println("-------- CATALOGO DE MIDIAS --------------- ");
         plataforma.mostrarFilmes();
 
