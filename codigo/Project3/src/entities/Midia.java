@@ -1,15 +1,11 @@
 package entities;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 //Essa classe será a superclasse da classe Filme e Serie
 public class Midia {
-    private String id;
+    private int id;
     private String nome;
     private String dataLancamento;
     private int audiencia;
@@ -18,7 +14,7 @@ public class Midia {
     private List<Avaliacao> avaliacoes;
     private List<Midia> listaParaVer;
 
-    public Midia(String id, String nome, String dataLancamento, int audiencia, String genero, String idioma) {
+    public Midia(int id, String nome, String dataLancamento, int audiencia, String genero, String idioma) {
         this.id = id;
         this.nome = nome;
         this.dataLancamento = dataLancamento;
@@ -33,11 +29,11 @@ public class Midia {
 
    
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -96,26 +92,7 @@ public class Midia {
         }
     }
 
-    public void carregarCSV(String arquivoCSV) {
-        String linha;
-        String separador = ";";
-
-        try (BufferedReader br = new BufferedReader(new FileReader(arquivoCSV))) {
-            while ((linha = br.readLine()) != null) {
-                String[] dados = linha.split(separador);
-                String id = dados[0];
-                String nome = dados[1];
-                String dataDeLancamento = dados[2];
-                int audiencia = Integer.parseInt(dados[3]);
-                String genero = dados[4];
-
-                Midia midia = new Midia(id, nome, dataDeLancamento, audiencia, genero, idioma);
-
-            }
-        } catch (IOException e) {
-            System.out.println("Erro ao ler o arquivo CSV: " + e.getMessage());
-        }
-    }
+    
 
     public void cadastrarMidia(Midia midia) {
         if (midia instanceof Serie) {
@@ -125,9 +102,8 @@ public class Midia {
             System.out.println("Série cadastrada com sucesso: " + serie.getNome());
         } else if (midia instanceof Filme) {
             Filme filme = (Filme) midia;
-            String chave = Double.toString(filme.getAudiencia()); 
-            HashMap<Double, Midia> filmes;
-            //filmes.put(filme.getId().toString(), filme);
+            List<Midia> filmes = new ArrayList<>();;
+            filmes.add(filme);
             System.out.println("Filme cadastrado com sucesso: " + filme.getNome());
         }
     }
