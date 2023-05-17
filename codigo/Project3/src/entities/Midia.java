@@ -1,5 +1,6 @@
 package entities;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -120,6 +121,14 @@ public class Midia {
         }
     
         return midiasRegistradas;
+    }
+
+    public LocalDate getDataAssistida() {
+        return null;
+    }
+
+    public Avaliacao getAvaliacao() {
+        return null;
     }
 }
 
