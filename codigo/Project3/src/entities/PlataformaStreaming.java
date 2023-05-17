@@ -1,5 +1,8 @@
 package entities;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +48,12 @@ public class PlataformaStreaming {
     }
 
   
+    public void mostrarFilmes(){
+        for (Midia m : midias) {
+            System.out.println(m.toString());
+        }
+    }
+
     public Cliente login(String nomeUsuario, String senha) {
         for (Cliente cliente : clientes) {
             if (cliente.getNomeDoUsuario().equals(nomeUsuario) && cliente.getSenha().equals(senha)) {
@@ -77,6 +86,16 @@ public class PlataformaStreaming {
         return midiasFiltradas;
     }
 
+    public List<Filme> filtrarPorGenero(String genero) {
+        List<Filme> filmesFiltrados = new ArrayList<>();
+        for (Midia midia : midias) {
+            if (midia instanceof Filme && midia.getGenero().equals(genero)) {
+                filmesFiltrados.add((Filme) midia);
+            }
+        }
+        return filmesFiltrados;
+    }
+
     public List<Midia> filtrarPorIdioma(String idioma) {
         List<Midia> midiasFiltradas = new ArrayList<>();
         for (Midia midia : midias) {
@@ -104,5 +123,55 @@ public class PlataformaStreaming {
             }
         }
         return null;
+    }
+
+    public void carregarCSV(String nomeArquivo) {
+        try (BufferedReader br = new BufferedReader(new FileReader(nomeArquivo))) {
+            String linha;
+
+            while ((linha = br.readLine()) != null) {
+                // Separar os campos da linha do CSV
+                String[] campos = linha.split(";");
+
+                // Verificar o tipo de mídia (filme ou série)
+                String tipoMidia = campos[0];
+
+                PlataformaStreaming plataforma = new PlataformaStreaming(nomeArquivo);
+
+                if (tipoMidia.equalsIgnoreCase("filme")) {
+                    // Criar um objeto Filme com os dados do CSV
+                    int id = Integer.parseInt(campos[1]);
+                    String nome = campos[2];
+                    String dataDeLancamento = campos[3];
+                    int audiencia = Integer.parseInt(campos[4]);
+                    String genero = campos[5];
+                    int duracao = Integer.parseInt(campos[6]);
+                    String idioma = campos[7];
+
+                    Midia filme = new Filme(id, nome, dataDeLancamento, audiencia, genero, duracao, idioma);
+
+                    // Adicionar o filme à plataforma
+                    plataforma.adicionarMidia(filme);
+                } else if (tipoMidia.equalsIgnoreCase("serie")) {
+                    // Criar um objeto Série com os dados do CSV
+                    int id = Integer.parseInt(campos[1]);
+                    String nome = campos[2];
+                    String dataDeLancamento = campos[3];
+                    int audiencia = Integer.parseInt(campos[4]);
+                    String genero = campos[5];
+                    int quantidadeEpisodios = Integer.parseInt(campos[6]);
+                    String idioma = campos[7];
+
+                    Midia serie = new Serie(id, nome, dataDeLancamento, audiencia, genero, quantidadeEpisodios, idioma);
+
+                    // Adicionar a série à plataforma
+                    plataforma.adicionarMidia(serie);
+                }
+            }
+
+            System.out.println("Dados carregados do arquivo CSV com sucesso!");
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar os dados do arquivo CSV: " + e.getMessage());
+        }
     }
 }
