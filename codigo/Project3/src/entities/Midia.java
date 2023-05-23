@@ -119,9 +119,16 @@ public class Midia {
     public void registrarAudiencia() {
         audiencia++;
     }
-    
-        return midiasRegistradas;
+
+    public LocalDate getDataAssistida() {
+        return null;
     }
+
+    public Avaliacao getAvaliacao() {
+        return null;
+    }
+    
+    
 }
 
 
