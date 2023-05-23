@@ -51,7 +51,7 @@ public class App {
     public static void exibirMenu(PlataformaStreaming plataforma, Cliente clienteLogado) {
         Scanner scanner = new Scanner(System.in);
         int opcao = 0;
-        while (opcao != 5) {
+        while (opcao != 6) {
             System.out.println();
             System.out.println("-------- MENU -----------");
             System.out.println("1. Mostrar catálogo de mídias");
@@ -118,7 +118,6 @@ public class App {
                     } else {
                         System.out.println("Mídia não encontrada.");
                     }
-
                     break;
                 case 6:
                     System.out.println("Encerrando o programa. Até mais!");
