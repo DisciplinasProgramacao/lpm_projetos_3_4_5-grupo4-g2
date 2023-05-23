@@ -76,24 +76,18 @@ public class Midia {
 
 
 
-    public double calcularMediaAvaliacao() {
-        List<Integer> avaliacoes = new ArrayList<>();
-        avaliacoes.add(4);
-        avaliacoes.add(5);
-        avaliacoes.add(3);
-
-        int soma = 0;
-        for (int avaliacao : avaliacoes) {
-            soma += avaliacao;
-        }
-
-        if (avaliacoes.size() > 0) {
-            return (double) soma / avaliacoes.size();
-        } else {
+    public double calcularMediaAvaliacoes() {
+        if (avaliacoes.isEmpty()) {
             return 0.0;
         }
+    
+        double somaAvaliacoes = 0.0;
+        for (Avaliacao avaliacao : avaliacoes) {
+            somaAvaliacoes += avaliacao.getNota();
+        }
+    
+        return somaAvaliacoes / avaliacoes.size();
     }
-
     
 
     public void cadastrarMidia(Midia midia) {

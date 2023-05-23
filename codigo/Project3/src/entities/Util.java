@@ -1,7 +1,4 @@
 package entities;
-import entities.Filme;
-import entities.Midia;
-import entities.Serie;
 
 import java.util.Random;
 

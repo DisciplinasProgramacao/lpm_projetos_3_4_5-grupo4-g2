@@ -69,42 +69,54 @@ public class App {
 
             // Exemplo de filtrar midias por idioma
             List<Midia> midiasFiltradasIdioma = clienteLogado.filtrarPorIdioma("Inglês");
-            System.out.print("Midias filtradas por idioma:");
+            System.out.println("Midias filtradas por idioma: Inglês");
             for (Midia m : midiasFiltradasIdioma) {
-                System.out.print(" " + m.getNome() + " ");
+                System.out.println(" " + m.getNome() + " ");
             }
             
             System.out.println();
 
            // Exemplo de filtrar midias por quantidade de episódios
            List<Midia> midiasFiltradasEpisodios = clienteLogado.filtrarPorQtdEpisodios(20);
-           System.out.print("Mídias filtradas por quantidade de episódios:");
+           System.out.println("Mídias filtradas por quantidade de episódios:");
            for (Midia m : midiasFiltradasEpisodios) {
                if (m instanceof Serie) {
                    Serie serie = (Serie) m;
                    if (serie.getQuantidadeEpisodios() >= 10) {
-                       System.out.print(" " + serie.getNome() + " ");
+                       System.out.println(" " + serie.getNome() + " ");
                    }
                }
            }
 
         if (clienteLogado != null) {
             // Exemplo de avaliação
-            clienteLogado.avaliar(plataforma.buscarMidia("shoreman"), 4);
+            clienteLogado.avaliar(plataforma.buscarMidia("Master Minds"), 4);
 
             // Registrar audiência para uma mídia
-            plataforma.buscarMidia("shoreman").registrarAudiencia();
+            plataforma.buscarMidia("Master Minds").registrarAudiencia();
             
             System.out.println();
             System.out.println();
             System.out.println("------------------ MÉDIA --------------------");
-            System.out.println("A média de avaliação da midia " + plataforma.buscarMidia("shoreman") + " é de: " + plataforma.buscarMidia("shoreman").calcularMediaAvaliacao());
+            System.out.println("A média de avaliação da midia " + plataforma.buscarMidia("Master Minds") + " é de: " + plataforma.buscarMidia("Master Minds").calcularMediaAvaliacoes());
 
 
-            // Realizar logoff
-            plataforma.logoff();
-        } else {
-            System.out.println("Login inválido. Verifique seu nome de usuário e senha.");
         }
+        // Realizar logoff
+        plataforma.logoff();
+
+        // Realizar o login de um cliente
+        clienteLogado = plataforma.login("Cliente2", "senha2");
+        clienteLogado.avaliar(plataforma.buscarMidia("Master Minds"), 1);
+
+            // Registrar audiência para uma mídia
+            plataforma.buscarMidia("Master Minds").registrarAudiencia();
+            
+            System.out.println();
+            System.out.println();
+            System.out.println("------------------ MÉDIA --------------------");
+            System.out.println("A média de avaliação da midia " + plataforma.buscarMidia("Master Minds") + " é de: " + plataforma.buscarMidia("Master Minds").calcularMediaAvaliacoes());
+
     }
+    
 }
