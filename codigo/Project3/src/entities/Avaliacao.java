@@ -14,4 +14,7 @@ public class Avaliacao {
     public void setNota(int nota) {
         this.nota = nota;
     }
+
+    public void setComentario(String comentario) {
+    }
 }
