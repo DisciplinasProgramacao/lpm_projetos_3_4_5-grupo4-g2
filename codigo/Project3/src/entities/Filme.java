@@ -2,9 +2,10 @@ package entities;
 
 public class Filme extends Midia {
     private int duracaoFilme;
+    private String idioma;
 
-    public Filme(int id, String nome, String dataLancamento, int audiencia, String genero, int duracaoFilme, String idioma) {
-        super(id, nome, dataLancamento, audiencia, genero, idioma);
+    public Filme(String id, String nome, String dataLancamento, int audiencia) {
+        super(id, nome, dataLancamento, audiencia);
         this.duracaoFilme = duracaoFilme;
     }
 
@@ -14,8 +15,12 @@ public class Filme extends Midia {
         return duracaoFilme;
     }
 
-    public void setDuracaoFilme(int duracaoFilme) {
+    public void setDuracao(int duracaoFilme) {
         this.duracaoFilme = duracaoFilme;
+    }
+
+    public void setIdioma(String idioma) {
+        this.idioma = idioma;
     }
 
     @Override

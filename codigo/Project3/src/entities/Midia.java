@@ -5,35 +5,31 @@ import java.util.List;
 
 //Essa classe será a superclasse da classe Filme e Serie
 public class Midia {
-    private int id;
+    private String id;
     private String nome;
     private String dataLancamento;
     private int audiencia;
     private String genero;
     private String idioma;
     private List<Avaliacao> avaliacoes;
-    private List<Midia> listaParaVer;
 
-    public Midia(int id, String nome, String dataLancamento, int audiencia, String genero, String idioma) {
+    public Midia(String id, String nome, String dataLancamento, int audiencia) {
         this.id = id;
         this.nome = nome;
         this.dataLancamento = dataLancamento;
         this.audiencia = audiencia;
-        this.genero = genero;
-        this.idioma = idioma;
         this.avaliacoes = new ArrayList<>();
-        this.listaParaVer = new ArrayList<>();
     }
 
     // getters e setters
 
    
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -72,6 +68,11 @@ public class Midia {
     public String getIdioma() {
         return idioma;
     }
+
+    public void setIdioma(String idioma) {
+        this.idioma = idioma;
+    }
+
 
 
     public double calcularMediaAvaliacao() {
@@ -112,14 +113,13 @@ public class Midia {
         avaliacoes.add(avaliacao);
     }
 
-    public List<Midia> registrarAudiencia() {
-        List<Midia> midiasRegistradas = new ArrayList<>();
-        for (Midia midia : listaParaVer) {
-            midia.setAudiencia(midia.getAudiencia() + 1);
-            midiasRegistradas.add(midia);
-        }
-    
-        return midiasRegistradas;
+   
+
+    public void registrarAudiencia() {
+        audiencia++;
     }
+    
 }
+
+
 

@@ -2,9 +2,10 @@ package entities;
 
 public class Serie extends Midia {
     private int quantidadeEpisodios;
+    private String idioma;
 
-    public Serie(int id, String nome, String dataLancamento, int audiencia, String genero, int quantidadeEpisodios, String idioma) {
-        super(id, nome, dataLancamento, audiencia, genero, idioma);
+    public Serie(String id, String nome, String dataLancamento, int audiencia) {
+        super(id, nome, dataLancamento, audiencia);
         this.quantidadeEpisodios = quantidadeEpisodios;
     }
 
@@ -17,6 +18,11 @@ public class Serie extends Midia {
     public void setQuantidadeEpisodios(int quantidadeEpisodios) {
         this.quantidadeEpisodios = quantidadeEpisodios;
     }
+
+    public void setIdioma(String idioma) {
+        this.idioma = idioma;
+    }
+
 
     @Override
     public String toString() {

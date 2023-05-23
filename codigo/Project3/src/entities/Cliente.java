@@ -3,12 +3,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Cliente {
+    private String nome;
     private String nomeDoUsuario;
     private String senha;
     private List<Midia> listaParaVer;
     private List<Midia> listaAssistidas;
 
-    public Cliente(String nomeDoUsuario, String senha) {
+    public Cliente(String nome, String nomeDoUsuario, String senha) {
+        this.nome = nome;
         this.nomeDoUsuario = nomeDoUsuario;
         this.senha = senha;
         this.listaParaVer = new ArrayList<>();
@@ -35,7 +37,8 @@ class Cliente {
 
     public List<Midia> filtrarPorGenero(String genero) {
         List<Midia> midiasFiltradas = new ArrayList<>();
-        for (Midia midia : listaParaVer) {
+        List<Midia> catalogo = PlataformaStreaming.getCatalogo(); // Obtenha o catálogo completo da plataforma
+        for (Midia midia : catalogo) {
             if (midia.getGenero().equals(genero)) {
                 midiasFiltradas.add(midia);
             }
@@ -45,17 +48,19 @@ class Cliente {
     
     public List<Midia> filtrarPorIdioma(String idioma) {
         List<Midia> midiasFiltradas = new ArrayList<>();
-        for (Midia midia : listaParaVer) {
+        List<Midia> catalogo = PlataformaStreaming.getCatalogo(); // Obtenha o catálogo completo da plataforma
+        for (Midia midia : catalogo) {
             if (midia.getIdioma().equals(idioma)) {
                 midiasFiltradas.add(midia);
             }
         }
         return midiasFiltradas;
     }
-
+    
     public List<Midia> filtrarPorQtdEpisodios(int quantEpisodios) {
         List<Midia> midiasFiltradas = new ArrayList<>();
-        for (Midia midia : listaParaVer) {
+        List<Midia> catalogo = PlataformaStreaming.getCatalogo(); // Obtenha o catálogo completo da plataforma
+        for (Midia midia : catalogo) {
             if (midia instanceof Serie) {
                 Serie serie = (Serie) midia;
                 if (serie.getQuantidadeEpisodios() >= quantEpisodios) {
@@ -65,6 +70,7 @@ class Cliente {
         }
         return midiasFiltradas;
     }
+    
 
     public void avaliar(Midia midia, int avaliacao) {
         if (avaliacao >= 1 && avaliacao <= 5) {
@@ -75,6 +81,8 @@ class Cliente {
         }
     }
 
+    
+   
 
     // Getters e setters...
     public String getNomeDoUsuario() {
