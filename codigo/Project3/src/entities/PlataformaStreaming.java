@@ -48,7 +48,7 @@ public class PlataformaStreaming {
     }
 
   
-    public void mostrarFilmes(){
+    public void mostrarMidias(){
         for (Midia m : midias) {
             System.out.println(m.toString());
         }
