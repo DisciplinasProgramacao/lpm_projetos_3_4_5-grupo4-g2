@@ -10,12 +10,12 @@ public class App {
 
         // Carregar dados das mídias
         plataforma.carregarCSV(
-                "C:/Users/hital/lpm_projetos_3_4_5-grupo4-g2/codigo/project3/src/entities/POO_Filmes.csv",
-                "C:/Users/hital/lpm_projetos_3_4_5-grupo4-g2/codigo/project3/src/entities/POO_Series.csv");
+                "C:/Users/Assemp/lpm_projetos_3_4_5-grupo4-g2/codigo/project3/src/entities/POO_Filmes.csv",
+                "C:/Users/Assemp/lpm_projetos_3_4_5-grupo4-g2/codigo/project3/src/entities/POO_Series.csv");
 
         // Carregar dados dos espectadores
         plataforma.carregarEspectadoresCSV(
-                "C:/Users/hital/lpm_projetos_3_4_5-grupo4-g2/codigo/project3/src/entities/POO_Espectadores.csv");
+                "C:/Users/Assemp/lpm_projetos_3_4_5-grupo4-g2/codigo/project3/src/entities/POO_Espectadores.csv");
 
         // Criar alguns clientes
         Cliente cliente1 = new Cliente("Jose", "Cliente1", "senha1");
@@ -37,21 +37,63 @@ public class App {
 
     public static Cliente realizarLogin(PlataformaStreaming plataforma) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Digite seu nome de usuário: ");
-        String nomeUsuario = scanner.nextLine();
-        System.out.print("Digite sua senha: ");
-        String senha = scanner.nextLine();
-        Cliente clienteLogado = plataforma.login(nomeUsuario, senha);
-        if (clienteLogado != null) {
-            System.out.println("Login realizado com sucesso!");
+        int opcao = 0;
+        while (opcao != 3) {
+            System.out.println();
+            System.out.println("-------- MENU DE ACESSO -----------");
+            System.out.println("1. Cadastrar-se");
+            System.out.println("2. Fazer login");
+            System.out.println("3. Sair");
+            System.out.print("Escolha uma opção: ");
+            opcao = scanner.nextInt();
+            scanner.nextLine();
+    
+            switch (opcao) {
+                case 1:
+                    System.out.print("Digite seu nome completo: ");
+                    String novoNome = scanner.nextLine();
+                    System.out.print("Digite o nome de usuário desejado: ");
+                    String novoNomeUsuario = scanner.nextLine();
+                    System.out.print("Digite a senha desejada: ");
+                    String novaSenha = scanner.nextLine();
+                    Cliente novoCliente = new Cliente(novoNome, novoNomeUsuario, novaSenha);
+                    plataforma.adicionarCliente(novoCliente);
+                    System.out.println();
+                    System.out.println("Cadastro realizado com sucesso! Faça login para continuar.");
+                    System.out.println();
+                    break;
+                case 2:
+                    System.out.print("Digite seu nome de usuário: ");
+                    String nomeUsuario = scanner.nextLine();
+                    System.out.print("Digite sua senha: ");
+                    String senha = scanner.nextLine();
+                    Cliente clienteLogado = plataforma.login(nomeUsuario, senha);
+                    if (clienteLogado != null) {
+                        System.out.println("Login realizado com sucesso!");
+                        System.out.println();
+                        System.out.println("Seja Bem Vindo " + clienteLogado.getNome());
+                        return clienteLogado;
+                    } else {
+                        System.out.println("Nome de usuário ou senha incorretos.");
+                        System.out.println();
+                    }
+                    break;
+                case 3:
+                    System.out.println("Encerrando o programa. Até mais!");
+                    return null;
+                default:
+                    System.out.println("Opção inválida. Digite novamente.");
+                    break;
+            }
         }
-        return clienteLogado;
+        scanner.close();
+        return null;
     }
 
     public static void exibirMenu(PlataformaStreaming plataforma, Cliente clienteLogado) {
         Scanner scanner = new Scanner(System.in);
         int opcao = 0;
-        while (opcao != 6) {
+        while (opcao != 7) {
             System.out.println();
             System.out.println("-------- MENU -----------");
             System.out.println("1. Mostrar catálogo de mídias");
@@ -59,11 +101,12 @@ public class App {
             System.out.println("3. Retirar mídia da lista para assistir");
             System.out.println("4. Filtrar mídias");
             System.out.println("5. Avaliar Midia");
-            System.out.println("6. Sair");
+            System.out.println("6. Fazer logoff");
+            System.out.println("7. Sair");
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt();
             scanner.nextLine();
-
+    
             switch (opcao) {
                 case 1:
                     System.out.println();
@@ -98,7 +141,6 @@ public class App {
                 case 4:
                     exibirMenuFiltrarMidias(clienteLogado);
                     break;
-
                 case 5:
                     System.out.println();
                     System.out.print("Digite o nome da mídia que deseja avaliar: ");
@@ -109,10 +151,10 @@ public class App {
                         int aval = scanner.nextInt();
                         clienteLogado.avaliar(plataforma.buscarMidia(nomeMidia), aval);
                         plataforma.buscarMidia(nomeMidia).registrarAudiencia();
-
+    
                         System.out.println();
                         System.out.println("------------------ MÉDIA --------------------");
-                        System.out.println("A média de avaliação da midia " + nomeMidia + " é de: "
+                        System.out.println("A média de avaliação da mídia " + nomeMidia + " é de: "
                                 + plataforma.buscarMidia(nomeMidia).calcularMediaAvaliacoes());
                         System.out.println();
                     } else {
@@ -120,6 +162,17 @@ public class App {
                     }
                     break;
                 case 6:
+                    System.out.println("Fazendo logoff...");
+                    plataforma.logoff();
+                    clienteLogado = realizarLogin(plataforma);
+                    if (clienteLogado != null) {
+                        System.out.println("Login realizado com sucesso!");
+                    } else {
+                        System.out.println("Login falhou. Encerrando o programa.");
+                        opcao = 7; // Encerrar o programa após o logoff
+                    }
+                    break;
+                case 7:
                     System.out.println("Encerrando o programa. Até mais!");
                     plataforma.logoff();
                     break;
@@ -130,6 +183,7 @@ public class App {
         }
         scanner.close();
     }
+    
 
     public static void exibirMenuFiltrarMidias(Cliente clienteLogado) {
         Scanner scanner = new Scanner(System.in);
@@ -187,7 +241,6 @@ public class App {
                     System.out.println("Opção inválida. Digite novamente.");
                     break;
             }
-            scanner.close();
         }
     }
 }

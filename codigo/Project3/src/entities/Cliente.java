@@ -156,6 +156,10 @@ class Cliente {
 
 
     // Getters e setters...
+    public String getNome() {
+        return nome;
+    }
+
     public String getNomeDoUsuario() {
         return nomeDoUsuario;
     }
