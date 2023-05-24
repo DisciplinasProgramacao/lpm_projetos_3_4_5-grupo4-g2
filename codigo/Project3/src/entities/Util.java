@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Util {
     private static final String[] GENEROS = {"Ação", "Comédia", "Terror", "Suspense", "Romance"};
-    private static final String[] IDIOMAS = {"Inglês", "Português", "Espanhol", "Francês", "Alemão"};
+    private static final String[] IDIOMAS = {"Ingles", "Portugues", "Espanhol", "Frances", "Alemao"};
     private static final Random RANDOM = new Random();
 
     public static void adicionarVariaveisAusentesFilme(Filme filme) {

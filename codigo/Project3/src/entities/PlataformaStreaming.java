@@ -14,7 +14,7 @@ public class PlataformaStreaming {
 
     public PlataformaStreaming(String nome) {
         this.nome = nome;
-        this.midias = new ArrayList<>();
+        PlataformaStreaming.midias = new ArrayList<>();
         this.clientes = new ArrayList<>();
         this.clienteAtual = null;
     }
@@ -35,7 +35,7 @@ public class PlataformaStreaming {
     }
 
     public void setMidias(List<Midia> midias) {
-        this.midias = midias;
+        PlataformaStreaming.midias = midias;
     }
 
 
@@ -193,10 +193,10 @@ private void carregarMidias(String caminhoArquivo, String tipoMidia) {
                 linha = linha.substring(1);
             }
 
-            linha = linha.trim(); // Remove espaços em branco antes e depois da linha
+            linha = linha.trim();
 
             if (linha.isEmpty()) {
-                continue; // Ignora linhas vazias
+                continue; 
             }
 
             // Separar os campos da linha do CSV
@@ -204,7 +204,6 @@ private void carregarMidias(String caminhoArquivo, String tipoMidia) {
 
             // Verificar o tipo de mídia
             if (tipoMidia.equalsIgnoreCase("filme")) {
-                // Verificar se há campos suficientes para adicionar um filme
                 if (campos.length < 4) {
                     System.out.println("Campos ausentes para adicionar um filme: " + linha);
                     continue;
@@ -223,7 +222,6 @@ private void carregarMidias(String caminhoArquivo, String tipoMidia) {
                 // Adicionar o filme à lista de filmes da plataforma
                 adicionarMidia(filme);
             } else if (tipoMidia.equalsIgnoreCase("serie")) {
-                // Verificar se há campos suficientes para adicionar uma série
                 if (campos.length < 3) {
                     System.out.println("Campos ausentes para adicionar uma série: " + linha);
                     continue;
@@ -258,10 +256,7 @@ private void carregarMidias(String caminhoArquivo, String tipoMidia) {
             String linha;
     
             while ((linha = br.readLine()) != null) {
-                // Separar os campos da linha do CSV
                 String[] campos = linha.split(";");
-    
-                // Carregar os campos do espectador
                 String nome = campos[0];
                 String nomeDoUsuario = campos[1];
                 String senha = campos[2];
@@ -322,15 +317,7 @@ private void carregarMidias(String caminhoArquivo, String tipoMidia) {
     }
 
 
-    public void registrarAudiencia(String tipoAudiencia, int valorAudiencia) {
-        if (tipoAudiencia.equals("F")) {
-       //     Cliente cliente.setAudienciaFeminina(cliente.getAudienciaFeminina() + valorAudiencia);
-        } else if (tipoAudiencia.equals("M")) {
-        //    cliente.setAudienciaMasculina(cliente.getAudienciaMasculina() + valorAudiencia);
-        } else {
-            System.out.println("Tipo de audiência inválido: " + tipoAudiencia);
-        }
-    }
+
 
   
     

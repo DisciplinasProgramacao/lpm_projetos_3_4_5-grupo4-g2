@@ -22,9 +22,6 @@ public class Midia {
         this.avaliacoes = new ArrayList<>();
     }
 
-    // getters e setters
-
-   
 
     public String getId() {
         return id;

@@ -25,7 +25,7 @@ public class App {
         plataforma.adicionarCliente(cliente1);
         plataforma.adicionarCliente(cliente2);
 
-        // Realizar o login de um cliente
+        
         Cliente clienteLogado = realizarLogin(plataforma);
 
         if (clienteLogado != null) {
@@ -169,7 +169,7 @@ public class App {
                         System.out.println("Login realizado com sucesso!");
                     } else {
                         System.out.println("Login falhou. Encerrando o programa.");
-                        opcao = 7; // Encerrar o programa após o logoff
+                        opcao = 7;
                     }
                     break;
                 case 7:
@@ -197,7 +197,7 @@ public class App {
             System.out.println("4. Voltar ao menu principal");
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt();
-            scanner.nextLine(); // Limpar o buffer do scanner
+            scanner.nextLine(); 
 
             switch (opcao) {
                 case 1:
