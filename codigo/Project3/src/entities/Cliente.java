@@ -90,6 +90,18 @@ class Cliente {
         return midiasFiltradas;
     }
     
+    public List<Midia> filtrarPorNome(String nome) {
+        List<Midia> midiasFiltradas = new ArrayList<>();
+        List<Midia> catalogo = PlataformaStreaming.getCatalogo(); // Obtenha o catálogo completo da plataforma
+        for (Midia midia : catalogo) {
+            if (midia.getNome().contains(nome)) {
+                midiasFiltradas.add(midia);
+            }
+        }
+        return midiasFiltradas;
+    }
+
+
     public List<Midia> filtrarPorQtdEpisodios(int quantEpisodios) {
         List<Midia> midiasFiltradas = new ArrayList<>();
         List<Midia> catalogo = PlataformaStreaming.getCatalogo(); // Obtenha o catálogo completo da plataforma

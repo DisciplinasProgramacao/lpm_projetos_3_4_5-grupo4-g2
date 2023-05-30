@@ -10,12 +10,15 @@ public class App {
 
         // Carregar dados das mídias
         plataforma.carregarCSV(
-                "C:/Users/Assemp/lpm_projetos_3_4_5-grupo4-g2/codigo/project3/src/entities/POO_Filmes.csv",
-                "C:/Users/Assemp/lpm_projetos_3_4_5-grupo4-g2/codigo/project3/src/entities/POO_Series.csv");
+                //"C:/Users/Assemp/lpm_projetos_3_4_5-grupo4-g2/codigo/project3/src/entities/POO_Filmes.csv",
+                "C:/Users/Pedro/Desktop/Trabalhoooooo/lpm_projetos_3_4_5-grupo4-g2/codigo/Project3/src/entities/POO_Filmes.csv",
+                //"C:/Users/Assemp/lpm_projetos_3_4_5-grupo4-g2/codigo/project3/src/entities/POO_Series.csv");
+                "C:/Users/Pedro/Desktop/Trabalhoooooo/lpm_projetos_3_4_5-grupo4-g2/codigo/Project3/src/entities/POO_Series.csv");
 
         // Carregar dados dos espectadores
         plataforma.carregarEspectadoresCSV(
-                "C:/Users/Assemp/lpm_projetos_3_4_5-grupo4-g2/codigo/project3/src/entities/POO_Espectadores.csv");
+                //"C:/Users/Assemp/lpm_projetos_3_4_5-grupo4-g2/codigo/project3/src/entities/POO_Espectadores.csv");
+                "C:/Users/Pedro/Desktop/Trabalhoooooo/lpm_projetos_3_4_5-grupo4-g2/codigo/Project3/src/entities/POO_Espectadores.csv");
 
         // Criar alguns clientes
         Cliente cliente1 = new Cliente("Jose", "Cliente1", "senha1");
@@ -140,6 +143,8 @@ public class App {
                     break;
                 case 4:
                     exibirMenuFiltrarMidias(clienteLogado);
+                    int n = scanner.nextInt();
+                    System.out.println(n);
                     break;
                 case 5:
                     System.out.println();
@@ -194,7 +199,7 @@ public class App {
             System.out.println("1. Filtrar por gênero");
             System.out.println("2. Filtrar por idioma");
             System.out.println("3. Filtrar por quantidade de episódios");
-            System.out.println("4. Voltar ao menu principal");
+            System.out.println("4. Filtrar por nome");
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt();
             scanner.nextLine(); 
@@ -234,7 +239,18 @@ public class App {
                         }
                     }
                     break;
-                case 4:
+                    case 4:
+                    System.out.println();
+                    System.out.print("Digite o titulo do filme ou série: ");
+                    String nomeDaMidia = scanner.nextLine();
+                    List<Midia> midiasFiltradasNome = clienteLogado.filtrarPorNome(nomeDaMidia);
+                    System.out.println("Mídias filtradas por nome (" + nomeDaMidia + ")"  );
+                    for (Midia m : midiasFiltradasNome) {                        
+                            Midia midia = (Midia) m;
+                            System.out.println(midia.getNome());                        
+                    }
+                    break;
+                case 5:
                     System.out.println("Voltando ao menu principal.");
                     break;
                 default:
