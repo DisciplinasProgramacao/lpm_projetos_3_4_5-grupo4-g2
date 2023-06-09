@@ -8,5 +8,7 @@ public class Filme extends Midia{
         this.nome = nome;
         this.dataLancamento = dataLancamento;
         this.duracao = duracao;
+        this.addGenero();
+        this.addIdioma();
     }
 }

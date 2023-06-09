@@ -7,5 +7,7 @@ public class Serie extends Midia{
         this.id = id;
         this.nome = nome;
         this.dataLancamento = dataLancamento;
+        this.addGenero();
+        this.addIdioma();
     }
 }
