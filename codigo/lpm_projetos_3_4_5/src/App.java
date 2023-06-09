@@ -1,27 +1,34 @@
 import java.util.Scanner;
 
 import models.Cliente;
+import models.Filme;
 import models.PlataformaStreaming;
+import models.Serie;
 
 public class App {
     public static void main(String[] args) throws Exception {
         PlataformaStreaming plataforma = PlataformaStreaming.getInstance("plataforma");
 
-        plataforma.preencherFilmes();
-        System.out.println(plataforma.getMidias().size());
+        Filme F1 = new Filme("776", "Lil Raffa Mano", "24/07/2022", 110);
+        Cliente C1 = new Cliente("777", "Raffa Moreira", "lilRaf", "777");
+        Serie S1 = new Serie("776", "Lil Raffa Mano", "24/07/2022");
 
-        plataforma.preencherSeries();
-        System.out.println(plataforma.getMidias().size());
+        plataforma.cadastrarSerie(S1);
+        // plataforma.preencherFilmes();
+        // System.out.println(plataforma.getMidias().size());
 
-        plataforma.preencherClientes();
-        System.out.println(plataforma.getClientes().size() + " idCliente: " + plataforma.getClientes().get(3).getIdCliente());
+        // plataforma.preencherSeries();
+        // System.out.println(plataforma.getMidias().size());
 
-        // plataforma.preencherAudiencia();
-        // plataforma.printAudPerMidia();
-        // System.out.println();
-        // plataforma.printAllClientes();
+        // plataforma.preencherClientes();
+        // System.out.println(plataforma.getClientes().size() + " idCliente: " + plataforma.getClientes().get(3).getIdCliente());
 
-        plataforma.filtraPorNome("Fools Of The East");
+        // // plataforma.preencherAudiencia();
+        // // plataforma.printAudPerMidia();
+        // // System.out.println();
+        // // plataforma.printAllClientes();
+
+        // plataforma.filtraPorNome("Fools Of The East");
 
         // fluxo normal e especialista
         // if(clienteAtual != null) {

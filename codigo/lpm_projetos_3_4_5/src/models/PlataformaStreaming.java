@@ -1,7 +1,9 @@
 package models;
 
+import java.io.BufferedWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 
 public class PlataformaStreaming {
@@ -115,7 +117,41 @@ public class PlataformaStreaming {
     }
 
     // escrita de arquivos
+
+    private void escrever(String str, String path) {
+        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(path), 
+        StandardOpenOption.APPEND, StandardOpenOption.CREATE)) {
+            writer.write(str);
+            writer.newLine();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     
+    public void cadastrarFilme(Filme filme) {
+        String str = filme.getId()+";"+
+                    filme.getNome()+";"+
+                    filme.getDataLancamento()+";"+
+                    filme.getDuracao();
+
+        escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Filmes.csv");
+    }
+
+    public void cadastrarCliente(Cliente cliente) {
+        String str = cliente.getNome()+";"+
+                    cliente.getUser()+";"+
+                    cliente.getSenha();
+
+        escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Espectadores.csv");
+    }
+
+    public void cadastrarSerie(Serie serie) {
+        String str = serie.getId()+";"+
+                    serie.getNome()+";"+
+                    serie.getDataLancamento();
+        
+        escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Series.csv");
+    }
 
     // operadores para testes
     public void printAudPerMidia(){

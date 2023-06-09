@@ -37,6 +37,10 @@ public abstract class Midia {
         return idioma;
     }
 
+    public String getDataLancamento() {
+        return dataLancamento;
+    }
+    
     // operacoes da classe
     protected void addGenero() {
         String[] generos = {"Ação", "Drama", "Anão"};
