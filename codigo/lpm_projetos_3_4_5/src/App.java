@@ -1,47 +1,25 @@
 import java.util.Scanner;
 
 import models.Cliente;
-import models.Filme;
 import models.PlataformaStreaming;
-import models.Serie;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        //instancia plataforma
-        PlataformaStreaming plataforma = PlataformaStreaming.getInstance("Streaming");
+        PlataformaStreaming plataforma = PlataformaStreaming.getInstance("plataforma");
 
-        //instancia filmes
-        Filme filme1 = new Filme("1","Heroes And Captains", "21/04/2022", 83);
-        Filme filme2 = new Filme("2","Heroes And Captains", "21/04/2022", 83);
-        Filme filme3 = new Filme("3","Heroes And Captains", "21/04/2022", 83);
+        plataforma.preencheFilmes();
+        System.out.println(plataforma.getMidias().size());
 
-        //instancia series
-        Serie serie1 = new Serie("1","Clear","14/09/2017");
-        Serie serie2 = new Serie("2","Clear","14/09/2017");
-
-        //instancia clientes
-        Cliente clienteNormal =  new Cliente("1", "a", "ab", "123", null, null, null);
-        Cliente clienteEspecialista = new Cliente("2", "b", "bb", "123");
-
-        clienteEspecialista.addFilmeAssistidas(filme1);
-        clienteEspecialista.addFilmeAssistidas(filme2);
-        clienteEspecialista.addFilmeAssistidas(filme3);
-        
-        clienteEspecialista.addSerieAssistidas(serie2);
-        clienteEspecialista.addSerieAssistidas(serie1);
-
-        plataforma.addCliente(clienteNormal);
-        plataforma.addCliente(clienteEspecialista);
-
-        Cliente clienteAtual = menuDeAcesso(plataforma);
-
-        if(clienteAtual != null) {
-            if(clienteAtual.getAssistidas().size() > 4) {
-                menuClienteEspecialista(clienteAtual);
-            } else {
-                menuCliente(clienteAtual);
-            }
-        } 
+        plataforma.preencherSeries();
+        System.out.println(plataforma.getMidias().size());
+        // fluxo normal e especialista
+        // if(clienteAtual != null) {
+        //     if(clienteAtual.getAssistidas().size() > 4) {
+        //         menuClienteEspecialista(clienteAtual);
+        //     } else {
+        //         menuCliente(clienteAtual);
+        //     }
+        // } 
     }
 
     // MENU DE ACESSO

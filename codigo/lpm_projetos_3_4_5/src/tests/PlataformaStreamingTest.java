@@ -66,4 +66,28 @@ public class PlataformaStreamingTest {
 
         assertEquals(plataforma.getClienteAtual(), null);
     }
+
+    @Test
+    public void shouldFillMidiasWithMovies() {
+        int result = 201;
+
+        try {
+            plataforma.preencheFilmes();
+            assertEquals(plataforma.getMidias().size(), result);
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void shouldFillMidiasWithSeries() {
+        int result = 130;
+
+        try {
+            plataforma.preencherSeries();
+            assertEquals(plataforma.getMidias().size(), result);
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
