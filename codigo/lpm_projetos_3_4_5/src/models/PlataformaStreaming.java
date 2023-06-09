@@ -5,6 +5,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+import javax.sound.sampled.Line;
+
 public class PlataformaStreaming {
     public static PlataformaStreaming instancia;
     private String nome;
@@ -32,6 +34,10 @@ public class PlataformaStreaming {
 
     public ArrayList<Midia> getMidias() {
         return midias;
+    }
+
+    public ArrayList<Cliente> getClientes() {
+        return clientes;
     }
 
     // operações da classe
@@ -67,5 +73,16 @@ public class PlataformaStreaming {
         .map(line -> line.split(";"))
         .map(col -> new Serie(col[0], col[1], col[2]))
         .forEach(midias::add);
+    }
+
+    public void preencherClientes() throws Exception {
+        Files.lines(Paths.get("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files/POO_Espectadores.csv"))
+        .map(line -> line.split(";"))
+        .forEach((col) -> {
+            int numeroLinha = this.clientes.size() + 1;
+            String idCliente = String.valueOf(numeroLinha);
+            Cliente cliente = new Cliente(idCliente, col[0], col[1], col[2]);
+            this.addCliente(cliente);
+        });
     }
 }

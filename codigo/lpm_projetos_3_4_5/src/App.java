@@ -12,6 +12,10 @@ public class App {
 
         plataforma.preencherSeries();
         System.out.println(plataforma.getMidias().size());
+
+        plataforma.preencherClientes();
+        System.out.println(plataforma.getClientes().size() + " idCliente: " + plataforma.getClientes().get(0).getIdCliente());
+
         // fluxo normal e especialista
         // if(clienteAtual != null) {
         //     if(clienteAtual.getAssistidas().size() > 4) {

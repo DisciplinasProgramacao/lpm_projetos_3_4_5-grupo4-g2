@@ -90,4 +90,16 @@ public class PlataformaStreamingTest {
             System.out.println(e.getMessage());
         }
     }
+
+    @Test
+    public void shouldFillClientes(){
+        int result = 51893;
+
+        try {
+            plataforma.preencherClientes();
+            assertEquals(result, plataforma.getClientes().size());
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
