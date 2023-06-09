@@ -69,8 +69,9 @@ public class PlataformaStreaming {
                                 midia.getId(), comentario, nota);
         
         clienteAtual.avaliarMidia(avaliacao);
+        midia.addAvaliacao(avaliacao);
     }
-    
+
     // leitura de arquivos
     public void preencherFilmes() throws Exception {
         Files.lines(Paths.get("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Filmes.csv"))

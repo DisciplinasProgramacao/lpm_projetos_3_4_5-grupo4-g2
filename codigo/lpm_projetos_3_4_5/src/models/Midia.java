@@ -10,7 +10,7 @@ public abstract class Midia {
     protected String genero;
     protected String idioma;
     protected ArrayList<Avaliacao> avaliacoes;
-    protected double media;
+    protected double media = 0;
 
     // getters / setters
     public String getId() {
@@ -50,5 +50,18 @@ public abstract class Midia {
     protected void addIdioma() {
         String[] idiomas = {"Inglês", "Português", "Francês", "Espanhol"};
         this.idioma = idiomas[(int) (Math.random() * idiomas.length)];
+    }
+
+    protected void addAvaliacao(Avaliacao avaliacao) {
+        this.avaliacoes.add(avaliacao);
+    }
+
+    protected void calcMedia() {
+        int acumulador = 0;
+        for(Avaliacao a : avaliacoes) {
+            acumulador += a.getNota();
+        } 
+
+        this.media = acumulador/this.avaliacoes.size();
     }
 }
