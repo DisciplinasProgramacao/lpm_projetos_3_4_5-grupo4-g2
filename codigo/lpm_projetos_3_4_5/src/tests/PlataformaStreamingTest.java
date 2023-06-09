@@ -72,7 +72,7 @@ public class PlataformaStreamingTest {
         int result = 201;
 
         try {
-            plataforma.preencheFilmes();
+            plataforma.preencherFilmes();
             assertEquals(plataforma.getMidias().size(), result);
         } catch(Exception e) {
             System.out.println(e.getMessage());
@@ -102,4 +102,14 @@ public class PlataformaStreamingTest {
             System.out.println(e.getMessage());
         }
     }
+
+    // @Test
+    // public void shouldFillMidiasCourtHearing() {
+    //     try {
+    //         plataforma.preencherSeries();
+    //         plataforma.preencherAudiencia();
+    //     } catch(Exception e) {
+    //         System.out.println(e.getMessage());
+    //     }
+    // }
 }

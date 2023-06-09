@@ -70,12 +70,12 @@ public class Cliente implements ClienteEspecialista {
     }
 
     // operações da classe
-    public void addSerieAssistidas(Serie serie){
-        this.assistidas.add(serie);
+    public void addAssistidas(Midia midia){
+        this.assistidas.add(midia);
     }
 
-    public void addFilmeAssistidas(Filme filme) {
-        this.assistidas.add(filme);
+    public void addParaVer(Midia midia) {
+        this.paraVer.add(midia);
     }
 
     public void assistirMidia(Midia midia) {

@@ -7,14 +7,21 @@ public class App {
     public static void main(String[] args) throws Exception {
         PlataformaStreaming plataforma = PlataformaStreaming.getInstance("plataforma");
 
-        plataforma.preencheFilmes();
+        plataforma.preencherFilmes();
         System.out.println(plataforma.getMidias().size());
 
         plataforma.preencherSeries();
         System.out.println(plataforma.getMidias().size());
 
         plataforma.preencherClientes();
-        System.out.println(plataforma.getClientes().size() + " idCliente: " + plataforma.getClientes().get(0).getIdCliente());
+        System.out.println(plataforma.getClientes().size() + " idCliente: " + plataforma.getClientes().get(3).getIdCliente());
+
+        // plataforma.preencherAudiencia();
+        // plataforma.printAudPerMidia();
+        // System.out.println();
+        // plataforma.printAllClientes();
+
+        plataforma.filtraPorNome("Fools Of The East");
 
         // fluxo normal e especialista
         // if(clienteAtual != null) {

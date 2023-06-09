@@ -15,4 +15,16 @@ public abstract class Midia {
     public String getId() {
         return id;
     }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public int getAudiencia() {
+        return audiencia;
+    }
+
+    public void addAudiencia() {
+        this.audiencia++;
+    }
 }
