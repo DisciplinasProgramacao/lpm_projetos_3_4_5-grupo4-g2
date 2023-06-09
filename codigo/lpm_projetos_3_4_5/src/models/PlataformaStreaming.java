@@ -63,6 +63,14 @@ public class PlataformaStreaming {
         .forEach(m -> System.out.println(m.getNome()));
     }
 
+    public void avaliar(Midia midia, String comentario, int nota) {
+        Avaliacao avaliacao;
+        avaliacao = new Avaliacao(this.clienteAtual.getIdCliente(),
+                                midia.getId(), comentario, nota);
+        
+        clienteAtual.avaliarMidia(avaliacao);
+    }
+    
     // leitura de arquivos
     public void preencherFilmes() throws Exception {
         Files.lines(Paths.get("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Filmes.csv"))
@@ -127,7 +135,7 @@ public class PlataformaStreaming {
             e.printStackTrace();
         }
     }
-    
+
     public void cadastrarFilme(Filme filme) {
         String str = filme.getId()+";"+
                     filme.getNome()+";"+

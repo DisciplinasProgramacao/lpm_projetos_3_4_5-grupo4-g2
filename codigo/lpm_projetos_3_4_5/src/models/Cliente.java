@@ -87,5 +87,9 @@ public class Cliente implements ClienteEspecialista {
         }
     }
 
+    public void avaliarMidia(Avaliacao avaliacao) {
+        this.avaliadas.add(avaliacao);
+    }
+
     // operações de especialista
 }
