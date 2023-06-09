@@ -3,10 +3,6 @@ package models;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.stream.Collectors;
-
-import javax.sound.sampled.Line;
 
 public class PlataformaStreaming {
     public static PlataformaStreaming instancia;
@@ -64,9 +60,8 @@ public class PlataformaStreaming {
         midias.stream().filter(m -> m.getNome().equals(nome))
         .forEach(m -> System.out.println(m.getNome()));
     }
-    
 
-    // leitura / escrita de dados
+    // leitura de arquivos
     public void preencherFilmes() throws Exception {
         Files.lines(Paths.get("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Filmes.csv"))
         .skip(1)
@@ -118,6 +113,9 @@ public class PlataformaStreaming {
             }
         });
     }
+
+    // escrita de arquivos
+    
 
     // operadores para testes
     public void printAudPerMidia(){

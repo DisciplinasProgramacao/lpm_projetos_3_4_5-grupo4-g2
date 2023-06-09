@@ -2,7 +2,6 @@ package tests;
 
 import static org.junit.Assert.assertNotEquals;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import models.Filme;
