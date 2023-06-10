@@ -132,13 +132,14 @@ public class App {
             System.out.println("2. Filtrar por nome");
             System.out.println("3. Filtrar por idioma");
             System.out.println("4. Filtrar por gênero");
-            System.out.println("5. Adicionar serie aos ver depois.");
-            System.out.println("6. Adicionar filme aos ver depois.");
+            System.out.println("5. Adicionar aos ver depois.");
+            System.out.println("6. Mostrar minha lista.");
             System.out.println("7. Assistir algo");
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt();
             scanner.nextLine();
-    
+            System.out.println();
+            
             switch (opcao) {
                 case 0:
                     plataforma.logoff();
@@ -167,6 +168,16 @@ public class App {
 
                     System.out.println("Filtro por gênero:");
                     plataforma.filtrarPorGenero(genero);
+                    break;
+                case 5:
+                    System.out.println("O que você quer assistir mais tarde?");
+                    nome = scanner.nextLine();
+
+                    plataforma.addParaVer(nome);
+                    break;
+                case 6:
+                    System.out.println("Essa é sua lista de desejos:");
+                    plataforma.mostrarListaParaVer();
                     break;
                 case 7:
                     break;

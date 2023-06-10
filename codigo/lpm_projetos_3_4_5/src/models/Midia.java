@@ -45,7 +45,6 @@ public abstract class Midia {
         return avaliacoes;
     }
     
-    // operacoes da classe
     protected void setGenero() {
         String[] generos = {"Ação", "Drama", "Anão"};
         this.genero = generos[(int) (Math.random() * generos.length)];
@@ -56,6 +55,7 @@ public abstract class Midia {
         this.idioma = idiomas[(int) (Math.random() * idiomas.length)];
     }
 
+    // operacoes da classe
     protected void calcMedia() {
         int acumulador = 0;
         for(Avaliacao a : avaliacoes) {

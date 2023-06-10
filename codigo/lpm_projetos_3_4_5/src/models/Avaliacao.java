@@ -14,6 +14,18 @@ public class Avaliacao {
         this.nota = nota;
     }
 
+    public String getIdCliente() {
+        return idCliente;
+    }
+
+    public String getIdMidia() {
+        return idMidia;
+    }
+
+    public String getComentario() {
+        return comentario;
+    }
+    
     public int getNota() {
         return nota;
     }

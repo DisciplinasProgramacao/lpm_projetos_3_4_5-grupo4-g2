@@ -76,6 +76,27 @@ public class PlataformaStreaming {
         .forEach(m -> System.out.println(m.getNome()));
     }
 
+    public void addParaVer(String nome) {
+        for(Midia m : midias) {
+            if(m.getNome().equals(nome)) {
+                getClienteAtual().getParaVer().add(m);
+            }
+        }
+    }
+
+    public void assistirMidia(String nome) {
+        for(Midia m : midias) {
+            if(m.getNome().equals(nome)) {
+                getClienteAtual().getAssistidas().add(m);
+                m.addAudiencia();
+            }
+        }
+    }
+
+    public void mostrarListaParaVer() {
+        clienteAtual.getParaVer().forEach(m -> System.out.println(m.getNome()));
+    } 
+
     public void avaliar(Midia midia, String comentario, int nota) {
         Avaliacao avaliacao;
         avaliacao = new Avaliacao(this.clienteAtual.getIdCliente(),
