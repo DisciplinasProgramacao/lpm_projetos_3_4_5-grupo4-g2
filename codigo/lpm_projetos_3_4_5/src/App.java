@@ -99,10 +99,12 @@ public class App {
 
                     if(clienteAtual != null) {
                         if(clienteAtual.getAssistidas().size()>4) {
-                            menuClienteEspecialista(clienteAtual);
+                            menuClienteEspecialista(clienteAtual, plataforma);
                         } else {
-                            menuCliente(clienteAtual);
+                            menuCliente(clienteAtual, plataforma);
                         }
+                    } else {
+                        System.out.println("Usuario ou senha invalidos!");
                     }
                     break;
                 default:
@@ -114,13 +116,14 @@ public class App {
     }
 
     // MENUS DE CLIENTE
-    public static void menuCliente(Cliente cliente) {
+    public static void menuCliente(Cliente cliente, PlataformaStreaming plataforma) {
         Scanner scanner = new Scanner(System.in);
         int opcao = -1;
         while (opcao != 0) {
             System.out.println();
             System.out.println("-------- MENU CLIENTE -----------");
-            System.out.println("0. Voltar");
+            System.out.println("Olá, " + cliente.getNome());
+            System.out.println("0. Delogar");
             System.out.println("1. Adicionar serie aos ver depois.");
             System.out.println("2. Adicionar filme aos ver depois.");
             System.out.println("3. Assistir algo");
@@ -129,21 +132,21 @@ public class App {
             scanner.nextLine();
     
             switch (opcao) {
+                case 0:
+                    plataforma.logoff();
+                    break;
                 case 1:
                     break;
                 case 2:
                     break;
-                case 3:
-                    System.out.println("Encerrando o programa. Até mais!");
                 default:
                     System.out.println("Opção inválida. Digite novamente.");
                     break;
             }
         }
-        scanner.close();
     }
 
-    public static void menuClienteEspecialista(Cliente clienteEspecialista) {
+    public static void menuClienteEspecialista(Cliente clienteEspecialista, PlataformaStreaming plataforma) {
         Scanner scanner = new Scanner(System.in);
         int opcao = -1;
         while (opcao != 0) {
