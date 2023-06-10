@@ -93,6 +93,20 @@ public class PlataformaStreaming {
         }
     }
 
+    public void mostrarListaAssistidas() {
+        clienteAtual.getAssistidas().forEach(m -> System.out.println(m.getNome()));
+    }
+
+    public void mostrarListaAvaliadas(){
+        clienteAtual.getAvaliadas().forEach(a -> {
+            for(Midia m : midias) {
+                if(a.getIdMidia().equals(m.getId())) {
+                    System.out.println("Nome: " + m.getNome() + " Nota: " + a.getNota());
+                }
+            }
+        });
+    }
+
     public void mostrarListaParaVer() {
         clienteAtual.getParaVer().forEach(m -> System.out.println(m.getNome()));
     } 

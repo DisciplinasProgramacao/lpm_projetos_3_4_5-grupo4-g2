@@ -16,6 +16,7 @@ public class App {
         plataforma.preencherSeries();
         plataforma.preencherClientes();
         plataforma.preencherAudiencia();
+        plataforma.preencherAvaliacoes();
 
         // Fluxo de menus
         menuDeAcesso(plataforma);
@@ -54,12 +55,19 @@ public class App {
         // } 
     }
 
+    // UTILIDADE TERMINAL
+    private static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
     // MENU DE ACESSO
     public static void menuDeAcesso(PlataformaStreaming plataforma) {
         Scanner scanner = new Scanner(System.in);
         String idCliente, nome, user, senha;
         int opcao = -1;
         while (opcao != 0) {
+            clearScreen();
             System.out.println();
             System.out.println("-------- MENU DE ACESSO -----------");
             System.out.println("0. Sair");
@@ -71,6 +79,7 @@ public class App {
     
             switch (opcao) {
                 case 0:
+                    clearScreen();
                     System.out.println("Encerrando o programa. Até mais!");
                     break;
                 case 1:
@@ -123,6 +132,7 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         int opcao = -1;
         while (opcao != 0) {
+            clearScreen();
             System.out.println();
             System.out.println("-------- MENU CLIENTE -----------");
             System.out.println("Olá, " + plataforma.getClienteAtual().getNome());
@@ -133,7 +143,7 @@ public class App {
             System.out.println("3. Filtrar por idioma");
             System.out.println("4. Filtrar por gênero");
             System.out.println("5. Adicionar aos ver depois.");
-            System.out.println("6. Mostrar minha lista.");
+            System.out.println("6. Mostrar minhas lista.");
             System.out.println("7. Assistir algo");
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt();
@@ -142,6 +152,15 @@ public class App {
             
             switch (opcao) {
                 case 0:
+                    clearScreen();
+                    System.out.println("Deslogando usuário.");
+
+                    try {
+                        Thread.sleep(3000);
+                    } catch(Exception e){
+                        e.getMessage();
+                    }
+
                     plataforma.logoff();
                     break;
                 case 1:
@@ -176,10 +195,49 @@ public class App {
                     plataforma.addParaVer(nome);
                     break;
                 case 6:
-                    System.out.println("Essa é sua lista de desejos:");
-                    plataforma.mostrarListaParaVer();
+                    menuListasDoCliente(plataforma);
                     break;
                 case 7:
+                    
+                    break;
+                default:
+                    System.out.println("Opção inválida. Digite novamente.");
+                    break;
+            }
+        }
+    }
+
+    public static void menuListasDoCliente(PlataformaStreaming plataforma) {
+        Scanner scanner = new Scanner(System.in);
+        int opcao = -1;
+        while (opcao != 0) {
+            clearScreen();
+            System.out.println();
+            System.out.println("-------- VISUALIZAR LISTAS -----------");
+            System.out.println("Olá, " + plataforma.getClienteAtual().getNome());
+            System.out.println("0. Voltar");
+            System.out.println("1. Assistidas");
+            System.out.println("2. Avaliações");
+            System.out.println("3. Para ver mais tarde");
+            System.out.print("Escolha uma opção: ");
+            opcao = scanner.nextInt();
+            scanner.nextLine();
+    
+            switch (opcao) {
+                case 0:
+                    clearScreen();
+                    break;
+                case 1:
+                    System.out.println("Essa é sua lista de midias assistidas:");
+                    plataforma.mostrarListaAssistidas();
+                    break;
+                case 2:
+                    System.out.println("Essa é sua lista de Avaliações:");
+                    plataforma.mostrarListaAvaliadas();
+                    break;
+                case 3:
+                    System.out.println("Essa é sua lista de midias para ver mais tarde:");
+                    plataforma.mostrarListaParaVer();
                     break;
                 default:
                     System.out.println("Opção inválida. Digite novamente.");
@@ -192,6 +250,7 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         int opcao = -1;
         while (opcao != 0) {
+            clearScreen();
             System.out.println();
             System.out.println("-------- MENU DE ESPECIALISTA -----------");
             System.out.println("Olá, " + plataforma.getClienteAtual().getNome());
@@ -223,6 +282,7 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         int opcao = -1;
         while (opcao != 0) {
+            clearScreen();
             System.out.println();
             System.out.println("-------- ASSISTIR MAIS TARDE -----------");
             System.out.println("0. Voltar");
