@@ -134,11 +134,11 @@ public class PlataformaStreaming {
     }
 
     public void preencherAudiencia() throws Exception {
-        Files.lines(Paths.get("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Audiencia.csv")).
-        map(lines -> lines.split(";")).
-        forEach((aud) -> {
-            Midia auxMidia = null;
-            for(Midia m : this.midias){
+        Files.lines(Paths.get("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Audiencia.csv"))
+        .map(lines -> lines.split(";"))
+        .forEach((aud) -> {
+            Midia auxMidia;
+            for(Midia m : midias){
                 if(m.getId().equals(aud[2])) {
                     m.addAudiencia();
                     auxMidia = m;
@@ -153,6 +153,22 @@ public class PlataformaStreaming {
                                 break;
                             }
                         }
+                    }
+                }
+            }
+        });
+    }
+
+    public void preencherAvaliacoes() throws Exception {
+        Files.lines(Paths.get("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Avaliacoes.csv"))
+        .map(lines -> lines.split(";"))
+        .forEach(aval -> {
+            for(Midia m : midias) {
+                for(Cliente c : clientes) {
+                    if(c.getIdCliente().equals(aval[0]) && m.getId().equals(aval[1])) {
+                        Avaliacao avaliacao = new Avaliacao(aval[0], aval[1], aval[2], Integer.parseInt(aval[3]));
+                        m.getAvaliacoes().add(avaliacao);
+                        c.getAvaliadas().add(avaliacao);
                     }
                 }
             }
@@ -197,6 +213,16 @@ public class PlataformaStreaming {
 
         escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Espectadores.csv");
         this.clientes.add(cliente);
+    }
+
+    public void cadastrarAvaliacao(Avaliacao avaliacao) {
+        String str = avaliacao.getIdCliente()+";"+
+                    avaliacao.getIdMidia()+";"+
+                    avaliacao.getComentario()+";"+
+                    avaliacao.getNota();
+        
+        escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Avaliacoes.csv");
+        this.getClienteAtual().getAvaliadas().add(avaliacao);
     }
 
     // operacoes para debug

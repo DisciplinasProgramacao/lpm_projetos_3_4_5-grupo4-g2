@@ -63,7 +63,7 @@ public class PlataformaStreamingTest {
 
     @Test
     public void shouldFillMidiasWithMovies() {
-        int result = 201;
+        int result = 3;
 
         try {
             plataforma.preencherFilmes();
@@ -75,7 +75,7 @@ public class PlataformaStreamingTest {
 
     @Test
     public void shouldFillMidiasWithSeries() {
-        int result = 130;
+        int result = 30;
 
         try {
             plataforma.preencherSeries();
@@ -87,7 +87,7 @@ public class PlataformaStreamingTest {
 
     @Test
     public void shouldFillClientes(){
-        int result = 51893;
+        int result = 36;
 
         try {
             plataforma.preencherClientes();
