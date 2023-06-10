@@ -40,6 +40,10 @@ public abstract class Midia {
     public String getDataLancamento() {
         return dataLancamento;
     }
+
+    public ArrayList<Avaliacao> getAvaliacoes() {
+        return avaliacoes;
+    }
     
     // operacoes da classe
     protected void setGenero() {
@@ -50,10 +54,6 @@ public abstract class Midia {
     protected void setIdioma() {
         String[] idiomas = {"Inglês", "Português", "Francês", "Espanhol"};
         this.idioma = idiomas[(int) (Math.random() * idiomas.length)];
-    }
-
-    protected void addAvaliacao(Avaliacao avaliacao) {
-        this.avaliacoes.add(avaliacao);
     }
 
     protected void calcMedia() {

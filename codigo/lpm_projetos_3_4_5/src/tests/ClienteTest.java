@@ -15,7 +15,7 @@ public class ClienteTest {
 
     @Test
     public void shouldAddCustomerAssessmentToAvaliadasList(){
-        C1.avaliarMidia(avaliacao);
+        C1.getAvaliadas().add(avaliacao);
         assertNotEquals(C1.getAvaliadas().size(), 0);
     }
 }

@@ -22,7 +22,7 @@ public class PlataformaStreamingTest {
         //instancia clientes
         clienteNormal =  new Cliente("1", "a", "ab", "123");
 
-        plataforma.addCliente(clienteNormal);
+        plataforma.getClientes().add(clienteNormal);
     }
 
     @Test

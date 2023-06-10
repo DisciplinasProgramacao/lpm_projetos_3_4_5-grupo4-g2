@@ -70,14 +70,6 @@ public class Cliente implements ClienteEspecialista {
     }
 
     // operações da classe
-    public void addAssistidas(Midia midia){
-        this.assistidas.add(midia);
-    }
-
-    public void addParaVer(Midia midia) {
-        this.paraVer.add(midia);
-    }
-
     public void assistirMidia(Midia midia) {
         this.assistidas.add(midia);
         for(Midia m : paraVer) {
@@ -85,10 +77,6 @@ public class Cliente implements ClienteEspecialista {
                 this.paraVer.remove(midia);
             }
         }
-    }
-
-    public void avaliarMidia(Avaliacao avaliacao) {
-        this.avaliadas.add(avaliacao);
     }
 
     // operações de especialista

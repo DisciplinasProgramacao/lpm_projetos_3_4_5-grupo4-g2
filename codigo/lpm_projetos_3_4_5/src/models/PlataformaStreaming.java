@@ -57,16 +57,12 @@ public class PlataformaStreaming {
         this.clienteAtual = null;
     }
 
-    public void addCliente(Cliente cliente) {
-        this.clientes.add(cliente);
-    }
-
     public void mostrarCatalogo() {
         midias.forEach(m -> System.out.println(m.getNome()));
     }
 
     public void filtraPorNome(String nome) {
-        midias.stream().filter(m -> m.getNome().equals(nome))
+        midias.stream().filter(m -> m.getNome().contains(nome))
         .forEach(m -> System.out.println(m.getNome()));
     }
 
@@ -85,8 +81,8 @@ public class PlataformaStreaming {
         avaliacao = new Avaliacao(this.clienteAtual.getIdCliente(),
                                 midia.getId(), comentario, nota);
         
-        clienteAtual.avaliarMidia(avaliacao);
-        midia.addAvaliacao(avaliacao);
+        clienteAtual.getAvaliadas().add(avaliacao);
+        midia.getAvaliacoes().add(avaliacao);
     }
 
     // leitura de arquivos
@@ -112,7 +108,7 @@ public class PlataformaStreaming {
             int numeroLinha = this.clientes.size() + 1;
             String idCliente = String.valueOf(numeroLinha);
             Cliente cliente = new Cliente(idCliente, col[0], col[1], col[2]);
-            this.addCliente(cliente);
+            this.clientes.add(cliente);
         });
     }
 
@@ -129,10 +125,10 @@ public class PlataformaStreaming {
                     for(Cliente c : clientes) {
                         if(c.getUser().equals(aud[0])) {
                             if(aud[1].equals("F")) {
-                                c.addParaVer(auxMidia);
+                                c.getParaVer().add(auxMidia);
                                 break;
                             } else {
-                                c.addAssistidas(auxMidia);
+                                c.getParaVer().add(auxMidia);
                                 break;
                             }
                         }
@@ -161,14 +157,7 @@ public class PlataformaStreaming {
                     filme.getDuracao();
 
         escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Filmes.csv");
-    }
-
-    public void cadastrarCliente(Cliente cliente) {
-        String str = cliente.getNome()+";"+
-                    cliente.getUser()+";"+
-                    cliente.getSenha();
-
-        escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Espectadores.csv");
+        this.midias.add(filme);
     }
 
     public void cadastrarSerie(Serie serie) {
@@ -177,9 +166,19 @@ public class PlataformaStreaming {
                     serie.getDataLancamento();
         
         escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Series.csv");
+        this.midias.add(serie);
     }
 
-    // operacoes para testes
+    public void cadastrarCliente(Cliente cliente) {
+        String str = cliente.getNome()+";"+
+                    cliente.getUser()+";"+
+                    cliente.getSenha();
+
+        escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Espectadores.csv");
+        this.clientes.add(cliente);
+    }
+
+    // operacoes para debug
     public void printAudPerMidia(){
         System.out.println("audiencia de series");
         for(Midia m : this.midias) {
