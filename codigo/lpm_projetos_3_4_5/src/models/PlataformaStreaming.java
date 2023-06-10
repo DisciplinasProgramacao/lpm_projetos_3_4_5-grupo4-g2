@@ -39,15 +39,18 @@ public class PlataformaStreaming {
         return clientes;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
     // operações da classe
-    public Cliente login(String user, String senha) {
+    public void login(String user, String senha) {
         for(Cliente c : clientes) {
             if(c.getUser().equals(user) && c.getSenha().equals(senha)){
                 clienteAtual = new Cliente(c.getIdCliente(), c.getNome(), c.getUser(), 
                                                     c.getSenha(), c.getParaVer(), c.getAssistidas(), c.getAvaliadas());
             }
         }
-        return this.clienteAtual;
     }
 
     public void logoff(){
@@ -58,8 +61,22 @@ public class PlataformaStreaming {
         this.clientes.add(cliente);
     }
 
+    public void mostrarCatalogo() {
+        midias.forEach(m -> System.out.println(m.getNome()));
+    }
+
     public void filtraPorNome(String nome) {
         midias.stream().filter(m -> m.getNome().equals(nome))
+        .forEach(m -> System.out.println(m.getNome()));
+    }
+
+    public void filtrarPorGenero(String genero) {
+        midias.stream().filter(m -> m.getGenero().equals(genero))
+        .forEach(m -> System.out.println(m.getNome()));
+    }
+
+    public void filtrarPorIdioma(String idioma) {
+        midias.stream().filter(m -> m.getIdioma().equals(idioma))
         .forEach(m -> System.out.println(m.getNome()));
     }
 
@@ -162,7 +179,7 @@ public class PlataformaStreaming {
         escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Series.csv");
     }
 
-    // operadores para testes
+    // operacoes para testes
     public void printAudPerMidia(){
         System.out.println("audiencia de series");
         for(Midia m : this.midias) {

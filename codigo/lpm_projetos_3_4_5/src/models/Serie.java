@@ -9,9 +9,9 @@ public class Serie extends Midia{
         this.id = id;
         this.nome = nome;
         this.dataLancamento = dataLancamento;
-        this.addGenero();
-        this.addIdioma();
-        this.addQuantidadeEpisodios();
+        this.setGenero();
+        this.setIdioma();
+        this.setQuantidadeEpisodios();
     }
 
     public int getQuantidadeEpisodios() {
@@ -19,7 +19,7 @@ public class Serie extends Midia{
     }
 
     // operacoes da classe
-    private void addQuantidadeEpisodios() {
+    private void setQuantidadeEpisodios() {
         this.quantidadeEpisodios = (int) (Math.random() * (MAX_EPISIODIOS - 1) + 1);
     }
 }

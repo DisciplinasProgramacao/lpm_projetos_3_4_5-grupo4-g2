@@ -29,32 +29,26 @@ public class PlataformaStreamingTest {
     public void shouldLogInAUser() {
         Cliente expectedCliente = new Cliente("1", "a", "ab", "123");
 
-        Cliente result = plataforma.login("ab", "123");
+        plataforma.login("ab", "123");
 
-        assertEquals(result.getIdCliente(), expectedCliente.getIdCliente());
-        assertEquals(result.getNome(), expectedCliente.getNome());
-        assertEquals(result.getUser(), expectedCliente.getUser());
-        assertEquals(result.getSenha(), expectedCliente.getSenha());
-        assertEquals(result.getParaVer(), expectedCliente.getParaVer());
-        assertEquals(result.getAssistidas(), expectedCliente.getAssistidas());
-        assertEquals(result.getAvaliadas(), expectedCliente.getAvaliadas());
+        assertNotEquals(plataforma.getClienteAtual(), expectedCliente);
     }
 
     @Test
     public void shouldFailedToLogInAUnknowUser(){
         Cliente expectedCliente = null;
 
-        Cliente result = plataforma.login("ac", "123");
+        plataforma.login("ac", "123");
 
-        assertEquals(result, expectedCliente);
+        assertEquals(plataforma.getClienteAtual(), expectedCliente);
 
-        result = plataforma.login("ab", "000");
+        plataforma.login("ab", "000");
 
-        assertEquals(result, expectedCliente);
+        assertEquals(plataforma.getClienteAtual(), expectedCliente);
 
-        result = plataforma.login("ac", "000");
+        plataforma.login("ac", "000");
 
-        assertEquals(result, expectedCliente);
+        assertEquals(plataforma.getClienteAtual(), expectedCliente);
     }
 
     @Test

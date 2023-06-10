@@ -42,12 +42,12 @@ public abstract class Midia {
     }
     
     // operacoes da classe
-    protected void addGenero() {
+    protected void setGenero() {
         String[] generos = {"Ação", "Drama", "Anão"};
         this.genero = generos[(int) (Math.random() * generos.length)];
     }
 
-    protected void addIdioma() {
+    protected void setIdioma() {
         String[] idiomas = {"Inglês", "Português", "Francês", "Espanhol"};
         this.idioma = idiomas[(int) (Math.random() * idiomas.length)];
     }
