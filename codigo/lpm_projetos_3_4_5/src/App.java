@@ -362,31 +362,4 @@ public class App {
             }
         }
     }
-
-    // MENU DE ASSISTIR
-    public static void assistirMidia(PlataformaStreaming plataforma) {
-        Scanner scanner = new Scanner(System.in);
-        int opcao = -1;
-        while (opcao != 0) {
-            clearScreen();
-            System.out.println();
-            System.out.println("-------- ASSISTIR MAIS TARDE -----------");
-            System.out.println("0. Voltar");
-            System.out.println("1. Serie");
-            System.out.println("2. Filme");
-            System.out.print("Escolha uma opção: ");
-            opcao = scanner.nextInt();
-            scanner.nextLine();
-    
-            switch (opcao) {
-                case 0:
-                    break;
-                case 1:
-                    break;
-                case 2:
-                default:
-                    break;
-            }
-        }
-    }
 }
