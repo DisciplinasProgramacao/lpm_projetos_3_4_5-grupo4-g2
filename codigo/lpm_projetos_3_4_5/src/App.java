@@ -146,7 +146,7 @@ public class App {
 
         String nome, idioma, genero;
         Midia avaliar;
-        
+
         Scanner scanner = new Scanner(System.in);
         int opcao = -1;
         while (opcao != 0) {
@@ -397,7 +397,7 @@ public class App {
                     nota = scanner.nextInt();
                     scanner.nextLine();
 
-                    System.out.print("duracao do filme: ");
+                    System.out.print("Comentario: ");
                     comentario = scanner.nextLine();
 
                     Avaliacao avaliacao = new Avaliacao(plataforma.getClienteAtual().getIdCliente(), midia.getId(), comentario, nota);
