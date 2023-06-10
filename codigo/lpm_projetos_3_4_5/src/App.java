@@ -1,7 +1,6 @@
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
 import java.util.Date;
-import java.text.SimpleDateFormat;
 
 import models.Avaliacao;
 import models.Cliente;
@@ -21,8 +20,8 @@ public class App {
         plataforma.preencherSeries();
         plataforma.preencherClientes();
         plataforma.preencherAudiencia();
-        plataforma.preencherAvaliacoes();
         plataforma.preencherAssistidas();
+        plataforma.preencherAvaliacoes();
 
         // Fluxo de menus
         menuDeAcesso(plataforma);
@@ -179,6 +178,7 @@ public class App {
                 case 1:
                     System.out.println("Todos:");
                     plataforma.mostrarCatalogo();
+                    scanner.nextLine();
                     break;
                 case 2:
                     System.out.println("Insira o nome:");
@@ -186,6 +186,7 @@ public class App {
 
                     System.out.println("Filtro por nome:");
                     plataforma.filtraPorNome(nome);
+                    scanner.nextLine();
                     break;
                 case 3:
                     System.out.println("Insira o idioma:");
@@ -193,6 +194,7 @@ public class App {
 
                     System.out.println("Filtro por idioma:");
                     plataforma.filtrarPorIdioma(idioma);
+                    scanner.nextLine();
                     break;
                case 4:
                     System.out.println("Insira o gênero:");
@@ -200,6 +202,7 @@ public class App {
 
                     System.out.println("Filtro por gênero:");
                     plataforma.filtrarPorGenero(genero);
+                    scanner.nextLine();
                     break;
                 case 5:
                     System.out.println("O que você quer assistir mais tarde?");
@@ -270,6 +273,7 @@ public class App {
                     case 1:
                         System.out.println("Todos:");
                         plataforma.mostrarCatalogo();
+                        scanner.nextLine();
                         break;
                     case 2:
                         System.out.println("Insira o nome:");
@@ -277,6 +281,7 @@ public class App {
     
                         System.out.println("Filtro por nome:");
                         plataforma.filtraPorNome(nome);
+                        scanner.nextLine();
                         break;
                     case 3:
                         System.out.println("Insira o idioma:");
@@ -284,6 +289,7 @@ public class App {
     
                         System.out.println("Filtro por idioma:");
                         plataforma.filtrarPorIdioma(idioma);
+                        scanner.nextLine();
                         break;
                    case 4:
                         System.out.println("Insira o gênero:");
@@ -291,6 +297,7 @@ public class App {
     
                         System.out.println("Filtro por gênero:");
                         plataforma.filtrarPorGenero(genero);
+                        scanner.nextLine();
                         break;
                     case 5:
                         System.out.println("O que você quer assistir mais tarde?");
@@ -357,14 +364,17 @@ public class App {
                 case 1:
                     System.out.println("Essa é sua lista de midias assistidas:");
                     plataforma.mostrarListaAssistidas();
+                    scanner.nextLine();
                     break;
                 case 2:
                     System.out.println("Essa é sua lista de Avaliações:");
                     plataforma.mostrarListaAvaliadas();
+                    scanner.nextLine();
                     break;
                 case 3:
                     System.out.println("Essa é sua lista de midias para ver mais tarde:");
                     plataforma.mostrarListaParaVer();
+                    scanner.nextLine();
                     break;
                 default:
                     System.out.println("Opção inválida. Digite novamente.");
@@ -379,7 +389,7 @@ public class App {
         String comentario;
         Scanner scanner = new Scanner(System.in);
         int opcao = -1;
-        while (opcao != 1) {
+        while (opcao != 1 && opcao != 2) {
             clearScreen();
             System.out.println();
             System.out.println("-------- AVALIAR FILME -----------");

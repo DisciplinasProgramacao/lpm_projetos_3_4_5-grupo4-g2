@@ -9,7 +9,7 @@ public abstract class Midia {
     protected int audiencia = 0;
     protected String genero;
     protected String idioma;
-    protected ArrayList<Avaliacao> avaliacoes;
+    protected ArrayList<Avaliacao> avaliacoes = new ArrayList<Avaliacao>();
     protected double media = 0;
 
     // getters / setters

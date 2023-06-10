@@ -79,8 +79,10 @@ public class PlataformaStreaming {
     public void addParaVer(String nome) {
         for(Midia m : midias) {
             if(m.getNome().equals(nome)) {
-                clienteAtual.getParaVer().add(m);
-                cadastrarAudiencia(clienteAtual.getUser(), "F", m.getId());
+                if(!clienteAtual.getParaVer().contains(m)) {
+                    clienteAtual.getParaVer().add(m);
+                    cadastrarAudiencia(clienteAtual.getUser(), "F", m.getId());
+                }
             }
         }
     }
@@ -88,12 +90,16 @@ public class PlataformaStreaming {
     public Midia assistirMidia(String nome) {
         for(Midia m : midias) {
             if(m.getNome().equals(nome)) {
-                clienteAtual.getAssistidas().add(m);
-                m.addAudiencia();
-                cadastrarMidiasAssistidas(clienteAtual.getIdCliente(), m.getId());
-                cadastrarAudiencia(clienteAtual.getUser(), "A", m.getId());
-                System.out.println("Assistido.");
-                return m;
+                if(!clienteAtual.getAssistidas().contains(m)) {
+                    clienteAtual.getAssistidas().add(m);
+                    clienteAtual.getParaVer().remove(m);
+                    m.addAudiencia();
+                    cadastrarMidiasAssistidas(clienteAtual.getIdCliente(), m.getId());
+                    cadastrarAudiencia(clienteAtual.getUser(), "A", m.getId());
+                    System.out.println("Assistido.");
+                    return m;
+                }
+                return null;
             }
         }
         System.out.println("Não encontrado.");
@@ -122,9 +128,10 @@ public class PlataformaStreaming {
         Avaliacao avaliacao;
         avaliacao = new Avaliacao(this.clienteAtual.getIdCliente(),
                                 midia.getId(), comentario, nota);
-        
-        clienteAtual.getAvaliadas().add(avaliacao);
-        midia.getAvaliacoes().add(avaliacao);
+        if(!clienteAtual.getAvaliadas().contains(avaliacao)) {
+            clienteAtual.getAvaliadas().add(avaliacao);
+            midia.getAvaliacoes().add(avaliacao);
+        }
     }
 
     // leitura de arquivos
@@ -170,7 +177,7 @@ public class PlataformaStreaming {
                                 c.getParaVer().add(auxMidia);
                                 break;
                             } else {
-                                c.getParaVer().add(auxMidia);
+                                c.getAssistidas().add(auxMidia);
                                 break;
                             }
                         }
