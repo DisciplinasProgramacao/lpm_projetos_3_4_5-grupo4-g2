@@ -272,6 +272,7 @@ public class PlataformaStreaming {
 
     private void cadastrarAudiencia(String user, String fa, String idMidia) {
         String str = user + ";" + fa + ";" + idMidia;
+        
         escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Audiencia.csv");
     }
 

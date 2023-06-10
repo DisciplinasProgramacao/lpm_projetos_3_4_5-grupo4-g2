@@ -1,4 +1,7 @@
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 import models.Cliente;
 import models.Filme;
@@ -64,6 +67,7 @@ public class App {
 
     // MENU DE ACESSO
     public static void menuDeAcesso(PlataformaStreaming plataforma) {
+
         Scanner scanner = new Scanner(System.in);
         String idCliente, nome, user, senha;
         int opcao = -1;
@@ -129,6 +133,7 @@ public class App {
 
     // MENUS DE CLIENTE
     public static void menuCliente(PlataformaStreaming plataforma) {
+
         String nome, idioma, genero;
         Scanner scanner = new Scanner(System.in);
         int opcao = -1;
@@ -212,6 +217,7 @@ public class App {
     }
 
     public static void menuListasDoCliente(PlataformaStreaming plataforma) {
+
         Scanner scanner = new Scanner(System.in);
         int opcao = -1;
         while (opcao != 0) {
@@ -252,7 +258,12 @@ public class App {
 
     // MENUS DE CLIENTE ESPECIALISTA
     public static void menuClienteEspecialista(PlataformaStreaming plataforma) {
+
+        String dataLancamento = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+        String id = String.valueOf(plataforma.getMidias().size() + 1);
+
         String nome, idioma, genero;
+        int duracao;
         Scanner scanner = new Scanner(System.in);
         int opcao = -1;
         while (opcao != 0) {
@@ -328,6 +339,22 @@ public class App {
                     nome = scanner.nextLine();
 
                     plataforma.assistirMidia(nome);
+                    break;
+                case 8:
+                    System.out.print("Nome do filme: ");
+                    nome = scanner.nextLine();
+                    System.out.print("duracao do filme: ");
+                    duracao = scanner.nextInt();
+                    
+                    Filme filme = new Filme(id, nome, dataLancamento, duracao);
+                    plataforma.cadastrarFilme(filme);
+                    break;
+                case 9:
+                    System.out.print("Nome da serie: ");
+                    nome = scanner.nextLine();
+                    
+                    Serie serie = new Serie(id, nome, dataLancamento);
+                    plataforma.cadastrarSerie(serie);
                     break;
                 default:
                     System.out.println("Opção inválida. Digite novamente.");
