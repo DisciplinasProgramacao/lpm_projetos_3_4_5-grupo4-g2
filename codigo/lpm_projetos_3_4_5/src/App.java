@@ -241,7 +241,7 @@ public class App {
             while (opcao != 0) {
                 clearScreen();
                 System.out.println();
-                System.out.println("-------- MENU CLIENTE -----------");
+                System.out.println("-------- MENU CLIENTE ESPECIALISTA -----------");
                 System.out.println("Olá, " + plataforma.getClienteAtual().getNome());
                 System.out.println("Bem vindo(a) à " + plataforma.getNome());
                 System.out.println("0. Delogar");
