@@ -85,23 +85,19 @@ public class PlataformaStreaming {
         }
     }
 
-    public void assistirMidia(String nome) {
-        boolean containInMidias = false;
+    public Midia assistirMidia(String nome) {
         for(Midia m : midias) {
             if(m.getNome().equals(nome)) {
                 clienteAtual.getAssistidas().add(m);
                 m.addAudiencia();
                 cadastrarMidiasAssistidas(clienteAtual.getIdCliente(), m.getId());
                 cadastrarAudiencia(clienteAtual.getUser(), "A", m.getId());
-                containInMidias = true;
-                break;
+                System.out.println("Assistido.");
+                return m;
             }
         }
-        if(containInMidias) {
-            System.out.println("Assistido.");
-        } else {
-            System.out.println("Não encontrado.");
-        }
+        System.out.println("Não encontrado.");
+        return null;
     }
 
     public void mostrarListaAssistidas() {
@@ -272,7 +268,7 @@ public class PlataformaStreaming {
 
     private void cadastrarAudiencia(String user, String fa, String idMidia) {
         String str = user + ";" + fa + ";" + idMidia;
-        
+
         escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Audiencia.csv");
     }
 
