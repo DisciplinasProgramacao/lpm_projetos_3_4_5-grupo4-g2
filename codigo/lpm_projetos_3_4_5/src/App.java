@@ -7,13 +7,27 @@ import models.Serie;
 
 public class App {
     public static void main(String[] args) throws Exception {
+
+        // Inicia o sistema
         PlataformaStreaming plataforma = PlataformaStreaming.getInstance("plataforma");
 
-        Filme F1 = new Filme("776", "Lil Raffa Mano", "24/07/2022", 110);
-        Cliente C1 = new Cliente("777", "Raffa Moreira", "lilRaf", "777");
-        Serie S1 = new Serie("776", "Lil Raffa Mano", "24/07/2022");
+        // Carrega dados
+        plataforma.preencherFilmes();
+        plataforma.preencherSeries();
+        plataforma.preencherClientes();
+        plataforma.preencherAudiencia();
 
-        plataforma.cadastrarSerie(S1);
+        // Fluxo de menus
+        menuDeAcesso(plataforma);
+
+
+
+
+        // Filme F1 = new Filme("776", "Lil Raffa Mano", "24/07/2022", 110);
+        // Cliente C1 = new Cliente("777", "Raffa Moreira", "lilRaf", "777");
+        // Serie S1 = new Serie("776", "Lil Raffa Mano", "24/07/2022");
+
+        // plataforma.cadastrarSerie(S1);
         // plataforma.preencherFilmes();
         // System.out.println(plataforma.getMidias().size());
 
@@ -41,8 +55,9 @@ public class App {
     }
 
     // MENU DE ACESSO
-    public static Cliente menuDeAcesso(PlataformaStreaming plataforma) {
+    public static void menuDeAcesso(PlataformaStreaming plataforma) {
         Scanner scanner = new Scanner(System.in);
+        String idCliente, nome, user, senha;
         int opcao = -1;
         while (opcao != 0) {
             System.out.println();
@@ -55,19 +70,47 @@ public class App {
             scanner.nextLine();
     
             switch (opcao) {
+                case 0:
+                    System.out.println("Encerrando o programa. Até mais!");
+                    break;
                 case 1:
+                    System.out.println("Para cadastrar digite:");
+                    System.out.print("Nome: ");
+                    nome = scanner.nextLine();
+                    System.out.print("User: ");
+                    user = scanner.nextLine();
+                    System.out.print("Senha: ");
+                    senha = scanner.nextLine();
+
+                    idCliente = String.valueOf(plataforma.getClientes().size() + 1);
+
+                    Cliente cliente = new Cliente(idCliente, nome, user, senha);
+                    
+                    plataforma.cadastrarCliente(cliente);
                     break;
                 case 2:
-                    return plataforma.login("bb", "123");
-                case 3:
-                    System.out.println("Encerrando o programa. Até mais!");
+                    System.out.println("Para logar digite:");
+                    System.out.print("User: ");
+                    user = scanner.nextLine();
+                    System.out.print("Senha: ");
+                    senha = scanner.nextLine();
+
+                    Cliente clienteAtual = plataforma.login(user, senha);
+
+                    if(clienteAtual != null) {
+                        if(clienteAtual.getAssistidas().size()>4) {
+                            menuClienteEspecialista(clienteAtual);
+                        } else {
+                            menuCliente(clienteAtual);
+                        }
+                    }
+                    break;
                 default:
                     System.out.println("Opção inválida. Digite novamente.");
                     break;
             }
         }
         scanner.close();
-        return null;
     }
 
     // MENUS DE CLIENTE
@@ -76,7 +119,7 @@ public class App {
         int opcao = -1;
         while (opcao != 0) {
             System.out.println();
-            System.out.println("-------- MENU -----------");
+            System.out.println("-------- MENU CLIENTE -----------");
             System.out.println("0. Voltar");
             System.out.println("1. Adicionar serie aos ver depois.");
             System.out.println("2. Adicionar filme aos ver depois.");
