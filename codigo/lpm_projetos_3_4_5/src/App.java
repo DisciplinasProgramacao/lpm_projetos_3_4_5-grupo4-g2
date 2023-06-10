@@ -17,6 +17,7 @@ public class App {
         plataforma.preencherClientes();
         plataforma.preencherAudiencia();
         plataforma.preencherAvaliacoes();
+        plataforma.preencherAssistidas();
 
         // Fluxo de menus
         menuDeAcesso(plataforma);
@@ -142,8 +143,8 @@ public class App {
             System.out.println("2. Filtrar por nome");
             System.out.println("3. Filtrar por idioma");
             System.out.println("4. Filtrar por gênero");
-            System.out.println("5. Adicionar aos ver depois.");
-            System.out.println("6. Mostrar minhas lista.");
+            System.out.println("5. Adicionar aos ver depois");
+            System.out.println("6. Mostrar minhas lista");
             System.out.println("7. Assistir algo");
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt();
@@ -198,7 +199,10 @@ public class App {
                     menuListasDoCliente(plataforma);
                     break;
                 case 7:
-                    
+                    System.out.println("O que você quer assistir?");
+                    nome = scanner.nextLine();
+
+                    plataforma.assistirMidia(nome);
                     break;
                 default:
                     System.out.println("Opção inválida. Digite novamente.");
@@ -246,35 +250,90 @@ public class App {
         }
     }
 
+    // MENUS DE CLIENTE ESPECIALISTA
     public static void menuClienteEspecialista(PlataformaStreaming plataforma) {
+        String nome, idioma, genero;
         Scanner scanner = new Scanner(System.in);
         int opcao = -1;
         while (opcao != 0) {
             clearScreen();
             System.out.println();
-            System.out.println("-------- MENU DE ESPECIALISTA -----------");
+            System.out.println("-------- MENU CLIENTE -----------");
             System.out.println("Olá, " + plataforma.getClienteAtual().getNome());
-            System.out.println("0. Deslogar");
-            System.out.println("1. Cadastrar-se");
-            System.out.println("2. Fazer login");
+            System.out.println("Bem vindo(a) à " + plataforma.getNome());
+            System.out.println("0. Delogar");
+            System.out.println("1. Mostrar catalogo");
+            System.out.println("2. Filtrar por nome");
+            System.out.println("3. Filtrar por idioma");
+            System.out.println("4. Filtrar por gênero");
+            System.out.println("5. Adicionar aos ver depois");
+            System.out.println("6. Mostrar minhas lista");
+            System.out.println("7. Assistir algo");
+            System.out.println("8. Cadastrar filme");
+            System.out.println("9. Cadastrar Serie");
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt();
             scanner.nextLine();
-    
+            System.out.println();
+            
             switch (opcao) {
                 case 0:
+                    clearScreen();
+                    System.out.println("Deslogando usuário.");
+
+                    try {
+                        Thread.sleep(3000);
+                    } catch(Exception e){
+                        e.getMessage();
+                    }
+
                     plataforma.logoff();
                     break;
                 case 1:
+                    System.out.println("Todos:");
+                    plataforma.mostrarCatalogo();
                     break;
                 case 2:
+                    System.out.println("Insira o nome:");
+                    nome = scanner.nextLine();
+
+                    System.out.println("Filtro por nome:");
+                    plataforma.filtraPorNome(nome);
+                    break;
+                case 3:
+                    System.out.println("Insira o idioma:");
+                    idioma = scanner.nextLine();
+
+                    System.out.println("Filtro por idioma:");
+                    plataforma.filtrarPorIdioma(idioma);
+                    break;
+               case 4:
+                    System.out.println("Insira o gênero:");
+                    genero = scanner.nextLine();
+
+                    System.out.println("Filtro por gênero:");
+                    plataforma.filtrarPorGenero(genero);
+                    break;
+                case 5:
+                    System.out.println("O que você quer assistir mais tarde?");
+                    nome = scanner.nextLine();
+
+                    plataforma.addParaVer(nome);
+                    break;
+                case 6:
+                    menuListasDoCliente(plataforma);
+                    break;
+                case 7:
+                    System.out.println("O que você quer assistir?");
+                    nome = scanner.nextLine();
+
+                    plataforma.assistirMidia(nome);
                     break;
                 default:
                     System.out.println("Opção inválida. Digite novamente.");
                     break;
             }
         }
-        scanner.close();
     }
 
     // MENU DE ASSISTIR

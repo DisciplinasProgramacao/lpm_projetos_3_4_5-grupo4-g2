@@ -79,17 +79,28 @@ public class PlataformaStreaming {
     public void addParaVer(String nome) {
         for(Midia m : midias) {
             if(m.getNome().equals(nome)) {
-                getClienteAtual().getParaVer().add(m);
+                clienteAtual.getParaVer().add(m);
+                cadastrarAudiencia(clienteAtual.getUser(), "F", m.getId());
             }
         }
     }
 
     public void assistirMidia(String nome) {
+        boolean containInMidias = false;
         for(Midia m : midias) {
             if(m.getNome().equals(nome)) {
-                getClienteAtual().getAssistidas().add(m);
+                clienteAtual.getAssistidas().add(m);
                 m.addAudiencia();
+                cadastrarMidiasAssistidas(clienteAtual.getIdCliente(), m.getId());
+                cadastrarAudiencia(clienteAtual.getUser(), "A", m.getId());
+                containInMidias = true;
+                break;
             }
+        }
+        if(containInMidias) {
+            System.out.println("Assistido.");
+        } else {
+            System.out.println("Não encontrado.");
         }
     }
 
@@ -189,6 +200,20 @@ public class PlataformaStreaming {
         });
     }
 
+    public void preencherAssistidas() throws Exception {
+        Files.lines(Paths.get("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Assistidas.csv"))
+        .map(lines -> lines.split(";"))
+        .forEach(ass -> {
+            for(Midia m : midias) {
+                for(Cliente c : clientes){
+                    if(c.getIdCliente().equals(ass[0]) && m.getId().equals(ass[1])) {
+                        c.getAssistidas().add(m);
+                    }
+                }
+            }
+        });
+    }
+
     // escrita de arquivos
 
     private void escrever(String str, String path) {
@@ -236,7 +261,18 @@ public class PlataformaStreaming {
                     avaliacao.getNota();
         
         escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Avaliacoes.csv");
-        this.getClienteAtual().getAvaliadas().add(avaliacao);
+        this.clienteAtual.getAvaliadas().add(avaliacao);
+    }
+
+    private void cadastrarMidiasAssistidas(String idCliente, String idMidia) {
+        String str = idCliente + ";" + idMidia;
+
+        escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Assistidas.csv");
+    }
+
+    private void cadastrarAudiencia(String user, String fa, String idMidia) {
+        String str = user + ";" + fa + ";" + idMidia;
+        escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Audiencia.csv");
     }
 
     // operacoes para debug
