@@ -67,6 +67,11 @@ public abstract class Midia {
             acumulador += a.getNota();
         } 
 
-        this.media = acumulador/this.avaliacoes.size();
+        if(this.avaliacoes.size() == 0) {
+            this.media = acumulador/1;
+        } else {
+            this.media = acumulador/this.avaliacoes.size();
+        }
+        
     }
 }
