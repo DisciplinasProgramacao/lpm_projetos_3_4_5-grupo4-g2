@@ -79,5 +79,9 @@ public class Cliente implements ClienteEspecialista {
         }
     }
 
+    public boolean ehEspecialista() {
+        return this.getAssistidas().size() > 4;
+    }
+
     // operações de especialista
 }

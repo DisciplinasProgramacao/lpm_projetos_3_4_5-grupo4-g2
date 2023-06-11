@@ -1,6 +1,10 @@
 package models;
 
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public abstract class Midia {
     protected String id;
@@ -73,5 +77,35 @@ public abstract class Midia {
             this.media = acumulador/this.avaliacoes.size();
         }
         
+    }
+
+    public boolean verificaLancamento(){
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            Date data = dateFormat.parse(dataLancamento);
+
+            Calendar hoje = Calendar.getInstance();
+            hoje.set(Calendar.HOUR_OF_DAY, 0);
+            hoje.set(Calendar.MINUTE, 0);
+            hoje.set(Calendar.SECOND, 0);
+            hoje.set(Calendar.MILLISECOND, 0);
+
+            Calendar dataFilme = Calendar.getInstance();
+            dataFilme.setTime(data);
+            dataFilme.set(Calendar.HOUR_OF_DAY, 0);
+            dataFilme.set(Calendar.MINUTE, 0);
+            dataFilme.set(Calendar.SECOND, 0);
+            dataFilme.set(Calendar.MILLISECOND, 0);
+
+            Calendar futuro = Calendar.getInstance();
+            futuro.setTime(dataFilme.getTime());
+            futuro.add(Calendar.DAY_OF_YEAR, 7);
+
+            return hoje.compareTo(dataFilme) >= 0 && hoje.compareTo(futuro) <= 0;
+
+        } catch(Exception e) {
+            e.getMessage();
+        }
+        return false;
     }
 }

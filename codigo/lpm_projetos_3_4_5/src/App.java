@@ -88,14 +88,19 @@ public class App {
 
                     Cliente clienteAtual = plataforma.getClienteAtual();
 
-                    if(clienteAtual != null) {
-                        if(clienteAtual.getAssistidas().size()>4) {
-                            menuClienteEspecialista(plataforma);
+                    try {
+                        if(clienteAtual != null) {
+                            if(clienteAtual.ehEspecialista()) {
+                                menuClienteEspecialista(plataforma);
+                            } else {
+                                menuCliente(plataforma);
+                            }
                         } else {
-                            menuCliente(plataforma);
+                            System.out.println("Usuario ou senha invalidos!");
                         }
-                    } else {
-                        System.out.println("Usuario ou senha invalidos!");
+                    } catch(Exception e){
+                        e.getMessage();
+                        spendTime(12000);
                     }
                     break;
                 default:
@@ -108,11 +113,15 @@ public class App {
     }
 
     // MENU DE CLIENTE
-    public static void menuCliente(PlataformaStreaming plataforma) {
-
+    public static void menuCliente(PlataformaStreaming plataforma) throws Exception{
         String nome, idioma, genero;
         Midia midia;
         Cliente clienteAtual = plataforma.getClienteAtual();
+
+        plataforma.preencherFilmes();
+        plataforma.preencherSeries();
+        plataforma.preencherAudiencia();
+        plataforma.preencherAvaliacoes();
 
         Scanner scanner = new Scanner(System.in);
         int opcao = -1;
@@ -189,6 +198,7 @@ public class App {
                     midia = plataforma.assistirMidia(nome);
                     spendTime(4000);
                     boolean naoAvaliado = true;
+                    
 
                     if(clienteAtual.getAvaliadas().size() > 0) {
                         for(Avaliacao a : plataforma.getClienteAtual().getAvaliadas()) {
@@ -211,7 +221,7 @@ public class App {
     }
 
         // MENU DE CLIENTE ESPECIALISTA
-        public static void menuClienteEspecialista(PlataformaStreaming plataforma) {
+        public static void menuClienteEspecialista(PlataformaStreaming plataforma) throws Exception{
 
             String dataLancamento = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
             
@@ -219,6 +229,11 @@ public class App {
             int duracao;
             Midia midia;
             Cliente clienteAtual = plataforma.getClienteAtual();
+
+            plataforma.preencherFilmes();
+            plataforma.preencherSeries();
+            plataforma.preencherAudiencia();
+            plataforma.preencherAvaliacoes();
     
             Scanner scanner = new Scanner(System.in);
             int opcao = -1;
@@ -415,6 +430,10 @@ public class App {
                     Avaliacao avaliacao = new Avaliacao(plataforma.getClienteAtual().getIdCliente(), midia.getId(), "", nota);
                     plataforma.cadastrarAvaliacao(avaliacao, midia);
                     break;
+                default:
+                    System.out.println("Essa não é uma opacao válida. Digite novamente");
+                    spendTime(3000);
+                    break;
             }
         }
     }
@@ -455,6 +474,10 @@ public class App {
 
                     Avaliacao avaliacao = new Avaliacao(plataforma.getClienteAtual().getIdCliente(), midia.getId(), comentario, nota);
                     plataforma.cadastrarAvaliacao(avaliacao, midia);
+                    break;
+                default:
+                    System.out.println("Essa não é uma opacao válida. Digite novamente");
+                    spendTime(3000);
                     break;
             }
         }
