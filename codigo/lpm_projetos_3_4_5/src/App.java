@@ -20,7 +20,6 @@ public class App {
         plataforma.preencherSeries();
         plataforma.preencherClientes();
         plataforma.preencherAudiencia();
-        plataforma.preencherAssistidas();
         plataforma.preencherAvaliacoes();
 
         // Fluxo de menus

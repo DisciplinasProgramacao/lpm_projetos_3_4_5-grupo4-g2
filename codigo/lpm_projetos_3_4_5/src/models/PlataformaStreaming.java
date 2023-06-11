@@ -2,6 +2,7 @@ package models;
 
 import java.io.BufferedWriter;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
@@ -95,11 +96,18 @@ public class PlataformaStreaming {
                     clienteAtual.getParaVer().remove(m);
                     m.addAudiencia();
                     cadastrarMidiasAssistidas(clienteAtual.getIdCliente(), m.getId());
-                    cadastrarAudiencia(clienteAtual.getUser(), "A", m.getId());
+                    cadastrarAudiencia(clienteAtual.getUser(), "A", m.getId());                    
                     System.out.println("Assistido.");
                     return m;
+                } else {
+                    System.out.println("Assistido.");
+                    try{
+                        removerParaVer(m.getId());
+                    } catch(Exception e) {
+                        e.getMessage();
+                    }
+                    return m;
                 }
-                return null;
             }
         }
         System.out.println("Não encontrado.");
@@ -168,7 +176,6 @@ public class PlataformaStreaming {
             Midia auxMidia;
             for(Midia m : midias){
                 if(m.getId().equals(aud[2])) {
-                    m.addAudiencia();
                     auxMidia = m;
 
                     for(Cliente c : clientes) {
@@ -178,6 +185,7 @@ public class PlataformaStreaming {
                                 break;
                             } else {
                                 c.getAssistidas().add(auxMidia);
+                                m.addAudiencia();
                                 break;
                             }
                         }
@@ -197,20 +205,6 @@ public class PlataformaStreaming {
                         Avaliacao avaliacao = new Avaliacao(aval[0], aval[1], aval[2], Integer.parseInt(aval[3]));
                         m.getAvaliacoes().add(avaliacao);
                         c.getAvaliadas().add(avaliacao);
-                    }
-                }
-            }
-        });
-    }
-
-    public void preencherAssistidas() throws Exception {
-        Files.lines(Paths.get("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Assistidas.csv"))
-        .map(lines -> lines.split(";"))
-        .forEach(ass -> {
-            for(Midia m : midias) {
-                for(Cliente c : clientes){
-                    if(c.getIdCliente().equals(ass[0]) && m.getId().equals(ass[1])) {
-                        c.getAssistidas().add(m);
                     }
                 }
             }
@@ -277,6 +271,23 @@ public class PlataformaStreaming {
         String str = user + ";" + fa + ";" + idMidia;
 
         escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Audiencia.csv");
+    }
+
+    private void removerParaVer(String idMidia) throws Exception {
+        ArrayList<String> lines = new ArrayList<String>(Files.readAllLines(Path.of("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Audiencia.csv")));
+        // for(String s : lines) {
+        //     String[] aux = s.split(";");
+        //     if(aux[3].equals(idMidia) && aux[2] == "F") {
+        //         lines.remove(s);
+        //     }
+        // }
+        lines.forEach((l) -> {
+            String[] aux = l.split(";");
+            if(aux[3].equals(idMidia) && aux[2] == "F") {
+                lines.remove(l);
+            }
+        });
+        Files.write(Path.of("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Audiencia.csv"), lines, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
     }
 
     // operacoes para debug
