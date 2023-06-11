@@ -58,23 +58,27 @@ public class PlataformaStreaming {
         this.clienteAtual = null;
     }
 
+    private void printMidiaModelo(Midia m) {
+        System.out.println("Nome: " + m.getNome() + " | média: " + m.getMedia());
+    }
+
     public void mostrarCatalogo() {
-        midias.forEach(m -> System.out.println(m.getNome()));
+        midias.forEach(m -> printMidiaModelo(m));
     }
 
     public void filtraPorNome(String nome) {
         midias.stream().filter(m -> m.getNome().contains(nome))
-        .forEach(m -> System.out.println(m.getNome()));
+        .forEach(m -> printMidiaModelo(m));
     }
 
     public void filtrarPorGenero(String genero) {
         midias.stream().filter(m -> m.getGenero().equals(genero))
-        .forEach(m -> System.out.println(m.getNome()));
+        .forEach(m -> printMidiaModelo(m));
     }
 
     public void filtrarPorIdioma(String idioma) {
         midias.stream().filter(m -> m.getIdioma().equals(idioma))
-        .forEach(m -> System.out.println(m.getNome()));
+        .forEach(m -> printMidiaModelo(m));
     }
 
     public void addParaVer(String nome) {
@@ -91,12 +95,12 @@ public class PlataformaStreaming {
     public Midia assistirMidia(String nome) {
         for(Midia m : midias) {
             if(m.getNome().equals(nome)) {
+                clienteAtual.getParaVer().remove(m);
                 if(!clienteAtual.getAssistidas().contains(m)) {
                     clienteAtual.getAssistidas().add(m);
-                    clienteAtual.getParaVer().remove(m);
                     m.addAudiencia();
                     cadastrarMidiasAssistidas(clienteAtual.getIdCliente(), m.getId());
-                    cadastrarAudiencia(clienteAtual.getUser(), "A", m.getId());                    
+                    cadastrarAudiencia(clienteAtual.getUser(), "A", m.getId());                  
                     System.out.println("Assistido.");
                     return m;
                 } else {
@@ -115,7 +119,7 @@ public class PlataformaStreaming {
     }
 
     public void mostrarListaAssistidas() {
-        clienteAtual.getAssistidas().forEach(m -> System.out.println(m.getNome()));
+        clienteAtual.getAssistidas().forEach(m -> printMidiaModelo(m));
     }
 
     public void mostrarListaAvaliadas(){
@@ -129,7 +133,7 @@ public class PlataformaStreaming {
     }
 
     public void mostrarListaParaVer() {
-        clienteAtual.getParaVer().forEach(m -> System.out.println(m.getNome()));
+        clienteAtual.getParaVer().forEach(m -> printMidiaModelo(m));
     } 
 
     public void avaliar(Midia midia, String comentario, int nota) {
@@ -212,7 +216,6 @@ public class PlataformaStreaming {
     }
 
     // escrita de arquivos
-
     private void escrever(String str, String path) {
         try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(path), 
         StandardOpenOption.APPEND, StandardOpenOption.CREATE)) {
@@ -274,20 +277,19 @@ public class PlataformaStreaming {
     }
 
     private void removerParaVer(String idMidia) throws Exception {
-        ArrayList<String> lines = new ArrayList<String>(Files.readAllLines(Path.of("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Audiencia.csv")));
-        // for(String s : lines) {
-        //     String[] aux = s.split(";");
-        //     if(aux[3].equals(idMidia) && aux[2] == "F") {
-        //         lines.remove(s);
-        //     }
-        // }
-        lines.forEach((l) -> {
-            String[] aux = l.split(";");
-            if(aux[3].equals(idMidia) && aux[2] == "F") {
-                lines.remove(l);
+        ArrayList<String> oldLines = new ArrayList<String>(Files.readAllLines(Path.of("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Audiencia.csv")));
+        ArrayList<String> newLines =  new ArrayList<String>();
+
+        oldLines.forEach((l) -> newLines.add(l));
+
+        for(String s : oldLines) {
+            String[] aux = s.split(";");
+            if(aux[2].equals(idMidia) && aux[1].equals("F")) {
+                newLines.remove(s);
             }
-        });
-        Files.write(Path.of("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Audiencia.csv"), lines, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
+        }
+
+        Files.write(Path.of("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Audiencia.csv"), newLines, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
     }
 
     // operacoes para debug

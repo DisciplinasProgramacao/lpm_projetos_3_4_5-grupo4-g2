@@ -55,8 +55,13 @@ public abstract class Midia {
         this.idioma = idiomas[(int) (Math.random() * idiomas.length)];
     }
 
+    public double getMedia() {
+        calcMedia();
+        return media;
+    }
+
     // operacoes da classe
-    protected void calcMedia() {
+    private void calcMedia() {
         int acumulador = 0;
         for(Avaliacao a : avaliacoes) {
             acumulador += a.getNota();
