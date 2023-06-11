@@ -46,7 +46,7 @@ public abstract class Midia {
     }
     
     protected void setGenero() {
-        String[] generos = {"Ação", "Drama", "Anão"};
+        String[] generos = {"Ação", "Anime", "Aventura", "Comédia", "Documentário", "Drama", "Policial", "Romance", "Suspense"};
         this.genero = generos[(int) (Math.random() * generos.length)];
     }
 

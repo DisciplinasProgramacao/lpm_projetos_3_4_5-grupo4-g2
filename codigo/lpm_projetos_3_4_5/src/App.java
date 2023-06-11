@@ -13,7 +13,7 @@ public class App {
     public static void main(String[] args) throws Exception {
 
         // Inicia o sistema
-        PlataformaStreaming plataforma = PlataformaStreaming.getInstance("plataforma");
+        PlataformaStreaming plataforma = PlataformaStreaming.getInstance("Meu Streaming");
 
         // Carrega dados
         plataforma.preencherFilmes();
@@ -24,39 +24,6 @@ public class App {
 
         // Fluxo de menus
         menuDeAcesso(plataforma);
-
-
-
-
-        // Filme F1 = new Filme("776", "Lil Raffa Mano", "24/07/2022", 110);
-        // Cliente C1 = new Cliente("777", "Raffa Moreira", "lilRaf", "777");
-        // Serie S1 = new Serie("776", "Lil Raffa Mano", "24/07/2022");
-
-        // plataforma.cadastrarSerie(S1);
-        // plataforma.preencherFilmes();
-        // System.out.println(plataforma.getMidias().size());
-
-        // plataforma.preencherSeries();
-        // System.out.println(plataforma.getMidias().size());
-
-        // plataforma.preencherClientes();
-        // System.out.println(plataforma.getClientes().size() + " idCliente: " + plataforma.getClientes().get(3).getIdCliente());
-
-        // // plataforma.preencherAudiencia();
-        // // plataforma.printAudPerMidia();
-        // // System.out.println();
-        // // plataforma.printAllClientes();
-
-        // plataforma.filtraPorNome("Fools Of The East");
-
-        // fluxo normal e especialista
-        // if(clienteAtual != null) {
-        //     if(clienteAtual.getAssistidas().size() > 4) {
-        //         menuClienteEspecialista(clienteAtual);
-        //     } else {
-        //         menuCliente(clienteAtual);
-        //     }
-        // } 
     }
 
     // UTILIDADE TERMINAL
@@ -340,7 +307,7 @@ public class App {
                         }
 
                         if(naoAvaliado && midia != null) {
-                            menuAvaliar(plataforma, midia);
+                            menuAvaliarEspecialista(plataforma, midia);
                         }
                         break;
                     case 8:
@@ -415,6 +382,44 @@ public class App {
     }
 
     public static void menuAvaliar(PlataformaStreaming plataforma, Midia midia){
+
+        int nota;
+        String comentario;
+        Scanner scanner = new Scanner(System.in);
+        int opcao = -1;
+        while (opcao != 1 && opcao != 2) {
+            clearScreen();
+            System.out.println();
+            System.out.println("-------- AVALIAR FILME -----------");
+            System.out.println("1. Não avaliar");
+            System.out.println("2. Dar nota");
+            System.out.print("Escolha uma opção: ");
+            opcao = scanner.nextInt();
+            scanner.nextLine();
+    
+            switch (opcao) {
+                case 1:
+                    break;
+                case 2:
+                    System.out.print("Nota: ");
+                    nota = scanner.nextInt();
+                    scanner.nextLine();
+
+                    if(nota < 1 || nota > 5) {
+                        System.out.println("Nota inválida.");
+                        spendTime(3000);
+                        opcao = -1;
+                        break;
+                    }
+
+                    Avaliacao avaliacao = new Avaliacao(plataforma.getClienteAtual().getIdCliente(), midia.getId(), "", nota);
+                    plataforma.cadastrarAvaliacao(avaliacao, midia);
+                    break;
+            }
+        }
+    }
+
+    public static void menuAvaliarEspecialista(PlataformaStreaming plataforma, Midia midia){
 
         int nota;
         String comentario;
