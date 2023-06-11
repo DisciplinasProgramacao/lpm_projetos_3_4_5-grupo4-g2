@@ -133,6 +133,7 @@ public class App {
                     break;
                 default:
                     System.out.println("Opção inválida. Digite novamente.");
+                    spendTime(3000);
                     break;
             }
         }
@@ -143,7 +144,8 @@ public class App {
     public static void menuCliente(PlataformaStreaming plataforma) {
 
         String nome, idioma, genero;
-        Midia avaliar;
+        Midia midia;
+        Cliente clienteAtual = plataforma.getClienteAtual();
 
         Scanner scanner = new Scanner(System.in);
         int opcao = -1;
@@ -217,12 +219,25 @@ public class App {
                     nome = scanner.nextLine();
 
                     clearScreen();
-                    avaliar = plataforma.assistirMidia(nome);
+                    midia = plataforma.assistirMidia(nome);
                     spendTime(4000);
-                    menuAvaliar(plataforma, avaliar);
+                    boolean naoAvaliado = true;
+
+                    if(clienteAtual.getAvaliadas().size() > 0) {
+                        for(Avaliacao a : plataforma.getClienteAtual().getAvaliadas()) {
+                            if(a.getIdMidia().equals(midia.getId())) {
+                                naoAvaliado = false;
+                            }
+                        }
+                    }
+
+                    if(naoAvaliado && midia != null) {
+                        menuAvaliar(plataforma, midia);
+                    }
                     break;
                 default:
                     System.out.println("Opção inválida. Digite novamente.");
+                    spendTime(3000);
                     break;
             }
         }
@@ -232,11 +247,11 @@ public class App {
         public static void menuClienteEspecialista(PlataformaStreaming plataforma) {
 
             String dataLancamento = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
-            String id = String.valueOf(plataforma.getMidias().size() + 1);
-    
-            String nome, idioma, genero;
+            
+            String nome, idioma, genero, id;
             int duracao;
-            Midia avaliar;
+            Midia midia;
+            Cliente clienteAtual = plataforma.getClienteAtual();
     
             Scanner scanner = new Scanner(System.in);
             int opcao = -1;
@@ -312,9 +327,21 @@ public class App {
                         nome = scanner.nextLine();
     
                         clearScreen();
-                        avaliar = plataforma.assistirMidia(nome);
+                        midia = plataforma.assistirMidia(nome);
                         spendTime(4000);
-                        menuAvaliar(plataforma, avaliar);
+                        boolean naoAvaliado = true;
+
+                        if(clienteAtual.getAvaliadas().size() > 0) {
+                            for(Avaliacao a : plataforma.getClienteAtual().getAvaliadas()) {
+                                if(a.getIdMidia().equals(midia.getId())) {
+                                    naoAvaliado = false;
+                                }
+                            }
+                        }
+
+                        if(naoAvaliado && midia != null) {
+                            menuAvaliar(plataforma, midia);
+                        }
                         break;
                     case 8:
                         System.out.print("Nome do filme: ");
@@ -322,6 +349,8 @@ public class App {
                         System.out.print("duracao do filme: ");
                         duracao = scanner.nextInt();
                         
+                        id = String.valueOf(plataforma.getMidias().size() + 1);
+
                         Filme filme = new Filme(id, nome, dataLancamento, duracao);
                         plataforma.cadastrarFilme(filme);
                         break;
@@ -329,11 +358,14 @@ public class App {
                         System.out.print("Nome da serie: ");
                         nome = scanner.nextLine();
                         
+                        id = String.valueOf(plataforma.getMidias().size() + 1);
+                        
                         Serie serie = new Serie(id, nome, dataLancamento);
                         plataforma.cadastrarSerie(serie);
                         break;
                     default:
                         System.out.println("Opção inválida. Digite novamente.");
+                        spendTime(3000);
                         break;
                 }
             }
@@ -406,11 +438,18 @@ public class App {
                     nota = scanner.nextInt();
                     scanner.nextLine();
 
+                    if(nota < 1 || nota > 5) {
+                        System.out.println("Nota inválida.");
+                        spendTime(3000);
+                        opcao = -1;
+                        break;
+                    }
+
                     System.out.print("Comentario: ");
                     comentario = scanner.nextLine();
 
                     Avaliacao avaliacao = new Avaliacao(plataforma.getClienteAtual().getIdCliente(), midia.getId(), comentario, nota);
-                    plataforma.cadastrarAvaliacao(avaliacao);
+                    plataforma.cadastrarAvaliacao(avaliacao, midia);
                     break;
             }
         }

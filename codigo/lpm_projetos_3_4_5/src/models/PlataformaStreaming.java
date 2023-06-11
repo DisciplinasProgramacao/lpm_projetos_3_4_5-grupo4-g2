@@ -96,20 +96,20 @@ public class PlataformaStreaming {
         for(Midia m : midias) {
             if(m.getNome().equals(nome)) {
                 clienteAtual.getParaVer().remove(m);
+                try{
+                    removerParaVer(m.getId());
+                } catch(Exception e) {
+                    e.getMessage();
+                }
+                
                 if(!clienteAtual.getAssistidas().contains(m)) {
                     clienteAtual.getAssistidas().add(m);
                     m.addAudiencia();
-                    cadastrarMidiasAssistidas(clienteAtual.getIdCliente(), m.getId());
                     cadastrarAudiencia(clienteAtual.getUser(), "A", m.getId());                  
                     System.out.println("Assistido.");
                     return m;
                 } else {
                     System.out.println("Assistido.");
-                    try{
-                        removerParaVer(m.getId());
-                    } catch(Exception e) {
-                        e.getMessage();
-                    }
                     return m;
                 }
             }
@@ -134,16 +134,6 @@ public class PlataformaStreaming {
 
     public void mostrarListaParaVer() {
         clienteAtual.getParaVer().forEach(m -> printMidiaModelo(m));
-    } 
-
-    public void avaliar(Midia midia, String comentario, int nota) {
-        Avaliacao avaliacao;
-        avaliacao = new Avaliacao(this.clienteAtual.getIdCliente(),
-                                midia.getId(), comentario, nota);
-        if(!clienteAtual.getAvaliadas().contains(avaliacao)) {
-            clienteAtual.getAvaliadas().add(avaliacao);
-            midia.getAvaliacoes().add(avaliacao);
-        }
     }
 
     // leitura de arquivos
@@ -254,20 +244,19 @@ public class PlataformaStreaming {
         this.clientes.add(cliente);
     }
 
-    public void cadastrarAvaliacao(Avaliacao avaliacao) {
-        String str = avaliacao.getIdCliente()+";"+
-                    avaliacao.getIdMidia()+";"+
-                    avaliacao.getComentario()+";"+
-                    avaliacao.getNota();
-        
-        escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Avaliacoes.csv");
-        this.clienteAtual.getAvaliadas().add(avaliacao);
-    }
+    public void cadastrarAvaliacao(Avaliacao avaliacao, Midia midia) {
+        if(!clienteAtual.getAvaliadas().contains(avaliacao)) {
+            clienteAtual.getAvaliadas().add(avaliacao);
+            midia.getAvaliacoes().add(avaliacao);
 
-    private void cadastrarMidiasAssistidas(String idCliente, String idMidia) {
-        String str = idCliente + ";" + idMidia;
+            String str = avaliacao.getIdCliente()+";"+
+            avaliacao.getIdMidia()+";"+
+            avaliacao.getComentario()+";"+
+            avaliacao.getNota();
 
-        escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Assistidas.csv");
+                    
+            escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Avaliacoes.csv");
+        }
     }
 
     private void cadastrarAudiencia(String user, String fa, String idMidia) {

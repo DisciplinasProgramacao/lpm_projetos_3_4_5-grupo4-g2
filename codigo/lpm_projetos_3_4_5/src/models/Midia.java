@@ -10,7 +10,7 @@ public abstract class Midia {
     protected String genero;
     protected String idioma;
     protected ArrayList<Avaliacao> avaliacoes = new ArrayList<Avaliacao>();
-    protected double media = 0;
+    protected double media = 0.0;
 
     // getters / setters
     public String getId() {
@@ -62,7 +62,7 @@ public abstract class Midia {
 
     // operacoes da classe
     private void calcMedia() {
-        int acumulador = 0;
+        double acumulador = 0.0;
         for(Avaliacao a : avaliacoes) {
             acumulador += a.getNota();
         } 
