@@ -15,13 +15,6 @@ public class App {
         // Inicia o sistema
         PlataformaStreaming plataforma = PlataformaStreaming.getInstance("Meu Streaming");
 
-        // Carrega dados
-        plataforma.preencherFilmes();
-        plataforma.preencherSeries();
-        plataforma.preencherClientes();
-        plataforma.preencherAudiencia();
-        plataforma.preencherAvaliacoes();
-
         // Fluxo de menus
         menuDeAcesso(plataforma);
     }
@@ -41,7 +34,12 @@ public class App {
     }
 
     // MENU DE ACESSO
-    public static void menuDeAcesso(PlataformaStreaming plataforma) {
+    public static void menuDeAcesso(PlataformaStreaming plataforma) throws Exception {
+
+        plataforma.preencherFilmes();
+        plataforma.preencherSeries();
+        plataforma.preencherClientes();
+        plataforma.preencherAvaliacoes();
 
         Scanner scanner = new Scanner(System.in);
         String idCliente, nome, user, senha;

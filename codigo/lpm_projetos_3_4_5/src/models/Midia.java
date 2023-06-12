@@ -64,6 +64,10 @@ public abstract class Midia {
         return media;
     }
 
+    public void setAudiencia(int audiencia) {
+        this.audiencia = audiencia;
+    }
+
     // operacoes da classe
     private void calcMedia() {
         double acumulador = 0.0;

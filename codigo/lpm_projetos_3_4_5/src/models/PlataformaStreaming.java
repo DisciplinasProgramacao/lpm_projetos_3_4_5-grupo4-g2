@@ -177,6 +177,7 @@ public class PlataformaStreaming {
     }
 
     public void preencherClientes() throws Exception {
+        clientes.clear();
         Files.lines(Paths.get("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Espectadores.csv"))
         .map(line -> line.split(";"))
         .forEach((col) -> {
@@ -188,6 +189,7 @@ public class PlataformaStreaming {
     }
 
     public void preencherAudiencia() throws Exception {
+        midias.forEach(m -> m.setAudiencia(0));
         Files.lines(Paths.get("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Audiencia.csv"))
         .map(lines -> lines.split(";"))
         .forEach((aud) -> {
@@ -214,6 +216,7 @@ public class PlataformaStreaming {
     }
 
     public void preencherAvaliacoes() throws Exception {
+        clientes.forEach(c -> c.getAvaliadas().clear());
         Files.lines(Paths.get("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Avaliacoes.csv"))
         .map(lines -> lines.split(";"))
         .forEach(aval -> {
