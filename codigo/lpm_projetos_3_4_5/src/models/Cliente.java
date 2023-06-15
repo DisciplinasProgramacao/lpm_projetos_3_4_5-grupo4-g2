@@ -71,7 +71,6 @@ public class Cliente implements ClienteEspecialista {
 
     // operações da classe
     public void assistirMidia(Midia midia) {
-        this.assistidas.add(midia);
         for(Midia m : paraVer) {
             if(m.getId().equals(midia.getId())){
                 this.paraVer.remove(midia);

@@ -106,8 +106,8 @@ public class PlataformaStreaming {
                 }
                 
                 if(!clienteAtual.getAssistidas().contains(m)) {
-                    clienteAtual.getAssistidas().add(m);
-                    m.addAudiencia();
+                    //clienteAtual.getAssistidas().add(m);
+                    //m.addAudiencia();
                     cadastrarAudiencia(clienteAtual.getUser(), "A", m.getId());                  
                     System.out.println("Assistido.");
                     return m;
@@ -189,6 +189,7 @@ public class PlataformaStreaming {
     }
 
     public void preencherAudiencia() throws Exception {
+        clienteAtual.getAssistidas().clear();
         midias.forEach(m -> m.setAudiencia(0));
         Files.lines(Paths.get("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Audiencia.csv"))
         .map(lines -> lines.split(";"))
