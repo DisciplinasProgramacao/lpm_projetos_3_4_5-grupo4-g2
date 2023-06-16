@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.List;
+
 import models.Audiencia;
 import services.AudienciaService;
 
@@ -15,10 +17,10 @@ public class AudienciaController {
     }
 
     public void removerMidiasFuturas(Audiencia audiencia) {
-        audienciaService.removerMidiasFuturas(audiencia);
+        audienciaService.removerAudiencia(audiencia);
     }
 
-    public void preencherAudiencia() {
-        audienciaService.preencherAudiencia();
+    public List<Audiencia> preencherAudiencia() {
+        return audienciaService.preencherAudiencia();
     }
 }

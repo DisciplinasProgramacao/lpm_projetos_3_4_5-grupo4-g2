@@ -1,23 +1,20 @@
 package models;
 
-enum Role {
-    ADMIN,
-    COMUM,
-    ESPECIALISTA,
-    PROFISSIONAL
-}
-
 public class Usuario {
-    private String id;
     private String nome;
     private String user;
     private String senha;
-    private Role role;
+    private int role;
+
+    // CONSTRUTOR
+    public Usuario(String nome, String user, String senha, int role) {
+        this.nome = nome;
+        this.user = user;
+        this.senha = senha;
+        this.role = role;
+    }
 
     // GETTERS 
-    public String getId() {
-        return id;
-    }
     public String getNome() {
         return nome;
     }
@@ -27,14 +24,11 @@ public class Usuario {
     public String getSenha() {
         return senha;
     }
-    public Role getRole() {
+    public int getRole() {
         return role;
     }
 
     // SETTERS
-    public void setId(String id) {
-        this.id = id;
-    }
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -44,7 +38,7 @@ public class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-    public void setRole(Role role) {
+    public void setRole(int role) {
         this.role = role;
     }
 }

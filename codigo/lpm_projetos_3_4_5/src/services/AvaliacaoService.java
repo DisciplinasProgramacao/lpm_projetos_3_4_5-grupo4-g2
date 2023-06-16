@@ -4,13 +4,14 @@ import models.Avaliacao;
 import utils.Utilidade;
 
 public class AvaliacaoService {
-    
+    private String finalPath = Utilidade.CSV_FOLDER_PATH+"POO_Avaliacoes.csv";
+
     public void cadastrarAvaliacao(Avaliacao avaliacao) {
-        String str = avaliacao.getIdCliente()+";"+
+        String str = avaliacao.getUser()+";"+
         avaliacao.getIdMidia()+";"+
         avaliacao.getComentario()+";"+
         avaliacao.getNota();
                     
-        Utilidade.escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Avaliacoes.csv");
+        Utilidade.escrever(str, finalPath);
     }
 }

@@ -13,20 +13,21 @@ import utils.Utilidade;
 
 public class AudienciaService {
 
-    private String relativePath = Utilidade.CSV_FOLDER_PATH+"POO_Audiencias.csv";
+    private String finalPath = Utilidade.CSV_FOLDER_PATH+"POO_Audiencias.csv";
     
     public void cadastrarAudiencia(Audiencia audiencia) {
         String str = audiencia.getUser() + ";" + audiencia.getParaVer() + ";" + audiencia.getMidiaID();
 
-        Utilidade.escrever(str, relativePath);
+        Utilidade.escrever(str, finalPath);
     }
 
-    public void removerMidiasFuturas(Audiencia audiencia) {
+    public void removerAudiencia(Audiencia audiencia) {
         try {
-            ArrayList<String> oldLines = new ArrayList<String>(Files.readAllLines(Path.of(relativePath)));
+            ArrayList<String> oldLines = new ArrayList<String>(Files.readAllLines(Path.of(finalPath)));
             ArrayList<String> newLines =  new ArrayList<String>();
 
-            oldLines.forEach((l) -> newLines.add(l));
+            //oldLines.forEach((l) -> newLines.add(l));
+            newLines.addAll(oldLines);
 
             for(String s : oldLines) {
                 String[] aux = s.split(";");
@@ -35,7 +36,7 @@ public class AudienciaService {
                 }
             }
 
-            Files.write(Path.of(relativePath), newLines, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
+            Files.write(Path.of(finalPath), newLines, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
         }catch(Exception e) {
             e.getMessage();
         }
@@ -45,12 +46,12 @@ public class AudienciaService {
         try {
             List<Audiencia> audiencias = new ArrayList<>();
 
-            Files.lines(Paths.get(relativePath))
+            Files.lines(Paths.get(finalPath))
             .map(lines -> lines.split(";"))
             .map(col -> new Audiencia(col[1], col[2], col[3]))
             .collect(Collectors.toList());
             return audiencias;
-            
+
         } catch(Exception e) {
             e.getMessage();
         }

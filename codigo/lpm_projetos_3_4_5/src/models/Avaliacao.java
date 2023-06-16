@@ -1,21 +1,21 @@
 package models;
 
 public class Avaliacao {
-    private String idCliente;
+    private String user;
     private String idMidia;
     private String comentario;
     private int nota;
 
     // custrutor e getters / setters
-    public Avaliacao(String idCliente, String idMidia, String comentario, int nota) {
-        this.idCliente = idCliente;
+    public Avaliacao(String user, String idMidia, String comentario, int nota) {
+        this.user = user;
         this.idMidia = idMidia;
         this.comentario = comentario;
         this.nota = nota;
     }
 
-    public String getIdCliente() {
-        return idCliente;
+    public String getUser() {
+        return user;
     }
 
     public String getIdMidia() {
