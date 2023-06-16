@@ -188,33 +188,33 @@ public class PlataformaStreaming {
         });
     }
 
-    public void preencherAudiencia() throws Exception {
-        clienteAtual.getAssistidas().clear();
-        midias.forEach(m -> m.setAudiencia(0));
-        Files.lines(Paths.get("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Audiencia.csv"))
-        .map(lines -> lines.split(";"))
-        .forEach((aud) -> {
-            Midia auxMidia;
-            for(Midia m : midias){
-                if(m.getId().equals(aud[2])) {
-                    auxMidia = m;
+    // public void preencherAudiencia() throws Exception {
+    //     clienteAtual.getAssistidas().clear();
+    //     midias.forEach(m -> m.setAudiencia(0));
+    //     Files.lines(Paths.get("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Audiencia.csv"))
+    //     .map(lines -> lines.split(";"))
+    //     .forEach((aud) -> {
+    //         Midia auxMidia;
+    //         for(Midia m : midias){
+    //             if(m.getId().equals(aud[2])) {
+    //                 auxMidia = m;
 
-                    for(Cliente c : clientes) {
-                        if(c.getUser().equals(aud[0])) {
-                            if(aud[1].equals("F")) {
-                                c.getParaVer().add(auxMidia);
-                                break;
-                            } else {
-                                c.getAssistidas().add(auxMidia);
-                                m.addAudiencia();
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-        });
-    }
+    //                 for(Cliente c : clientes) {
+    //                     if(c.getUser().equals(aud[0])) {
+    //                         if(aud[1].equals("F")) {
+    //                             c.getParaVer().add(auxMidia);
+    //                             break;
+    //                         } else {
+    //                             c.getAssistidas().add(auxMidia);
+    //                             m.addAudiencia();
+    //                             break;
+    //                         }
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     });
+    // }
 
     public void preencherAvaliacoes() throws Exception {
         clientes.forEach(c -> c.getAvaliadas().clear());
@@ -233,81 +233,70 @@ public class PlataformaStreaming {
         });
     }
 
-    // escrita de arquivos
-    private void escrever(String str, String path) {
-        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(path), 
-        StandardOpenOption.APPEND, StandardOpenOption.CREATE)) {
-            writer.write(str);
-            writer.newLine();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+    // public void cadastrarFilme(Filme filme) {
+    //     String str = filme.getId()+";"+
+    //                 filme.getNome()+";"+
+    //                 filme.getDataLancamento()+";"+
+    //                 filme.getDuracao();
 
-    public void cadastrarFilme(Filme filme) {
-        String str = filme.getId()+";"+
-                    filme.getNome()+";"+
-                    filme.getDataLancamento()+";"+
-                    filme.getDuracao();
+    //     escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Filmes.csv");
+    //     this.midias.add(filme);
+    // }
 
-        escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Filmes.csv");
-        this.midias.add(filme);
-    }
-
-    public void cadastrarSerie(Serie serie) {
-        String str = serie.getId()+";"+
-                    serie.getNome()+";"+
-                    serie.getDataLancamento();
+    // public void cadastrarSerie(Serie serie) {
+    //     String str = serie.getId()+";"+
+    //                 serie.getNome()+";"+
+    //                 serie.getDataLancamento();
         
-        escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Series.csv");
-        this.midias.add(serie);
-    }
+    //     escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Series.csv");
+    //     this.midias.add(serie);
+    // }
 
-    public void cadastrarCliente(Cliente cliente) {
-        String str = cliente.getNome()+";"+
-                    cliente.getUser()+";"+
-                    cliente.getSenha();
+    // public void cadastrarCliente(Cliente cliente) {
+    //     String str = cliente.getNome()+";"+
+    //                 cliente.getUser()+";"+
+    //                 cliente.getSenha();
 
-        escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Espectadores.csv");
-        this.clientes.add(cliente);
-    }
+    //     escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Espectadores.csv");
+    //     this.clientes.add(cliente);
+    // }
 
-    public void cadastrarAvaliacao(Avaliacao avaliacao, Midia midia) {
-        if(!clienteAtual.getAvaliadas().contains(avaliacao)) {
-            clienteAtual.getAvaliadas().add(avaliacao);
-            midia.getAvaliacoes().add(avaliacao);
+    // public void cadastrarAvaliacao(Avaliacao avaliacao, Midia midia) {
+    //     if(!clienteAtual.getAvaliadas().contains(avaliacao)) {
+    //         clienteAtual.getAvaliadas().add(avaliacao);
+    //         midia.getAvaliacoes().add(avaliacao);
 
-            String str = avaliacao.getIdCliente()+";"+
-            avaliacao.getIdMidia()+";"+
-            avaliacao.getComentario()+";"+
-            avaliacao.getNota();
+    //         String str = avaliacao.getIdCliente()+";"+
+    //         avaliacao.getIdMidia()+";"+
+    //         avaliacao.getComentario()+";"+
+    //         avaliacao.getNota();
 
                     
-            escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Avaliacoes.csv");
-        }
-    }
+    //         escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Avaliacoes.csv");
+    //     }
+    // }
 
-    private void cadastrarAudiencia(String user, String fa, String idMidia) {
-        String str = user + ";" + fa + ";" + idMidia;
+    // private void cadastrarAudiencia(String user, String fa, String idMidia) {
+    //     String str = user + ";" + fa + ";" + idMidia;
 
-        escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Audiencia.csv");
-    }
+    //     escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Audiencia.csv");
+    // }
 
-    private void removerParaVer(String idMidia) throws Exception {
-        ArrayList<String> oldLines = new ArrayList<String>(Files.readAllLines(Path.of("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Audiencia.csv")));
-        ArrayList<String> newLines =  new ArrayList<String>();
+    // private void removerParaVer(String idMidia) throws Exception {
+    //     ArrayList<String> oldLines = new ArrayList<String>(Files.readAllLines(Path.of("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Audiencia.csv")));
+    //     ArrayList<String> newLines =  new ArrayList<String>();
 
-        oldLines.forEach((l) -> newLines.add(l));
+    //     oldLines.forEach((l) -> newLines.add(l));
 
-        for(String s : oldLines) {
-            String[] aux = s.split(";");
-            if(aux[2].equals(idMidia) && aux[1].equals("F")) {
-                newLines.remove(s);
-            }
-        }
+    //     for(String s : oldLines) {
+    //         String[] aux = s.split(";");
+    //         if(aux[2].equals(idMidia) && aux[1].equals("F")) {
+    //             newLines.remove(s);
+    //         }
+    //     }
 
-        Files.write(Path.of("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Audiencia.csv"), newLines, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
-    }
+    //     Files.write(Path.of("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Audiencia.csv"), newLines, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
+    // }
 
     // operacoes para debug
     public void printAudPerMidia(){
