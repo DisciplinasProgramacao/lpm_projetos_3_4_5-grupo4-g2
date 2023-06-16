@@ -39,6 +39,7 @@ public class App {
         plataforma.preencherFilmes();
         plataforma.preencherSeries();
         plataforma.preencherClientes();
+        plataforma.preencherAudiencia();
         plataforma.preencherAvaliacoes();
 
         Scanner scanner = new Scanner(System.in);
