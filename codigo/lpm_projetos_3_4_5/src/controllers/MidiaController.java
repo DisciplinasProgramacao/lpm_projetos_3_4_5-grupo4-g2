@@ -2,19 +2,18 @@ package controllers;
 
 import java.util.List;
 
-import models.Filme;
 import models.Midia;
-import models.Serie;
 import services.MidiaService;
 
 public class MidiaController {
     private MidiaService midiaService;
     
-    public MidiaController(List<Filme> filmes, List<Serie> series) {
-        this.midiaService = new MidiaService(filmes, series);
+    public MidiaController() {
+        this.midiaService = new MidiaService();
+    }
+    
+    public List<Midia> preencherMidias(List<Midia> midias) {
+        return midiaService.preencherMidias(midias);
     }
 
-    public List<Midia> preencherMidias() {
-        return midiaService.listarMidias();
-    }
 }

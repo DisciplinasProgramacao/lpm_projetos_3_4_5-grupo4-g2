@@ -1,26 +1,18 @@
 package models;
 
-import java.io.BufferedWriter;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class PlataformaStreaming {
     public static PlataformaStreaming instancia;
     private String nome;
-    private ArrayList<Midia> midias;
-    private ArrayList<Usuario> usuarios;
+    private List<Midia> midias = new ArrayList<Midia>();
+    private List<Usuario> usuarios = new ArrayList<Usuario>();;
     private Usuario usuarioAtual = null;
 
     // construtor e getters / setters
     private PlataformaStreaming(String nome) {
         this.nome = nome;
-        this.midias = new ArrayList<Midia>();
-        this.usuarios = new ArrayList<Usuario>();
     }
 
     public static PlataformaStreaming getInstance(String nome) {
@@ -34,16 +26,20 @@ public class PlataformaStreaming {
         return usuarioAtual;
     }
 
-    public ArrayList<Midia> getMidias() {
+    public List<Midia> getMidias() {
         return midias;
     }
 
-    public ArrayList<Usuario> getUsuarios() {
+    public List<Usuario> getUsuarios() {
         return usuarios;
     }
 
     public String getNome() {
         return nome;
+    }
+
+    public void setUsuarioAtual(Usuario usuarioAtual) {
+        this.usuarioAtual = usuarioAtual;
     }
 
     // OPERACOES DA CLASSE

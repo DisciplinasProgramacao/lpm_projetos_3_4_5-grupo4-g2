@@ -3,20 +3,14 @@ package services;
 import java.util.ArrayList;
 import java.util.List;
 
-import models.Filme;
 import models.Midia;
-import models.Serie;
 
 public class MidiaService {
-    private List<Midia> midias;
 
-    public MidiaService(List<Filme> filmes, List<Serie> series) {
-        this.midias.addAll(filmes);
-        this.midias.addAll(series);
+    public List<Midia> preencherMidias(List<Midia> midias) {
+        List<Midia> fullMidias = new ArrayList<Midia>();
+        fullMidias.addAll(midias);
+
+        return fullMidias;
     }
-
-    public List<Midia> listarMidias() {
-        return midias;
-    }
-
 }
