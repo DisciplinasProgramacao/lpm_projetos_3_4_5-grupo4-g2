@@ -43,36 +43,36 @@ public class PlataformaStreaming {
     }
 
     // OPERACOES DA CLASSE
-    public void login(String user, String senha) {
-        for(Usuario u : usuarios) {
-            if(u.getUser().equals(user) && u.getSenha().equals(senha)) {
-                usuarioAtual = new Usuario(u.getNome(), u.getUser(), u.getSenha(), u.getRole());
-            }
-        }
-    }
+    // public void login(String user, String senha) {
+    //     for(Usuario u : usuarios) {
+    //         if(u.getUser().equals(user) && u.getSenha().equals(senha)) {
+    //             usuarioAtual = new Usuario(u.getNome(), u.getUser(), u.getSenha(), u.getRole());
+    //         }
+    //     }
+    // }
 
-    public void logoff(){
-        this.usuarioAtual = null;
-    }
+    // public void logoff(){
+    //     this.usuarioAtual = null;
+    // }
 
-    public void listarTodos() {
-        midias.forEach(m -> System.out.println(m.toString()));
-    }
+    // public void listarTodos() {
+    //     midias.forEach(m -> System.out.println(m.toString()));
+    // }
 
-    public void listarPorNome(String nome) {
-        midias.stream().filter(m -> m.getNome().contains(nome))
-        .forEach(m -> System.out.println(m.toString()));
-    }
+    // public void listarPorNome(String nome) {
+    //     midias.stream().filter(m -> m.getNome().contains(nome))
+    //     .forEach(m -> System.out.println(m.toString()));
+    // }
 
-    public void listarPorGenero(String genero) {
-        midias.stream().filter(m -> m.getGenero().equals(genero))
-        .forEach(m -> System.out.println(m.toString()));
-    }
+    // public void listarPorGenero(String genero) {
+    //     midias.stream().filter(m -> m.getGenero().equals(genero))
+    //     .forEach(m -> System.out.println(m.toString()));
+    // }
 
-    public void listarPorIdioma(String idioma) {
-        midias.stream().filter(m -> m.getIdioma().equals(idioma))
-        .forEach(m -> System.out.println(m.toString()));
-    }
+    // public void listarPorIdioma(String idioma) {
+    //     midias.stream().filter(m -> m.getIdioma().equals(idioma))
+    //     .forEach(m -> System.out.println(m.toString()));
+    // }
 
     // public void addParaVer(String nome) {
     //     for(Midia m : midias) {

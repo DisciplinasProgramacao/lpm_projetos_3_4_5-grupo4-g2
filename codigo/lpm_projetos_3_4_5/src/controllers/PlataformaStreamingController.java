@@ -5,8 +5,8 @@ import models.Usuario;
 
 public class PlataformaStreamingController {
 
-    public PlataformaStreaming plataforma = PlataformaStreaming.getInstance("plataforma");
-
+    public PlataformaStreaming plataforma = PlataformaStreaming.getInstance("Meu Streaming");
+      
     public void login(String user, String senha) {
         for(Usuario u : plataforma.getUsuarios()) {
             if(u.getUser().equals(user) && u.getSenha().equals(senha)) {
