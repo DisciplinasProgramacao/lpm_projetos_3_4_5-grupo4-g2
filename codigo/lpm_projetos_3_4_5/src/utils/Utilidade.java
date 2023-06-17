@@ -20,6 +20,4 @@ public class Utilidade {
             e.printStackTrace();
         }
     }
-
-
 }

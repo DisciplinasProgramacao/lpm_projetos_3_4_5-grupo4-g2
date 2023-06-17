@@ -13,14 +13,14 @@ public class PlataformaStreaming {
     public static PlataformaStreaming instancia;
     private String nome;
     private ArrayList<Midia> midias;
-    private ArrayList<ClienteComum> clientes;
-    private ClienteComum clienteAtual = null;
+    private ArrayList<Usuario> usuarios;
+    private Usuario usuarioAtual = null;
 
     // construtor e getters / setters
     private PlataformaStreaming(String nome) {
         this.nome = nome;
         this.midias = new ArrayList<Midia>();
-        this.clientes = new ArrayList<ClienteComum>();
+        this.usuarios = new ArrayList<Usuario>();
     }
 
     public static PlataformaStreaming getInstance(String nome) {
@@ -30,114 +30,109 @@ public class PlataformaStreaming {
         return instancia;
     }
 
-    public ClienteComum getClienteAtual() {
-        return clienteAtual;
+    public Usuario getUsuarioAtual() {
+        return usuarioAtual;
     }
 
     public ArrayList<Midia> getMidias() {
         return midias;
     }
 
-    public ArrayList<ClienteComum> getClientes() {
-        return clientes;
+    public ArrayList<Usuario> getUsuarios() {
+        return usuarios;
     }
 
     public String getNome() {
         return nome;
     }
 
-    // operações da classe
+    // OPERACOES DA CLASSE
     public void login(String user, String senha) {
-        for(ClienteComum c : clientes) {
-            if(c.getUser().equals(user) && c.getSenha().equals(senha)){
-                clienteAtual = new ClienteComum(c.getIdCliente(), c.getNome(), c.getUser(), 
-                                                    c.getSenha(), c.getParaVer(), c.getAssistidas(), c.getAvaliadas());
+        for(Usuario u : usuarios) {
+            if(u.getUser().equals(user) && u.getSenha().equals(senha)) {
+                usuarioAtual = new Usuario(u.getNome(), u.getUser(), u.getSenha(), u.getRole());
             }
         }
     }
 
     public void logoff(){
-        this.clienteAtual = null;
+        this.usuarioAtual = null;
     }
 
-    private void printMidiaModelo(Midia m) {
-        System.out.println("Nome: " + m.getNome() + " | média: " + m.getMedia());
+    public void listarTodos() {
+        midias.forEach(m -> System.out.println(m.toString()));
     }
 
-    public void mostrarCatalogo() {
-        midias.forEach(m -> printMidiaModelo(m));
-    }
-
-    public void filtraPorNome(String nome) {
+    public void listarPorNome(String nome) {
         midias.stream().filter(m -> m.getNome().contains(nome))
-        .forEach(m -> printMidiaModelo(m));
+        .forEach(m -> System.out.println(m.toString()));
     }
 
-    public void filtrarPorGenero(String genero) {
+    public void listarPorGenero(String genero) {
         midias.stream().filter(m -> m.getGenero().equals(genero))
-        .forEach(m -> printMidiaModelo(m));
+        .forEach(m -> System.out.println(m.toString()));
     }
 
-    public void filtrarPorIdioma(String idioma) {
+    public void listarPorIdioma(String idioma) {
         midias.stream().filter(m -> m.getIdioma().equals(idioma))
-        .forEach(m -> printMidiaModelo(m));
+        .forEach(m -> System.out.println(m.toString()));
     }
 
-    public void addParaVer(String nome) {
-        for(Midia m : midias) {
-            if(m.getNome().equals(nome)) {
-                if(!clienteAtual.getParaVer().contains(m)) {
-                    clienteAtual.getParaVer().add(m);
-                    cadastrarAudiencia(clienteAtual.getUser(), "F", m.getId());
-                }
-            }
-        }
-    }
+    // public void addParaVer(String nome) {
+    //     for(Midia m : midias) {
+    //         if(m.getNome().equals(nome)) {
+    //             if(!clienteAtual.getParaVer().contains(m)) {
+    //                 clienteAtual.getParaVer().add(m);
+    //                 cadastrarAudiencia(clienteAtual.getUser(), "F", m.getId());
+    //             }
+    //         }
+    //     }
+    // }
 
-    public Midia assistirMidia(String nome) {
+    // public Midia assistirMidia(String nome) {
         
-        for(Midia m : midias) {
-            if(m.getNome().equals(nome)) {
-                clienteAtual.getParaVer().remove(m);
-                try{
-                    removerParaVer(m.getId());
-                } catch(Exception e) {
-                    e.getMessage();
-                }
+    //     for(Midia m : midias) {
+    //         if(m.getNome().equals(nome)) {
+    //             clienteAtual.getParaVer().remove(m);
+    //             try{
+    //                 removerParaVer(m.getId());
+    //             } catch(Exception e) {
+    //                 e.getMessage();
+    //             }
                 
-                if(!clienteAtual.getAssistidas().contains(m)) {
-                    //clienteAtual.getAssistidas().add(m);
-                    //m.addAudiencia();
-                    cadastrarAudiencia(clienteAtual.getUser(), "A", m.getId());                  
-                    System.out.println("Assistido.");
-                    return m;
-                } else {
-                    System.out.println("Assistido.");
-                    return m;
-                }
-            }
-        }
-        System.out.println("Não encontrado.");
-        return null;
-    }
+    //             if(!clienteAtual.getAssistidas().contains(m)) {
+    //                 //clienteAtual.getAssistidas().add(m);
+    //                 //m.addAudiencia();
+    //                 cadastrarAudiencia(clienteAtual.getUser(), "A", m.getId());                  
+    //                 System.out.println("Assistido.");
+    //                 return m;
+    //             } else {
+    //                 System.out.println("Assistido.");
+    //                 return m;
+    //             }
+    //         }
+    //     }
+    //     System.out.println("Não encontrado.");
+    //     return null;
+    // }
 
-    public void mostrarListaAssistidas() {
-        clienteAtual.getAssistidas().forEach(m -> printMidiaModelo(m));
-    }
+    // public void mostrarListaAssistidas() {
+    //     clienteAtual.getAssistidas().forEach(m -> printMidiaModelo(m));
+    // }
 
-    public void mostrarListaAvaliadas(){
-        clienteAtual.getAvaliadas().forEach(a -> {
-            for(Midia m : midias) {
-                if(a.getIdMidia().equals(m.getId())) {
-                    System.out.println("Nome: " + m.getNome() + " Nota: " + a.getNota());
-                }
-            }
-        });
-    }
+    // public void mostrarListaAvaliadas(){
+    //     clienteAtual.getAvaliadas().forEach(a -> {
+    //         for(Midia m : midias) {
+    //             if(a.getIdMidia().equals(m.getId())) {
+    //                 System.out.println("Nome: " + m.getNome() + " Nota: " + a.getNota());
+    //             }
+    //         }
+    //     });
+    // }
 
-    public void mostrarListaParaVer() {
-        clienteAtual.getParaVer().forEach(m -> printMidiaModelo(m));
-    }
+    // public void mostrarListaParaVer() {
+    //     clienteAtual.getParaVer().forEach(m -> printMidiaModelo(m));
+    // }
 
     // leitura de arquivos
     // public void preencherFilmes() throws Exception {
@@ -176,17 +171,17 @@ public class PlataformaStreaming {
     //     }
     // }
 
-    public void preencherClientes() throws Exception {
-        clientes.clear();
-        Files.lines(Paths.get("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Espectadores.csv"))
-        .map(line -> line.split(";"))
-        .forEach((col) -> {
-            int numeroLinha = this.clientes.size() + 1;
-            String idCliente = String.valueOf(numeroLinha);
-            ClienteComum cliente = new ClienteComum(idCliente, col[0], col[1], col[2]);
-            this.clientes.add(cliente);
-        });
-    }
+    // public void preencherClientes() throws Exception {
+    //     clientes.clear();
+    //     Files.lines(Paths.get("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Espectadores.csv"))
+    //     .map(line -> line.split(";"))
+    //     .forEach((col) -> {
+    //         int numeroLinha = this.clientes.size() + 1;
+    //         String idCliente = String.valueOf(numeroLinha);
+    //         ClienteComum cliente = new ClienteComum(idCliente, col[0], col[1], col[2]);
+    //         this.clientes.add(cliente);
+    //     });
+    // }
 
     // public void preencherAudiencia() throws Exception {
     //     clienteAtual.getAssistidas().clear();
@@ -299,17 +294,17 @@ public class PlataformaStreaming {
     // }
 
     // operacoes para debug
-    public void printAudPerMidia(){
-        System.out.println("audiencia de series");
-        for(Midia m : this.midias) {
-            System.out.println("id: " + m.getId() + " | nome: " + m.getNome() + " | audiencia: " + m.getAudiencia());
-        }
-    }
+    // public void printAudPerMidia(){
+    //     System.out.println("audiencia de series");
+    //     for(Midia m : this.midias) {
+    //         System.out.println("id: " + m.getId() + " | nome: " + m.getNome() + " | audiencia: " + m.getAudiencia());
+    //     }
+    // }
 
-    public void printAllClientes() {
-        System.out.println("Listas dos clientes:");
-        for(ClienteComum c : this.clientes) {
-            System.out.println("id: " + c.getIdCliente() + " | nome: " + c.getNome() + " | lista Assistidas: " + c.getAssistidas().size() + " | lista para ver: " + c.getParaVer().size());
-        }
-    }
+    // public void printAllClientes() {
+    //     System.out.println("Listas dos clientes:");
+    //     for(ClienteComum c : this.clientes) {
+    //         System.out.println("id: " + c.getIdCliente() + " | nome: " + c.getNome() + " | lista Assistidas: " + c.getAssistidas().size() + " | lista para ver: " + c.getParaVer().size());
+    //     }
+    // }
 }

@@ -16,7 +16,7 @@ public class AudienciaController {
         audienciaService.cadastrarAudiencia(audiencia);
     }
 
-    public void removerMidiasFuturas(Audiencia audiencia) {
+    public void removerAudiencia(Audiencia audiencia) {
         audienciaService.removerAudiencia(audiencia);
     }
 

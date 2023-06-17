@@ -68,6 +68,12 @@ public abstract class Midia {
         this.audiencia = audiencia;
     }
 
+    
+    @Override
+    public String toString() {
+        return "Nome: " + this.nome + " | Média: " + this.media;
+    }
+
     // operacoes da classe
     private void calcMedia() {
         double acumulador = 0.0;
