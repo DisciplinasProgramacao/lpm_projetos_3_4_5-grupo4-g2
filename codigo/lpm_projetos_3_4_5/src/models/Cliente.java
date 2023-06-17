@@ -3,7 +3,6 @@ package models;
 import java.util.ArrayList;
 
 public class Cliente {
-    private String idCliente;
     private String nome;
     private String user;
     private String senha;
@@ -13,21 +12,21 @@ public class Cliente {
     private String profissão;
 
     // construtor e getters / setters
-    public Cliente(String idCliente,
-                   String nome, 
+    public Cliente(String nome, 
                    String user, 
                    String senha, 
                    ArrayList<Midia> paraVer,
                    ArrayList<Midia> assistidas,
-                   ArrayList<Avaliacao> avaliadas) {
+                   ArrayList<Avaliacao> avaliadas,
+                   String profissao) {
 
-        this.idCliente = idCliente;
         this.nome = nome;
         this.user = user;
         this.senha = senha;
         this.paraVer = paraVer;
         this.assistidas = assistidas;
         this.avaliadas = avaliadas;
+        this.profissão = profissao;
     }
 
     public Cliente(String nome, 
@@ -78,10 +77,6 @@ public class Cliente {
     public String getProfissão() {
         return profissão;
     }
-    
-    public String getIdCliente() {
-        return idCliente;
-    }
 
     // operações da classe
     public void assistirMidia(Midia midia) {
@@ -94,6 +89,10 @@ public class Cliente {
 
     public boolean ehEspecialista() {
         return this.getAssistidas().size() > 4;
+    }
+
+    public boolean ehProfissional() {
+        return this.profissão != null;
     }
 
     // operações de especialista

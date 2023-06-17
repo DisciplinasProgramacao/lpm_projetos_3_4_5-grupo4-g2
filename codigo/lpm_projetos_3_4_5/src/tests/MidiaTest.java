@@ -20,9 +20,9 @@ public class MidiaTest {
     Cliente C2 = new Cliente("7771", "Raffa Moreira", "lilRaf", "777");
     Cliente C3 = new Cliente("7772", "Raffa Moreira", "lilRaf", "777");
 
-    private Avaliacao A1 = new Avaliacao(C1.getIdCliente(), midiaF.getId(), "prr", 3);
-    private Avaliacao A2 = new Avaliacao(C2.getIdCliente(), midiaF.getId(), "prr", 3);
-    private Avaliacao A3 = new Avaliacao(C3.getIdCliente(), midiaF.getId(), "prr", 3);
+    private Avaliacao A1 = new Avaliacao(C1.getUser(), midiaF.getId(), "prr", 3);
+    private Avaliacao A2 = new Avaliacao(C2.getUser(), midiaF.getId(), "prr", 3);
+    private Avaliacao A3 = new Avaliacao(C3.getUser(), midiaF.getId(), "prr", 3);
 
     @Test
     public void shouldSetMidiaGender(){

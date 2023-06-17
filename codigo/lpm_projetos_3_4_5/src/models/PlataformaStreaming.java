@@ -50,8 +50,8 @@ public class PlataformaStreaming {
     public void login(String user, String senha) {
         for(Cliente c : clientes) {
             if(c.getUser().equals(user) && c.getSenha().equals(senha)){
-                clienteAtual = new Cliente(c.getIdCliente(), c.getNome(), c.getUser(), 
-                                                    c.getSenha(), c.getParaVer(), c.getAssistidas(), c.getAvaliadas());
+                clienteAtual = new Cliente(c.getNome(), c.getUser(), c.getSenha(), 
+                    c.getParaVer(), c.getAssistidas(), c.getAvaliadas(), c.getProfissão());
             }
         }
     }
@@ -140,11 +140,15 @@ public class PlataformaStreaming {
     }
 
     // leitura de arquivos
-    public void preencherFilmes() throws Exception {
+    public void preencherMidias() throws Exception {
+        preencherFilmes();
+        preencherSeries();
+    }
+
+    private void preencherFilmes() throws Exception {
         midias.clear();
-        if(clienteAtual != null && !clienteAtual.ehEspecialista()){
+        if(clienteAtual != null && !clienteAtual.ehProfissional()){
             List<Midia> filmes = Files.lines(Paths.get("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Filmes.csv"))
-                .skip(1)
                 .map(line -> line.split(";"))
                 .map(col -> new Filme(col[0], col[1], col[2], Integer.parseInt(col[3])))
                 .filter(m -> !m.verificaLancamento())
@@ -152,16 +156,14 @@ public class PlataformaStreaming {
             midias.addAll(filmes);
         } else {
             Files.lines(Paths.get("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Filmes.csv"))
-            .skip(1)
             .map(line -> line.split(";"))
             .map(col -> new Filme(col[0], col[1], col[2], Integer.parseInt(col[3])))
             .forEach(midias::add);
         }
     }
 
-    public void preencherSeries() throws Exception {
-        midias.clear();
-        if(clienteAtual != null && !clienteAtual.ehEspecialista()){
+    private void preencherSeries() throws Exception {
+        if(clienteAtual != null && !clienteAtual.ehProfissional()){
             List<Midia> series = Files.lines(Paths.get("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Series.csv"))
                 .map(line -> line.split(";"))
                 .map(col -> new Serie(col[0], col[1], col[2]))
@@ -325,18 +327,61 @@ public class PlataformaStreaming {
         Files.write(Path.of("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Audiencia.csv"), newLines, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
     }
 
-    // operacoes para debug
-    public void printAudPerMidia(){
-        System.out.println("audiencia de series");
-        for(Midia m : this.midias) {
-            System.out.println("id: " + m.getId() + " | nome: " + m.getNome() + " | audiencia: " + m.getAudiencia());
-        }
+    // operacoes para relatorios
+    // public void printAudPerMidia(){
+    //     System.out.println("audiencia de series");
+    //     for(Midia m : this.midias) {
+    //         System.out.println("id: " + m.getId() + " | nome: " + m.getNome() + " | audiencia: " + m.getAudiencia());
+    //     }
+    // }
+
+    // public void printAllClientes() {
+    //     System.out.println("Listas dos clientes:");
+    //     for(Cliente c : this.clientes) {
+    //         System.out.println("id: " + c.getUser() + " | nome: " + c.getNome() + " | lista Assistidas: " + c.getAssistidas().size() + " | lista para ver: " + c.getParaVer().size());
+    //     }
+    // }
+    
+    public void gerarRelatorioClienteQueMaisAssistiuMidias() {
+
     }
 
-    public void printAllClientes() {
-        System.out.println("Listas dos clientes:");
-        for(Cliente c : this.clientes) {
-            System.out.println("id: " + c.getIdCliente() + " | nome: " + c.getNome() + " | lista Assistidas: " + c.getAssistidas().size() + " | lista para ver: " + c.getParaVer().size());
+    public void gerarRelatorioClienteQueMaisAvaliouMidias() {
+
+    }
+    
+    public void gerarRelatorioClientesCom15MaisAvaliacoes() {
+        List<Cliente> apenasEspectadores = new ArrayList<Cliente>();
+        List<Cliente> apenas15MaisAvaliacoes = new ArrayList<Cliente>();
+
+        for(Cliente c : clientes) {
+            if(!"Admin".equals(c.getProfissão())) {
+                apenasEspectadores.add(c);
+                if(c.getAvaliadas().size() >= 15) {
+                    apenas15MaisAvaliacoes.add(c);
+                }
+            }
         }
+
+        double porcentagem = ((double) apenas15MaisAvaliacoes.size() / apenasEspectadores.size()) * 100;
+        System.out.println("Relatório de porcentagem de usuários com 15 ou mais avaliações:");
+        System.out.println("Atualmente o sistema possui " + apenas15MaisAvaliacoes.size() + " usuários que se enquadram nesse critério.");
+        System.out.println("Esse valor corresponde a " + porcentagem + " por cento dos usuários." );
+    }
+
+    public void gerarRelatorio10MidiasMelhoresVotos() {
+
+    }
+
+    public void gerarRelatorio10MidiasMaisVisualizadas() {
+
+    }
+
+    public void gerarRelatorio10MidiasMelhoresVotosCadaGenero() {
+
+    }
+
+        public void gerarRelatorio10MidiasMaisVisualizadasCadaGenero() {
+
     }
 }

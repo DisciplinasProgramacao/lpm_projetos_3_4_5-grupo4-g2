@@ -4,8 +4,10 @@ import java.util.Date;
 
 import models.Avaliacao;
 import models.Cliente;
+import models.Filme;
 import models.Midia;
 import models.PlataformaStreaming;
+import models.Serie;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -34,15 +36,14 @@ public class App {
     // MENU DE ACESSO
     public static void menuDeAcesso(PlataformaStreaming plataforma) throws Exception {
 
-        plataforma.preencherFilmes();
-        plataforma.preencherSeries();
+        plataforma.preencherMidias();
         plataforma.preencherClientes();
         plataforma.preencherAudiencia();
         plataforma.preencherAvaliacoes();
 
         Scanner scanner = new Scanner(System.in);
         String nome, user, senha, profissao;
-         Cliente cliente; 
+        Cliente cliente; 
 
         int opcao = -1;
         while (opcao != 0) {
@@ -94,7 +95,9 @@ public class App {
 
                     try {
                         if(clienteAtual != null) {
-                            if(clienteAtual.ehEspecialista()) {
+                            if("Admin".equals(clienteAtual.getProfissão())) {
+                                menuAdiministrador(plataforma);
+                            } else if(clienteAtual.ehEspecialista() || clienteAtual.ehProfissional()) {
                                 menuClienteEspecialista(plataforma);
                             } else {
                                 menuCliente(plataforma);
@@ -122,8 +125,7 @@ public class App {
         Midia midia;
         Cliente clienteAtual = plataforma.getClienteAtual();
 
-        plataforma.preencherFilmes();
-        plataforma.preencherSeries();
+        plataforma.preencherMidias();
         plataforma.preencherAudiencia();
         plataforma.preencherAvaliacoes();
 
@@ -224,138 +226,180 @@ public class App {
         }
     }
 
-        // MENU DE CLIENTE ESPECIALISTA
-        public static void menuClienteEspecialista(PlataformaStreaming plataforma) throws Exception{
+    // MENU DE CLIENTE ESPECIALISTA
+    public static void menuClienteEspecialista(PlataformaStreaming plataforma) throws Exception {
+        
+        String nome, idioma, genero;
+        Midia midia;
+        Cliente clienteAtual = plataforma.getClienteAtual();
 
-            String dataLancamento = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+        plataforma.preencherMidias();
+        plataforma.preencherAudiencia();
+        plataforma.preencherAvaliacoes();
+
+        Scanner scanner = new Scanner(System.in);
+        int opcao = -1;
+        while (opcao != 0) {
+            clearScreen();
+            System.out.println();
+            System.out.println("-------- MENU CLIENTE ESPECIALISTA -----------");
+            System.out.println("Olá, " + plataforma.getClienteAtual().getNome());
+            System.out.println("Bem vindo(a) à " + plataforma.getNome());
+            System.out.println("0. Delogar");
+            System.out.println("1. Mostrar catalogo");
+            System.out.println("2. Filtrar por nome");
+            System.out.println("3. Filtrar por idioma");
+            System.out.println("4. Filtrar por gênero");
+            System.out.println("5. Adicionar aos ver depois");
+            System.out.println("6. Mostrar minhas lista");
+            System.out.println("7. Assistir algo");
+            System.out.print("Escolha uma opção: ");
+            opcao = scanner.nextInt();
+            scanner.nextLine();
+            System.out.println();
             
-            String nome, idioma, genero, id;
-            int duracao;
-            Midia midia;
-            Cliente clienteAtual = plataforma.getClienteAtual();
+            switch (opcao) {
+                case 0:
+                    clearScreen();
+                    System.out.println("Deslogando usuário.");
 
-            plataforma.preencherFilmes();
-            plataforma.preencherSeries();
-            plataforma.preencherAudiencia();
-            plataforma.preencherAvaliacoes();
-    
-            Scanner scanner = new Scanner(System.in);
-            int opcao = -1;
-            while (opcao != 0) {
-                clearScreen();
-                System.out.println();
-                System.out.println("-------- MENU CLIENTE ESPECIALISTA -----------");
-                System.out.println("Olá, " + plataforma.getClienteAtual().getNome());
-                System.out.println("Bem vindo(a) à " + plataforma.getNome());
-                System.out.println("0. Delogar");
-                System.out.println("1. Mostrar catalogo");
-                System.out.println("2. Filtrar por nome");
-                System.out.println("3. Filtrar por idioma");
-                System.out.println("4. Filtrar por gênero");
-                System.out.println("5. Adicionar aos ver depois");
-                System.out.println("6. Mostrar minhas lista");
-                System.out.println("7. Assistir algo");
-                // System.out.println("8. Cadastrar filme");
-                // System.out.println("9. Cadastrar Serie");
-                System.out.print("Escolha uma opção: ");
-                opcao = scanner.nextInt();
-                scanner.nextLine();
-                System.out.println();
-                
-                switch (opcao) {
-                    case 0:
-                        clearScreen();
-                        System.out.println("Deslogando usuário.");
-    
-                        spendTime(1500);
-                        plataforma.logoff();
-                        break;
-                    case 1:
-                        System.out.println("Todos:");
-                        plataforma.mostrarCatalogo();
-                        scanner.nextLine();
-                        break;
-                    case 2:
-                        System.out.println("Insira o nome:");
-                        nome = scanner.nextLine();
-    
-                        System.out.println("Filtro por nome:");
-                        plataforma.filtraPorNome(nome);
-                        scanner.nextLine();
-                        break;
-                    case 3:
-                        System.out.println("Insira o idioma:");
-                        idioma = scanner.nextLine();
-    
-                        System.out.println("Filtro por idioma:");
-                        plataforma.filtrarPorIdioma(idioma);
-                        scanner.nextLine();
-                        break;
-                   case 4:
-                        System.out.println("Insira o gênero:");
-                        genero = scanner.nextLine();
-    
-                        System.out.println("Filtro por gênero:");
-                        plataforma.filtrarPorGenero(genero);
-                        scanner.nextLine();
-                        break;
-                    case 5:
-                        System.out.println("O que você quer assistir mais tarde?");
-                        nome = scanner.nextLine();
-    
-                        plataforma.addParaVer(nome);
-                        break;
-                    case 6:
-                        menuListasDoCliente(plataforma);
-                        break;
-                    case 7:
-                        System.out.println("O que você quer assistir?");
-                        nome = scanner.nextLine();
-    
-                        clearScreen();
-                        midia = plataforma.assistirMidia(nome);
-                        spendTime(4000);
-                        boolean naoAvaliado = true;
+                    spendTime(1500);
+                    plataforma.logoff();
+                    break;
+                case 1:
+                    System.out.println("Todos:");
+                    plataforma.mostrarCatalogo();
+                    scanner.nextLine();
+                    break;
+                case 2:
+                    System.out.println("Insira o nome:");
+                    nome = scanner.nextLine();
 
-                        if(clienteAtual.getAvaliadas().size() > 0) {
-                            for(Avaliacao a : plataforma.getClienteAtual().getAvaliadas()) {
-                                if(a.getIdMidia().equals(midia.getId())) {
-                                    naoAvaliado = false;
-                                }
+                    System.out.println("Filtro por nome:");
+                    plataforma.filtraPorNome(nome);
+                    scanner.nextLine();
+                    break;
+                case 3:
+                    System.out.println("Insira o idioma:");
+                    idioma = scanner.nextLine();
+
+                    System.out.println("Filtro por idioma:");
+                    plataforma.filtrarPorIdioma(idioma);
+                    scanner.nextLine();
+                    break;
+                case 4:
+                    System.out.println("Insira o gênero:");
+                    genero = scanner.nextLine();
+
+                    System.out.println("Filtro por gênero:");
+                    plataforma.filtrarPorGenero(genero);
+                    scanner.nextLine();
+                    break;
+                case 5:
+                    System.out.println("O que você quer assistir mais tarde?");
+                    nome = scanner.nextLine();
+
+                    plataforma.addParaVer(nome);
+                    break;
+                case 6:
+                    menuListasDoCliente(plataforma);
+                    break;
+                case 7:
+                    System.out.println("O que você quer assistir?");
+                    nome = scanner.nextLine();
+
+                    clearScreen();
+                    midia = plataforma.assistirMidia(nome);
+                    spendTime(4000);
+                    boolean naoAvaliado = true;
+
+                    if(clienteAtual.getAvaliadas().size() > 0) {
+                        for(Avaliacao a : plataforma.getClienteAtual().getAvaliadas()) {
+                            if(a.getIdMidia().equals(midia.getId())) {
+                                naoAvaliado = false;
                             }
                         }
+                    }
 
-                        if(naoAvaliado && midia != null) {
-                            menuAvaliarEspecialista(plataforma, midia);
-                        }
-                        break;
-                    // case 8:
-                    //     System.out.print("Nome do filme: ");
-                    //     nome = scanner.nextLine();
-                    //     System.out.print("duracao do filme: ");
-                    //     duracao = scanner.nextInt();
-                        
-                    //     id = String.valueOf(plataforma.getMidias().size() + 1);
-
-                    //     Filme filme = new Filme(id, nome, dataLancamento, duracao);
-                    //     plataforma.cadastrarFilme(filme);
-                    //     break;
-                    // case 9:
-                    //     System.out.print("Nome da serie: ");
-                    //     nome = scanner.nextLine();
-                        
-                    //     id = String.valueOf(plataforma.getMidias().size() + 1);
-                        
-                    //     Serie serie = new Serie(id, nome, dataLancamento);
-                    //     plataforma.cadastrarSerie(serie);
-                    //     break;
-                    default:
-                        System.out.println("Opção inválida. Digite novamente.");
-                        spendTime(3000);
-                        break;
-                }
+                    if(naoAvaliado && midia != null) {
+                        menuAvaliarEspecialista(plataforma, midia);
+                    }
+                    break;
+                default:
+                    System.out.println("Opção inválida. Digite novamente.");
+                    spendTime(3000);
+                    break;
             }
         }
+    }
+
+    public static void menuAdiministrador(PlataformaStreaming plataforma) throws Exception {
+
+        String dataLancamento = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+
+        String nome, idioma, genero, id;
+        int duracao;
+
+        Midia midia;
+        Cliente clienteAtual = plataforma.getClienteAtual();
+
+        plataforma.preencherMidias();
+        plataforma.preencherAudiencia();
+        plataforma.preencherAvaliacoes();
+
+        Scanner scanner = new Scanner(System.in);
+        int opcao = -1;
+        while (opcao != 0) {
+            clearScreen();
+            System.out.println();
+            System.out.println("-------- MENU ADMINISTRADOR -----------");
+            System.out.println("0. Delogar");
+            System.out.println("1. Cadastrar filme");
+            System.out.println("2. Cadastrar serie");
+            System.out.println("3. Gerar relatórios");
+            System.out.print("Escolha uma opção: ");
+            opcao = scanner.nextInt();
+            scanner.nextLine();
+            System.out.println();
+
+            switch(opcao) {
+                case 0:
+                    clearScreen();
+                    System.out.println("Deslogando usuário.");
+
+                    spendTime(1500);
+                    plataforma.logoff();
+                    break;
+                case 1:
+                    System.out.print("Nome do filme: ");
+                    nome = scanner.nextLine();
+                    System.out.print("duracao do filme: ");
+                    duracao = scanner.nextInt();
+                    
+                    id = String.valueOf(plataforma.getMidias().size() + 1);
+
+                    Filme filme = new Filme(id, nome, dataLancamento, duracao);
+                    plataforma.cadastrarFilme(filme);
+                    break;
+                case 2:
+                    System.out.print("Nome da serie: ");
+                    nome = scanner.nextLine();
+                    
+                    id = String.valueOf(plataforma.getMidias().size() + 1);
+                    
+                    Serie serie = new Serie(id, nome, dataLancamento);
+                    plataforma.cadastrarSerie(serie);
+                    break;
+                case 3:
+                    menuListaDeRelatorios(plataforma);
+                    break;
+                default:
+                    System.out.println("Opção inválida. Digite novamente.");
+                    spendTime(3000);
+                    break;
+            }
+        }
+    }
 
     public static void menuListasDoCliente(PlataformaStreaming plataforma) {
 
@@ -373,6 +417,7 @@ public class App {
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt();
             scanner.nextLine();
+            System.out.println();
     
             switch (opcao) {
                 case 0:
@@ -391,6 +436,66 @@ public class App {
                 case 3:
                     System.out.println("Essa é sua lista de midias para ver mais tarde:");
                     plataforma.mostrarListaParaVer();
+                    scanner.nextLine();
+                    break;
+                default:
+                    System.out.println("Opção inválida. Digite novamente.");
+                    break;
+            }
+        }
+    }
+
+        public static void menuListaDeRelatorios(PlataformaStreaming plataforma) {
+
+        Scanner scanner = new Scanner(System.in);
+        int opcao = -1;
+        while (opcao != 0) {
+            clearScreen();
+            System.out.println();
+            System.out.println("-------- RELATORIOS -----------");
+            System.out.println("Olá, " + plataforma.getClienteAtual().getNome());
+            System.out.println("0. Voltar");
+            System.out.println("1. Cliente que assistiu mais midias");
+            System.out.println("2. Cliente que tem mais avaliacoes");
+            System.out.println("3. Porcentagem de clientes com mais de 15 avaliações");
+            System.out.println("4. Top 10 midias com melhores votos");
+            System.out.println("5. Top 10 midias mais visualizadas");
+            System.out.println("6. Top 10 midias com melhores votos de cada genero");
+            System.out.println("7. Top 10 midias mais visualizadas de cada genero");
+            System.out.print("Escolha uma opção: ");
+            opcao = scanner.nextInt();
+            scanner.nextLine();
+            System.out.println();
+    
+            switch (opcao) {
+                case 0:
+                    clearScreen();
+                    break;
+                case 1:
+                    plataforma.gerarRelatorioClienteQueMaisAssistiuMidias();
+                    break;
+                case 2:
+                    plataforma.gerarRelatorioClienteQueMaisAvaliouMidias();
+                    scanner.nextLine();
+                    break;
+                case 3:
+                    plataforma.gerarRelatorioClientesCom15MaisAvaliacoes();
+                    scanner.nextLine();
+                    break;
+                case 4:
+                    plataforma.gerarRelatorio10MidiasMelhoresVotos();
+                    scanner.nextLine();
+                    break;
+                case 5:
+                    plataforma.gerarRelatorio10MidiasMaisVisualizadas();
+                    scanner.nextLine();
+                    break;
+                case 6:
+                    plataforma.gerarRelatorio10MidiasMelhoresVotosCadaGenero();
+                    scanner.nextLine();
+                    break;
+                case 7:
+                    plataforma.gerarRelatorio10MidiasMaisVisualizadasCadaGenero();
                     scanner.nextLine();
                     break;
                 default:
@@ -431,7 +536,7 @@ public class App {
                         break;
                     }
 
-                    Avaliacao avaliacao = new Avaliacao(plataforma.getClienteAtual().getIdCliente(), midia.getId(), "", nota);
+                    Avaliacao avaliacao = new Avaliacao(plataforma.getClienteAtual().getUser(), midia.getId(), "", nota);
                     plataforma.cadastrarAvaliacao(avaliacao, midia);
                     break;
                 default:
@@ -476,7 +581,7 @@ public class App {
                     System.out.print("Comentario: ");
                     comentario = scanner.nextLine();
 
-                    Avaliacao avaliacao = new Avaliacao(plataforma.getClienteAtual().getIdCliente(), midia.getId(), comentario, nota);
+                    Avaliacao avaliacao = new Avaliacao(plataforma.getClienteAtual().getUser(), midia.getId(), comentario, nota);
                     plataforma.cadastrarAvaliacao(avaliacao, midia);
                     break;
                 default:
