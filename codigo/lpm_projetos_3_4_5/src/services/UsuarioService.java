@@ -12,9 +12,9 @@ import utils.Utilidade;
 
 public class UsuarioService {
 
-    private String finalPath = Utilidade.CSV_FOLDER_PATH+"POO_Usuarios.csv";
+    private static String finalPath = Utilidade.CSV_FOLDER_PATH+"POO_Usuarios.csv";
 
-    public void cadastrarUsuario(Usuario usuario) {
+    public static void cadastrarUsuario(Usuario usuario) {
         String str = usuario.getNome()+";"+
                     usuario.getUser()+";"+
                     usuario.getSenha();
@@ -22,7 +22,7 @@ public class UsuarioService {
         Utilidade.escrever(str, finalPath);
     }
 
-    public void removerUsuario(Usuario usuario) {
+    public static void removerUsuario(Usuario usuario) {
         
         String str = usuario.getNome()+";"+
                     usuario.getUser()+";"+

@@ -12,12 +12,12 @@ public class UsuarioController {
         this.usuarioService = new UsuarioService();
     }
 
-    public void cadastrarUsuario(Usuario usuario) {
-        usuarioService.cadastrarUsuario(usuario);
+    public static void cadastrarUsuario(Usuario usuario) {
+        UsuarioController.cadastrarUsuario(usuario);
     }
 
-    public void removerUsuario(Usuario usuario) {
-        usuarioService.removerUsuario(usuario);
+    public static void removerUsuario(Usuario usuario) {
+        UsuarioController.removerUsuario(usuario);
     }
 
     public List<Usuario> preencherUsuarios() {

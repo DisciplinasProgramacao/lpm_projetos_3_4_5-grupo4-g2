@@ -14,47 +14,53 @@ import java.util.List;
 
 import models.Midia;
 import models.PlataformaStreaming;
+import models.Usuario;
 
 public class App {
-    public static void main(String[] args) throws Exception {
-
-        PlataformaStreaming plataforma = PlataformaStreaming.getInstance("Meu Streaming");
-        List<Midia> allMidias = new ArrayList<Midia>();
-        allMidias.addAll(allMidias);
-        
-    // public void login(String user, String senha) {
-    //     for(Usuario u : plataforma.getUsuarios()) {
-    //         if(u.getUser().equals(user) && u.getSenha().equals(senha)) {
-    //             Usuario usuarioAtual = new Usuario(u.getNome(), u.getUser(), u.getSenha(), u.getRole());
-    //             plataforma.setUsuarioAtual(usuarioAtual);
-    //         }
-    //     }
-    // }
-
-    // public void logoff() {
-    //     plataforma.setUsuarioAtual(null);
-    // }
-
-    // public void listarTodas() {
-    //     plataforma.getMidias().forEach(m -> System.out.println(m.toString()));
-    // }
-
-    // public void listarPorNome(String nome) {
-    //     plataforma.getMidias().stream().filter(m -> m.getNome().contains(nome))
-    //     .forEach(m -> System.out.println(m.toString()));
-    // }
-
-    // public void listarPorGenero(String genero) {
-    //     plataforma.getMidias().stream().filter(m -> m.getGenero().equals(genero))
-    //     .forEach(m -> System.out.println(m.toString()));
-    // }
-
-    // public void listarPorIdioma(String idioma) {
-    //     plataforma.getMidias().stream().filter(m -> m.getIdioma().equals(idioma))
-    //     .forEach(m -> System.out.println(m.toString()));
-    // }
+    public static void main(String[] args) {
+        public PlataformaStreaming plataforma = PlataformaStreaming.getInstance("Meu Streaming");
     }
- }
+}
+
+    public void login(String user, String senha) {
+        for(Usuario u : plataforma.getUsuarios()) {
+            if(u.getUser().equals(user) && u.getSenha().equals(senha)) {
+                Usuario usuarioAtual = new Usuario(u.getNome(), u.getUser(), u.getSenha(), u.getRole());
+                plataforma.setUsuarioAtual(usuarioAtual);
+            }
+        }
+    }
+
+    public void logoff() {
+        plataforma.setUsuarioAtual(null);
+    }
+
+    public void mudarRoleUsuario(Usuario usuario) {
+        UsuarioController.removerUsuario(usuario);
+
+        usuario.setRole(2);
+        
+        UsuarioController.cadastrarUsuario(usuario);
+    }
+
+    public void listarTodas() {
+        plataforma.getMidias().forEach(m -> System.out.println(m.toString()));
+    }
+
+    public void listarPorNome(String nome) {
+        plataforma.getMidias().stream().filter(m -> m.getNome().contains(nome))
+        .forEach(m -> System.out.println(m.toString()));
+    }
+
+    public void listarPorGenero(String genero) {
+        plataforma.getMidias().stream().filter(m -> m.getGenero().equals(genero))
+        .forEach(m -> System.out.println(m.toString()));
+    }
+
+    public void listarPorIdioma(String idioma) {
+        plataforma.getMidias().stream().filter(m -> m.getIdioma().equals(idioma))
+        .forEach(m -> System.out.println(m.toString()));
+    }
 
 //         // Inicia o sistema
 //         PlataformaStreaming plataforma = PlataformaStreaming.getInstance("Meu Streaming");
