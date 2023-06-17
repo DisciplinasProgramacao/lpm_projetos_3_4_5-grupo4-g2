@@ -181,9 +181,12 @@ public class PlataformaStreaming {
         Files.lines(Paths.get("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Espectadores.csv"))
         .map(line -> line.split(";"))
         .forEach((col) -> {
-            int numeroLinha = this.clientes.size() + 1;
-            String idCliente = String.valueOf(numeroLinha);
-            Cliente cliente = new Cliente(idCliente, col[0], col[1], col[2]);
+            Cliente cliente;
+            if(col.length == 3) {
+                cliente = new Cliente(col[0], col[1], col[2]);
+            } else {
+                cliente = new Cliente(col[0], col[1], col[2], col[3]);
+            }
             this.clientes.add(cliente);
         });
     }
@@ -227,7 +230,7 @@ public class PlataformaStreaming {
         .forEach(aval -> {
             for(Midia m : midias) {
                 for(Cliente c : clientes) {
-                    if(c.getIdCliente().equals(aval[0]) && m.getId().equals(aval[1])) {
+                    if(c.getUser().equals(aval[0]) && m.getId().equals(aval[1])) {
                         Avaliacao avaliacao = new Avaliacao(aval[0], aval[1], aval[2], Integer.parseInt(aval[3]));
                         m.getAvaliacoes().add(avaliacao);
                         c.getAvaliadas().add(avaliacao);
@@ -268,9 +271,18 @@ public class PlataformaStreaming {
     }
 
     public void cadastrarCliente(Cliente cliente) {
-        String str = cliente.getNome()+";"+
-                    cliente.getUser()+";"+
-                    cliente.getSenha();
+        String str;
+        if(cliente.getProfissão() == null){
+            str = cliente.getNome()+";"+
+                cliente.getUser()+";"+
+                cliente.getSenha();
+        } else {
+            str = cliente.getNome()+";"+
+                cliente.getUser()+";"+
+                cliente.getSenha()+";"+
+                cliente.getProfissão(); 
+        }
+
 
         escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Espectadores.csv");
         this.clientes.add(cliente);
@@ -281,7 +293,7 @@ public class PlataformaStreaming {
             clienteAtual.getAvaliadas().add(avaliacao);
             midia.getAvaliacoes().add(avaliacao);
 
-            String str = avaliacao.getIdCliente()+";"+
+            String str = avaliacao.getUser()+";"+
             avaliacao.getIdMidia()+";"+
             avaliacao.getComentario()+";"+
             avaliacao.getNota();

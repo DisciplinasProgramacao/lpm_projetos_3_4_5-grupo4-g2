@@ -4,10 +4,8 @@ import java.util.Date;
 
 import models.Avaliacao;
 import models.Cliente;
-import models.Filme;
 import models.Midia;
 import models.PlataformaStreaming;
-import models.Serie;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -43,7 +41,9 @@ public class App {
         plataforma.preencherAvaliacoes();
 
         Scanner scanner = new Scanner(System.in);
-        String idCliente, nome, user, senha;
+        String nome, user, senha, profissao;
+         Cliente cliente; 
+
         int opcao = -1;
         while (opcao != 0) {
             clearScreen();
@@ -70,9 +70,14 @@ public class App {
                     System.out.print("Senha: ");
                     senha = scanner.nextLine();
 
-                    idCliente = String.valueOf(plataforma.getClientes().size() + 1);
+                    System.out.println("Trabalha com críticas?");
+                    profissao = menuProfissaoDoCliente();
 
-                    Cliente cliente = new Cliente(idCliente, nome, user, senha);
+                    if(profissao == null) {
+                        cliente = new Cliente(nome, user, senha);
+                    } else {
+                        cliente = new Cliente(nome, user, senha, profissao);
+                    }
                     
                     plataforma.cadastrarCliente(cliente);
                     break;
@@ -250,8 +255,8 @@ public class App {
                 System.out.println("5. Adicionar aos ver depois");
                 System.out.println("6. Mostrar minhas lista");
                 System.out.println("7. Assistir algo");
-                System.out.println("8. Cadastrar filme");
-                System.out.println("9. Cadastrar Serie");
+                // System.out.println("8. Cadastrar filme");
+                // System.out.println("9. Cadastrar Serie");
                 System.out.print("Escolha uma opção: ");
                 opcao = scanner.nextInt();
                 scanner.nextLine();
@@ -324,26 +329,26 @@ public class App {
                             menuAvaliarEspecialista(plataforma, midia);
                         }
                         break;
-                    case 8:
-                        System.out.print("Nome do filme: ");
-                        nome = scanner.nextLine();
-                        System.out.print("duracao do filme: ");
-                        duracao = scanner.nextInt();
+                    // case 8:
+                    //     System.out.print("Nome do filme: ");
+                    //     nome = scanner.nextLine();
+                    //     System.out.print("duracao do filme: ");
+                    //     duracao = scanner.nextInt();
                         
-                        id = String.valueOf(plataforma.getMidias().size() + 1);
+                    //     id = String.valueOf(plataforma.getMidias().size() + 1);
 
-                        Filme filme = new Filme(id, nome, dataLancamento, duracao);
-                        plataforma.cadastrarFilme(filme);
-                        break;
-                    case 9:
-                        System.out.print("Nome da serie: ");
-                        nome = scanner.nextLine();
+                    //     Filme filme = new Filme(id, nome, dataLancamento, duracao);
+                    //     plataforma.cadastrarFilme(filme);
+                    //     break;
+                    // case 9:
+                    //     System.out.print("Nome da serie: ");
+                    //     nome = scanner.nextLine();
                         
-                        id = String.valueOf(plataforma.getMidias().size() + 1);
+                    //     id = String.valueOf(plataforma.getMidias().size() + 1);
                         
-                        Serie serie = new Serie(id, nome, dataLancamento);
-                        plataforma.cadastrarSerie(serie);
-                        break;
+                    //     Serie serie = new Serie(id, nome, dataLancamento);
+                    //     plataforma.cadastrarSerie(serie);
+                    //     break;
                     default:
                         System.out.println("Opção inválida. Digite novamente.");
                         spendTime(3000);
@@ -481,4 +486,41 @@ public class App {
             }
         }
     }
+
+    public static String menuProfissaoDoCliente() {
+        String profissao = null;
+        Scanner scanner = new Scanner(System.in);
+        int opcao = -1;
+        while (opcao < 0 || opcao > 4) {
+            clearScreen();
+            System.out.println();
+            System.out.println("1. Nenhuma das alternativas");
+            System.out.println("2. Jornalista");
+            System.out.println("3. Diretor");
+            System.out.println("4. Ator");
+            System.out.print("Escolha uma opção: ");
+            opcao = scanner.nextInt();
+            scanner.nextLine();
+    
+            switch (opcao) {
+                case 1:
+                    break;
+                case 2:
+                    profissao = "Jornalista";
+                    break;
+                case 3:
+                    profissao = "Diretor";
+                    break;
+                case 4:
+                    profissao = "Ator";
+                    break;
+                default:
+                    System.out.println("Essa não é uma opacao válida. Digite novamente");
+                    spendTime(3000);
+                    break;
+            }
+        }
+        return profissao;
+    }
 }
+

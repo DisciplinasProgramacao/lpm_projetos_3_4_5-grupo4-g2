@@ -2,7 +2,7 @@ package models;
 
 import java.util.ArrayList;
 
-public class Cliente implements ClienteEspecialista {
+public class Cliente {
     private String idCliente;
     private String nome;
     private String user;
@@ -10,6 +10,7 @@ public class Cliente implements ClienteEspecialista {
     private ArrayList<Midia> paraVer = new ArrayList<Midia>();
     private ArrayList<Midia> assistidas = new ArrayList<Midia>();
     private ArrayList<Avaliacao> avaliadas = new ArrayList<Avaliacao>();
+    private String profissão;
 
     // construtor e getters / setters
     public Cliente(String idCliente,
@@ -29,12 +30,21 @@ public class Cliente implements ClienteEspecialista {
         this.avaliadas = avaliadas;
     }
 
-    public Cliente(String idCliente,
-            String nome, 
+    public Cliente(String nome, 
+            String user, 
+            String senha, 
+            String profissao) {
+
+        this.nome = nome;
+        this.user = user;
+        this.senha = senha;
+        this.profissão = profissao;
+    }
+
+    public Cliente(String nome, 
             String user, 
             String senha) {
 
-        this.idCliente = idCliente;
         this.nome = nome;
         this.user = user;
         this.senha = senha;
@@ -63,6 +73,10 @@ public class Cliente implements ClienteEspecialista {
 
     public ArrayList<Midia> getParaVer() {
         return paraVer;
+    }
+
+    public String getProfissão() {
+        return profissão;
     }
     
     public String getIdCliente() {
