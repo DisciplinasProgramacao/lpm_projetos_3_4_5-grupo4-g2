@@ -9,7 +9,7 @@ public class Cliente {
     private ArrayList<Midia> paraVer = new ArrayList<Midia>();
     private ArrayList<Midia> assistidas = new ArrayList<Midia>();
     private ArrayList<Avaliacao> avaliadas = new ArrayList<Avaliacao>();
-    private String profissão;
+    private String profissao;
 
     // construtor e getters / setters
     public Cliente(String nome, 
@@ -26,7 +26,7 @@ public class Cliente {
         this.paraVer = paraVer;
         this.assistidas = assistidas;
         this.avaliadas = avaliadas;
-        this.profissão = profissao;
+        this.profissao = profissao;
     }
 
     public Cliente(String nome, 
@@ -37,7 +37,7 @@ public class Cliente {
         this.nome = nome;
         this.user = user;
         this.senha = senha;
-        this.profissão = profissao;
+        this.profissao = profissao;
     }
 
     public Cliente(String nome, 
@@ -74,8 +74,8 @@ public class Cliente {
         return paraVer;
     }
 
-    public String getProfissão() {
-        return profissão;
+    public String getProfissao() {
+        return profissao;
     }
 
     // operações da classe
@@ -92,7 +92,7 @@ public class Cliente {
     }
 
     public boolean ehProfissional() {
-        return this.profissão != null;
+        return this.profissao != null;
     }
 
     // operações de especialista

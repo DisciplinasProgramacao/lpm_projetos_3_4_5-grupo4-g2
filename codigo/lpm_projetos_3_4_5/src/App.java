@@ -94,7 +94,7 @@ public class App {
 
                     try {
                         if(clienteAtual != null) {
-                            if("Admin".equals(clienteAtual.getProfissão())) {
+                            if("Admin".equals(clienteAtual.getProfissao())) {
                                 menuAdiministrador(plataforma);
                             } else if(clienteAtual.ehEspecialista() || clienteAtual.ehProfissional()) {
                                 menuClienteEspecialista(plataforma);

@@ -51,7 +51,7 @@ public class PlataformaStreaming {
         for(Cliente c : clientes) {
             if(c.getUser().equals(user) && c.getSenha().equals(senha)){
                 clienteAtual = new Cliente(c.getNome(), c.getUser(), c.getSenha(), 
-                    c.getParaVer(), c.getAssistidas(), c.getAvaliadas(), c.getProfissão());
+                    c.getParaVer(), c.getAssistidas(), c.getAvaliadas(), c.getProfissao());
             }
         }
     }
@@ -275,7 +275,7 @@ public class PlataformaStreaming {
 
     public void cadastrarCliente(Cliente cliente) {
         String str;
-        if(cliente.getProfissão() == null){
+        if(cliente.getProfissao() == null){
             str = cliente.getNome()+";"+
                 cliente.getUser()+";"+
                 cliente.getSenha();
@@ -283,7 +283,7 @@ public class PlataformaStreaming {
             str = cliente.getNome()+";"+
                 cliente.getUser()+";"+
                 cliente.getSenha()+";"+
-                cliente.getProfissão(); 
+                cliente.getProfissao(); 
         }
 
 
@@ -374,7 +374,7 @@ public class PlataformaStreaming {
         List<Cliente> apenas15MaisAvaliacoes = new ArrayList<Cliente>();
 
         for(Cliente c : clientes) {
-            if(!"Admin".equals(c.getProfissão())) {
+            if(!"Admin".equals(c.getProfissao())) {
                 apenasEspectadores.add(c);
                 if(c.getAvaliadas().size() >= 3) {
                     apenas15MaisAvaliacoes.add(c);
