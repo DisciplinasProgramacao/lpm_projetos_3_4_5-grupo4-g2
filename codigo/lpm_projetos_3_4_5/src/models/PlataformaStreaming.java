@@ -408,7 +408,7 @@ public class PlataformaStreaming {
         System.out.println("Top 10 de midias com melhores votos:");
 
         top10Midias.forEach(t -> {
-            System.out.println(t.getNome() + " | "+ t.getMedia());
+            System.out.println(t.getNome() + " | " + t.getMedia());
         });
     }
 
@@ -425,15 +425,54 @@ public class PlataformaStreaming {
         System.out.println("Top 10 de midias mais vistas:");
 
         top10Midias.forEach(t -> {
-            System.out.println(t.getNome() + " | "+ t.getAudiencia());
+            System.out.println(t.getNome() + " | " + t.getAudiencia());
         });
     }
 
-    public void gerarRelatorio10MidiasMelhoresVotosCadaGenero() {
+    public void gerarRelatorio10MidiasMelhoresVotosPorGenero(String genero) {
+        List<Midia> midiasOrdenadas = midias.stream()
+        .filter(midia -> midia.getAvaliacoes().size() > 4)
+        .filter(midia -> genero.equals(midia.getGenero()))
+        .sorted(Comparator.comparingDouble(midia -> midia.getAudiencia()))
+        .collect(Collectors.toList());
 
+        Collections.reverse(midiasOrdenadas);
+
+        List<Midia> top10Midias = midiasOrdenadas.stream().limit(10)
+            .collect(Collectors.toList());
+
+        System.out.println("Top 10 de midias de " + genero + " com melhores votos:");
+
+        top10Midias.forEach(t -> {
+            System.out.println(t.getNome() + " | " + t.getAudiencia());
+        });
     }
 
-    public void gerarRelatorio10MidiasMaisVisualizadasCadaGenero() {
+    public void gerarRelatorio10MidiasMaisVisualizadasPorGenero(String genero) {
+        List<Midia> midiasOrdenadas = midias.stream()
+        .filter(midia -> genero.equals(midia.getGenero()))
+        .sorted(Comparator.comparingDouble(midia -> midia.getAudiencia()))
+        .collect(Collectors.toList());
 
+        Collections.reverse(midiasOrdenadas);
+
+        List<Midia> top10Midias = midiasOrdenadas.stream().limit(10)
+            .collect(Collectors.toList());
+
+        System.out.println("Top 10 de midias de " + genero + " mais vistas:");
+
+        top10Midias.forEach(t -> {
+            System.out.println(t.getNome() + " | " + t.getAudiencia());
+        });
+    }
+
+    public void gerarRelatorioGeralMidias() {
+        System.out.println("Nome | Gênero | Média | Audiência | qnt.Avaliações");
+        midias.forEach(m -> System.out.println(
+            m.getNome() + " | " + 
+            m.getGenero() + " | " +
+            m.getMedia() + " | " +
+            m.getAudiencia() + " | " +
+            m.getAvaliacoes().size()));
     }
 }

@@ -71,7 +71,6 @@ public class App {
                     System.out.print("Senha: ");
                     senha = scanner.nextLine();
 
-                    System.out.println("Trabalha com críticas?");
                     profissao = menuProfissaoDoCliente();
 
                     if(profissao == null) {
@@ -446,8 +445,9 @@ public class App {
         }
     }
 
-        public static void menuListaDeRelatorios(PlataformaStreaming plataforma) {
+    public static void menuListaDeRelatorios(PlataformaStreaming plataforma) {
 
+        String genero;
         Scanner scanner = new Scanner(System.in);
         int opcao = -1;
         while (opcao != 0) {
@@ -461,8 +461,9 @@ public class App {
             System.out.println("3. Porcentagem de clientes com mais de 15 avaliações");
             System.out.println("4. Top 10 midias com melhores votos");
             System.out.println("5. Top 10 midias mais visualizadas");
-            System.out.println("6. Top 10 midias com melhores votos de cada genero");
-            System.out.println("7. Top 10 midias mais visualizadas de cada genero");
+            System.out.println("6. Top 10 midias com melhores votos por genero");
+            System.out.println("7. Top 10 midias mais visualizadas por genero");
+            System.out.println("8. Geral todas as midias");
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt();
             scanner.nextLine();
@@ -493,11 +494,23 @@ public class App {
                     scanner.nextLine();
                     break;
                 case 6:
-                    plataforma.gerarRelatorio10MidiasMelhoresVotosCadaGenero();
+                    genero = menuSelecionaGenero();
+
+                    if(genero != null) {
+                        plataforma.gerarRelatorio10MidiasMelhoresVotosPorGenero(genero);
+                    }
                     scanner.nextLine();
                     break;
                 case 7:
-                    plataforma.gerarRelatorio10MidiasMaisVisualizadasCadaGenero();
+                    genero = menuSelecionaGenero();
+
+                    if(genero != null) {
+                        plataforma.gerarRelatorio10MidiasMaisVisualizadasPorGenero(genero);
+                    }
+                    scanner.nextLine();
+                    break;
+                case 8:
+                    plataforma.gerarRelatorioGeralMidias();
                     scanner.nextLine();
                     break;
                 default:
@@ -516,7 +529,7 @@ public class App {
         while (opcao != 1 && opcao != 2) {
             clearScreen();
             System.out.println();
-            System.out.println("-------- AVALIAR FILME -----------");
+            System.out.println("-------- AVALIAR -----------");
             System.out.println("1. Não avaliar");
             System.out.println("2. Dar nota");
             System.out.print("Escolha uma opção: ");
@@ -558,7 +571,7 @@ public class App {
         while (opcao != 1 && opcao != 2) {
             clearScreen();
             System.out.println();
-            System.out.println("-------- AVALIAR FILME -----------");
+            System.out.println("-------- AVALIAR -----------");
             System.out.println("1. Não avaliar");
             System.out.println("2. Dar nota");
             System.out.print("Escolha uma opção: ");
@@ -600,7 +613,8 @@ public class App {
         int opcao = -1;
         while (opcao < 0 || opcao > 4) {
             clearScreen();
-            System.out.println();
+            System.out.println();                    
+            System.out.println("Selecione uma profissao:");
             System.out.println("1. Nenhuma das alternativas");
             System.out.println("2. Jornalista");
             System.out.println("3. Diretor");
@@ -628,6 +642,64 @@ public class App {
             }
         }
         return profissao;
+    }
+
+    public static String menuSelecionaGenero() {
+        String genero = null;
+        Scanner scanner = new Scanner(System.in);
+        int opcao = -1;
+        while (opcao < 1 || opcao > 9) {
+            clearScreen();
+            System.out.println("Slecione o genero: ");
+            System.out.println("1. Ação");
+            System.out.println("2. Anime");
+            System.out.println("3. Aventura");
+            System.out.println("4. Comédia");
+            System.out.println("5. Documentário");
+            System.out.println("6. Drama");
+            System.out.println("7. Policial");
+            System.out.println("8. Romance");
+            System.out.println("9. Suspense");
+            System.out.print("Escolha uma opção: ");
+            opcao = scanner.nextInt();
+            scanner.nextLine();
+    
+            switch (opcao) {
+                case 1:
+                    genero = "Ação";
+                    break;
+                case 2:
+                    genero = "Anime";
+                    break;
+                case 3:
+                    genero = "Aventura";
+                    break;
+                case 4:
+                    genero = "Comédia";
+                    break;
+                case 5:
+                    genero = "Documentário";
+                    break;
+                case 6:
+                    genero = "Drama";
+                    break;
+                case 7:
+                    genero = "Policial";
+                    break;
+                case 8:
+                    genero = "Romance";
+                    break;
+                case 9:
+                    genero = "Suspense";
+                    break;
+                default:
+                    clearScreen();
+                    System.out.println("Essa não é uma opacao válida. Digite novamente");
+                    spendTime(3000);
+                    break;
+            }
+        }
+        return genero;
     }
 }
 
