@@ -227,6 +227,7 @@ public class PlataformaStreaming {
         if(clienteAtual != null) {
             clienteAtual.getAvaliadas().clear();
         }
+        clientes.forEach(c -> c.getAvaliadas().clear());
         Files.lines(Paths.get("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Avaliacoes.csv"))
         .map(lines -> lines.split(";"))
         .forEach(aval -> {
@@ -351,12 +352,21 @@ public class PlataformaStreaming {
         
         Cliente queMaisAssistiu = clientesOrdenados.get(0);
 
-        System.out.println("O cliente que mais assistiu mídias na plataforma foi: "+ queMaisAssistiu.getNome());
+        System.out.println("O cliente que mais assistiu mídias na plataforma foi: "+ queMaisAssistiu.getUser());
         System.out.println("A quantidade de mídias assistidas foi: "+ queMaisAssistiu.getAssistidas().size());
     }
 
     public void gerarRelatorioClienteQueMaisAvaliouMidias() {
-
+        List<Cliente> clientesOrdenados = clientes.stream()
+            .sorted(Comparator.comparingInt(cliente -> cliente.getAvaliadas().size()))
+            .collect(Collectors.toList());
+            
+        Collections.reverse(clientesOrdenados);
+        
+        Cliente queMaisAvaliou = clientesOrdenados.get(0);
+        
+        System.out.println("O cliente que mais avaliou mídias na plataforma foi: "+ queMaisAvaliou.getUser());
+        System.out.println("A quantidade de mídias avaliadas foi: "+ queMaisAvaliou.getAssistidas().size());
     }
     
     public void gerarRelatorioClientesCom15MaisAvaliacoes() {
@@ -366,24 +376,57 @@ public class PlataformaStreaming {
         for(Cliente c : clientes) {
             if(!"Admin".equals(c.getProfissão())) {
                 apenasEspectadores.add(c);
-                if(c.getAvaliadas().size() >= 15) {
+                if(c.getAvaliadas().size() >= 3) {
                     apenas15MaisAvaliacoes.add(c);
                 }
             }
         }
 
-        double porcentagem = ((double) apenas15MaisAvaliacoes.size() / apenasEspectadores.size()) * 100;
+        double porcentagem;
+        if(apenasEspectadores.size() < 1) {
+          porcentagem = ((double) apenas15MaisAvaliacoes.size() / 1) * 100;  
+        } else {
+         porcentagem = ((double) apenas15MaisAvaliacoes.size() / apenasEspectadores.size()) * 100;
+        }
+
         System.out.println("Relatório de porcentagem de usuários com 15 ou mais avaliações:");
-        System.out.println("Atualmente o sistema possui " + apenas15MaisAvaliacoes.size() + " usuários que se enquadram nesse critério.");
-        System.out.println("Esse valor corresponde a " + porcentagem + " por cento dos usuários." );
+        System.out.println("Atualmente o sistema possui " + apenas15MaisAvaliacoes.size() + " usuários que se enquadram nesse critério.\n");
+        System.out.printf("Esse valor corresponde a %.2f por cento dos usuários.%n", porcentagem);
     }
 
     public void gerarRelatorio10MidiasMelhoresVotos() {
-        
+        List<Midia> midiasOrdenadas = midias.stream()
+                .filter(midia -> midia.getAvaliacoes().size() > 4)
+                .sorted(Comparator.comparingDouble(midia -> midia.getMedia()))
+                .collect(Collectors.toList());
+
+        Collections.reverse(midiasOrdenadas);
+
+        List<Midia> top10Midias = midiasOrdenadas.stream().limit(10)
+            .collect(Collectors.toList());
+
+        System.out.println("Top 10 de midias com melhores votos:");
+
+        top10Midias.forEach(t -> {
+            System.out.println(t.getNome() + " | "+ t.getMedia());
+        });
     }
 
     public void gerarRelatorio10MidiasMaisVisualizadas() {
+        List<Midia> midiasOrdenadas = midias.stream()
+        .sorted(Comparator.comparingDouble(midia -> midia.getAudiencia()))
+        .collect(Collectors.toList());
 
+        Collections.reverse(midiasOrdenadas);
+
+        List<Midia> top10Midias = midiasOrdenadas.stream().limit(10)
+            .collect(Collectors.toList());
+
+        System.out.println("Top 10 de midias mais vistas:");
+
+        top10Midias.forEach(t -> {
+            System.out.println(t.getNome() + " | "+ t.getAudiencia());
+        });
     }
 
     public void gerarRelatorio10MidiasMelhoresVotosCadaGenero() {

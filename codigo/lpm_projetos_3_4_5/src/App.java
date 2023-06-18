@@ -103,11 +103,12 @@ public class App {
                                 menuCliente(plataforma);
                             }
                         } else {
+                            clearScreen();
                             System.out.println("Usuario ou senha invalidos!");
+                            spendTime(5000);
                         }
                     } catch(Exception e){
                         e.getMessage();
-                        spendTime(12000);
                     }
                     break;
                 default:
