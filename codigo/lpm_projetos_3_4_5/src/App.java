@@ -473,6 +473,7 @@ public class App {
                     break;
                 case 1:
                     plataforma.gerarRelatorioClienteQueMaisAssistiuMidias();
+                    scanner.nextLine();
                     break;
                 case 2:
                     plataforma.gerarRelatorioClienteQueMaisAvaliouMidias();

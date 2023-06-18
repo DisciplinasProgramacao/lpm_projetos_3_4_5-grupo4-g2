@@ -6,21 +6,21 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class PlataformaStreaming {
     public static PlataformaStreaming instancia;
     private String nome;
-    private ArrayList<Midia> midias;
-    private ArrayList<Cliente> clientes;
+    private ArrayList<Midia> midias = new ArrayList<Midia>();
+    private ArrayList<Cliente> clientes = new ArrayList<Cliente>();
     private Cliente clienteAtual = null;
 
     // construtor e getters / setters
     private PlataformaStreaming(String nome) {
         this.nome = nome;
-        this.midias = new ArrayList<Midia>();
-        this.clientes = new ArrayList<Cliente>();
     }
 
     public static PlataformaStreaming getInstance(String nome) {
@@ -106,8 +106,7 @@ public class PlataformaStreaming {
                 }
                 
                 if(!clienteAtual.getAssistidas().contains(m)) {
-                    //clienteAtual.getAssistidas().add(m);
-                    //m.addAudiencia();
+                    clienteAtual.getAssistidas().add(m);
                     cadastrarAudiencia(clienteAtual.getUser(), "A", m.getId());                  
                     System.out.println("Assistido.");
                     return m;
@@ -197,6 +196,7 @@ public class PlataformaStreaming {
         if(clienteAtual != null) {
             clienteAtual.getAssistidas().clear();
         }
+        clientes.forEach(c -> c.getAssistidas().clear());
         midias.forEach(m -> m.setAudiencia(0));
         Files.lines(Paths.get("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Audiencia.csv"))
         .map(lines -> lines.split(";"))
@@ -343,7 +343,16 @@ public class PlataformaStreaming {
     // }
     
     public void gerarRelatorioClienteQueMaisAssistiuMidias() {
+        List<Cliente> clientesOrdenados = clientes.stream()
+                .sorted(Comparator.comparingInt(cliente -> cliente.getAssistidas().size()))
+                .collect(Collectors.toList());
+        
+        Collections.reverse(clientesOrdenados);
+        
+        Cliente queMaisAssistiu = clientesOrdenados.get(0);
 
+        System.out.println("O cliente que mais assistiu mídias na plataforma foi: "+ queMaisAssistiu.getNome());
+        System.out.println("A quantidade de mídias assistidas foi: "+ queMaisAssistiu.getAssistidas().size());
     }
 
     public void gerarRelatorioClienteQueMaisAvaliouMidias() {
@@ -370,7 +379,7 @@ public class PlataformaStreaming {
     }
 
     public void gerarRelatorio10MidiasMelhoresVotos() {
-
+        
     }
 
     public void gerarRelatorio10MidiasMaisVisualizadas() {
@@ -381,7 +390,7 @@ public class PlataformaStreaming {
 
     }
 
-        public void gerarRelatorio10MidiasMaisVisualizadasCadaGenero() {
+    public void gerarRelatorio10MidiasMaisVisualizadasCadaGenero() {
 
     }
 }
