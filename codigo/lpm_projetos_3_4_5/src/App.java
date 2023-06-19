@@ -137,7 +137,7 @@ public class App {
             System.out.println("-------- MENU CLIENTE -----------");
             System.out.println("Olá, " + plataforma.getClienteAtual().getNome());
             System.out.println("Bem vindo(a) à " + plataforma.getNome());
-            System.out.println("0. Delogar");
+            System.out.println("0. Deslogar");
             System.out.println("1. Mostrar catalogo");
             System.out.println("2. Filtrar por nome");
             System.out.println("3. Filtrar por idioma");
@@ -164,7 +164,7 @@ public class App {
                     scanner.nextLine();
                     break;
                 case 2:
-                    System.out.println("Insira o nome:");
+                    System.out.print("Insira o nome: ");
                     nome = scanner.nextLine();
 
                     System.out.println("Filtro por nome:");
@@ -172,7 +172,7 @@ public class App {
                     scanner.nextLine();
                     break;
                 case 3:
-                    System.out.println("Insira o idioma:");
+                    System.out.print("Insira o idioma: ");
                     idioma = scanner.nextLine();
 
                     System.out.println("Filtro por idioma:");
@@ -180,8 +180,7 @@ public class App {
                     scanner.nextLine();
                     break;
                case 4:
-                    System.out.println("Insira o gênero:");
-                    genero = scanner.nextLine();
+                    genero = menuSelecionaGenero();
 
                     System.out.println("Filtro por gênero:");
                     plataforma.filtrarPorGenero(genero);
@@ -205,17 +204,18 @@ public class App {
                     spendTime(4000);
                     boolean naoAvaliado = true;
                     
-
-                    if(clienteAtual.getAvaliadas().size() > 0) {
-                        for(Avaliacao a : plataforma.getClienteAtual().getAvaliadas()) {
-                            if(a.getIdMidia().equals(midia.getId())) {
-                                naoAvaliado = false;
+                    if(midia != null) {
+                        if(clienteAtual.getAvaliadas().size() > 0) {
+                            for(Avaliacao a : plataforma.getClienteAtual().getAvaliadas()) {
+                                if(a.getIdMidia().equals(midia.getId())) {
+                                    naoAvaliado = false;
+                                }
                             }
                         }
-                    }
 
-                    if(naoAvaliado && midia != null) {
-                        menuAvaliar(plataforma, midia);
+                        if(naoAvaliado) {
+                            menuAvaliar(plataforma, midia);
+                        }
                     }
                     break;
                 default:
@@ -272,7 +272,7 @@ public class App {
                     scanner.nextLine();
                     break;
                 case 2:
-                    System.out.println("Insira o nome:");
+                    System.out.print("Insira o nome: ");
                     nome = scanner.nextLine();
 
                     System.out.println("Filtro por nome:");
@@ -280,16 +280,15 @@ public class App {
                     scanner.nextLine();
                     break;
                 case 3:
-                    System.out.println("Insira o idioma:");
+                    System.out.print("Insira o idioma: ");
                     idioma = scanner.nextLine();
 
                     System.out.println("Filtro por idioma:");
                     plataforma.filtrarPorIdioma(idioma);
                     scanner.nextLine();
                     break;
-                case 4:
-                    System.out.println("Insira o gênero:");
-                    genero = scanner.nextLine();
+               case 4:
+                    genero = menuSelecionaGenero();
 
                     System.out.println("Filtro por gênero:");
                     plataforma.filtrarPorGenero(genero);
@@ -313,16 +312,18 @@ public class App {
                     spendTime(4000);
                     boolean naoAvaliado = true;
 
-                    if(clienteAtual.getAvaliadas().size() > 0) {
-                        for(Avaliacao a : plataforma.getClienteAtual().getAvaliadas()) {
-                            if(a.getIdMidia().equals(midia.getId())) {
-                                naoAvaliado = false;
+                    if(midia != null) {
+                        if(clienteAtual.getAvaliadas().size() > 0) {
+                            for(Avaliacao a : plataforma.getClienteAtual().getAvaliadas()) {
+                                if(a.getIdMidia().equals(midia.getId())) {
+                                    naoAvaliado = false;
+                                }
                             }
                         }
-                    }
 
-                    if(naoAvaliado && midia != null) {
-                        menuAvaliarEspecialista(plataforma, midia);
+                        if(naoAvaliado) {
+                            menuAvaliar(plataforma, midia);
+                        }
                     }
                     break;
                 default:

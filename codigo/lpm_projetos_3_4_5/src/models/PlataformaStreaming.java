@@ -286,7 +286,6 @@ public class PlataformaStreaming {
                 cliente.getProfissao(); 
         }
 
-
         escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Espectadores.csv");
         this.clientes.add(cliente);
     }
@@ -327,21 +326,6 @@ public class PlataformaStreaming {
 
         Files.write(Path.of("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Audiencia.csv"), newLines, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
     }
-
-    // operacoes para relatorios
-    // public void printAudPerMidia(){
-    //     System.out.println("audiencia de series");
-    //     for(Midia m : this.midias) {
-    //         System.out.println("id: " + m.getId() + " | nome: " + m.getNome() + " | audiencia: " + m.getAudiencia());
-    //     }
-    // }
-
-    // public void printAllClientes() {
-    //     System.out.println("Listas dos clientes:");
-    //     for(Cliente c : this.clientes) {
-    //         System.out.println("id: " + c.getUser() + " | nome: " + c.getNome() + " | lista Assistidas: " + c.getAssistidas().size() + " | lista para ver: " + c.getParaVer().size());
-    //     }
-    // }
     
     public void gerarRelatorioClienteQueMaisAssistiuMidias() {
         List<Cliente> clientesOrdenados = clientes.stream()
@@ -376,7 +360,7 @@ public class PlataformaStreaming {
         for(Cliente c : clientes) {
             if(!"Admin".equals(c.getProfissao())) {
                 apenasEspectadores.add(c);
-                if(c.getAvaliadas().size() >= 3) {
+                if(c.getAvaliadas().size() >= 4) {
                     apenas15MaisAvaliacoes.add(c);
                 }
             }
