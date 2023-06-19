@@ -147,14 +147,14 @@ public class PlataformaStreaming {
     private void preencherFilmes() throws Exception {
         midias.clear();
         if(clienteAtual != null && !clienteAtual.ehProfissional()){
-            List<Midia> filmes = Files.lines(Paths.get("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Filmes.csv"))
+            List<Midia> filmes = Files.lines(Paths.get("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_stable/POO_Filmes.csv"))
                 .map(line -> line.split(";"))
                 .map(col -> new Filme(col[0], col[1], col[2], Integer.parseInt(col[3])))
                 .filter(m -> !m.verificaLancamento())
                 .collect(Collectors.toList());
             midias.addAll(filmes);
         } else {
-            Files.lines(Paths.get("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Filmes.csv"))
+            Files.lines(Paths.get("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_stable/POO_Filmes.csv"))
             .map(line -> line.split(";"))
             .map(col -> new Filme(col[0], col[1], col[2], Integer.parseInt(col[3])))
             .forEach(midias::add);
@@ -163,14 +163,14 @@ public class PlataformaStreaming {
 
     private void preencherSeries() throws Exception {
         if(clienteAtual != null && !clienteAtual.ehProfissional()){
-            List<Midia> series = Files.lines(Paths.get("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Series.csv"))
+            List<Midia> series = Files.lines(Paths.get("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_stable/POO_Series.csv"))
                 .map(line -> line.split(";"))
                 .map(col -> new Serie(col[0], col[1], col[2]))
                 .filter(m -> !m.verificaLancamento())
                 .collect(Collectors.toList());
             midias.addAll(series);
         } else {
-            Files.lines(Paths.get("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Series.csv"))
+            Files.lines(Paths.get("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_stable/POO_Series.csv"))
             .map(line -> line.split(";"))
             .map(col -> new Serie(col[0], col[1], col[2]))
             .forEach(midias::add);
@@ -179,7 +179,7 @@ public class PlataformaStreaming {
 
     public void preencherClientes() throws Exception {
         clientes.clear();
-        Files.lines(Paths.get("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Espectadores.csv"))
+        Files.lines(Paths.get("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_stable/POO_Espectadores.csv"))
         .map(line -> line.split(";"))
         .forEach((col) -> {
             Cliente cliente;
@@ -198,7 +198,7 @@ public class PlataformaStreaming {
         }
         clientes.forEach(c -> c.getAssistidas().clear());
         midias.forEach(m -> m.setAudiencia(0));
-        Files.lines(Paths.get("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Audiencia.csv"))
+        Files.lines(Paths.get("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_stable/POO_Audiencia.csv"))
         .map(lines -> lines.split(";"))
         .forEach((aud) -> {
             Midia auxMidia;
@@ -228,7 +228,7 @@ public class PlataformaStreaming {
             clienteAtual.getAvaliadas().clear();
         }
         clientes.forEach(c -> c.getAvaliadas().clear());
-        Files.lines(Paths.get("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Avaliacoes.csv"))
+        Files.lines(Paths.get("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_stable/POO_Avaliacoes.csv"))
         .map(lines -> lines.split(";"))
         .forEach(aval -> {
             for(Midia m : midias) {
@@ -260,7 +260,7 @@ public class PlataformaStreaming {
                     filme.getDataLancamento()+";"+
                     filme.getDuracao();
 
-        escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Filmes.csv");
+        escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_stable/POO_Filmes.csv");
         this.midias.add(filme);
     }
 
@@ -269,7 +269,7 @@ public class PlataformaStreaming {
                     serie.getNome()+";"+
                     serie.getDataLancamento();
         
-        escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Series.csv");
+        escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_stable/POO_Series.csv");
         this.midias.add(serie);
     }
 
@@ -286,7 +286,7 @@ public class PlataformaStreaming {
                 cliente.getProfissao(); 
         }
 
-        escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Espectadores.csv");
+        escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_stable/POO_Espectadores.csv");
         this.clientes.add(cliente);
     }
 
@@ -301,18 +301,18 @@ public class PlataformaStreaming {
             avaliacao.getNota();
 
                     
-            escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Avaliacoes.csv");
+            escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_stable/POO_Avaliacoes.csv");
         }
     }
 
     private void cadastrarAudiencia(String user, String fa, String idMidia) {
         String str = user + ";" + fa + ";" + idMidia;
 
-        escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Audiencia.csv");
+        escrever(str, "/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_stable/POO_Audiencia.csv");
     }
 
     private void removerParaVer(String idMidia) throws Exception {
-        ArrayList<String> oldLines = new ArrayList<String>(Files.readAllLines(Path.of("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Audiencia.csv")));
+        ArrayList<String> oldLines = new ArrayList<String>(Files.readAllLines(Path.of("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_stable/POO_Audiencia.csv")));
         ArrayList<String> newLines =  new ArrayList<String>();
 
         oldLines.forEach((l) -> newLines.add(l));
@@ -324,7 +324,7 @@ public class PlataformaStreaming {
             }
         }
 
-        Files.write(Path.of("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_test/POO_Audiencia.csv"), newLines, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
+        Files.write(Path.of("/home/ribas/PUCMINAS/Lab_PM/lpm_projetos_3_4_5-grupo4-g2/codigo/lpm_projetos_3_4_5/src/csv_files_stable/POO_Audiencia.csv"), newLines, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
     }
     
     public void gerarRelatorioClienteQueMaisAssistiuMidias() {

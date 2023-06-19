@@ -79,14 +79,6 @@ public class Cliente {
     }
 
     // operações da classe
-    public void assistirMidia(Midia midia) {
-        for(Midia m : paraVer) {
-            if(m.getId().equals(midia.getId())){
-                this.paraVer.remove(midia);
-            }
-        }
-    }
-
     public boolean ehEspecialista() {
         return this.getAssistidas().size() > 4;
     }
@@ -94,6 +86,4 @@ public class Cliente {
     public boolean ehProfissional() {
         return this.profissao != null;
     }
-
-    // operações de especialista
 }

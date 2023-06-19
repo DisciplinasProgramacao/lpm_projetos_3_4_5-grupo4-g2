@@ -20,7 +20,7 @@ public class PlataformaStreamingTest {
         plataforma = PlataformaStreaming.getInstance("Streaming");
 
         //instancia clientes
-        clienteNormal =  new Cliente("1", "a", "ab", "123");
+        clienteNormal =  new Cliente("a", "ab", "123");
 
         plataforma.getClientes().add(clienteNormal);
     }
@@ -58,27 +58,15 @@ public class PlataformaStreamingTest {
         assertNotEquals(null, plataforma.getClienteAtual());
         plataforma.logoff();
 
-        assertEquals(plataforma.getClienteAtual(), null);
+        assertEquals(null, plataforma.getClienteAtual());
     }
 
     @Test
-    public void shouldFillMidiasWithMovies() {
-        int result = 3;
+    public void shouldFillMidias() {
+        int result = 48;
 
         try {
-            plataforma.preencherFilmes();
-            assertEquals(plataforma.getMidias().size(), result);
-        } catch(Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    @Test
-    public void shouldFillMidiasWithSeries() {
-        int result = 30;
-
-        try {
-            plataforma.preencherSeries();
+            plataforma.preencherMidias();
             assertEquals(plataforma.getMidias().size(), result);
         } catch(Exception e) {
             System.out.println(e.getMessage());
@@ -87,7 +75,7 @@ public class PlataformaStreamingTest {
 
     @Test
     public void shouldFillClientes(){
-        int result = 36;
+        int result = 29;
 
         try {
             plataforma.preencherClientes();
