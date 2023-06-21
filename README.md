@@ -2,7 +2,10 @@
 
 # Plataforma de Streaming
 
-Escreva um ou dois parágrafos resumindo o objetivo do seu projeto.
+
+O trabalho consistiu na criação de uma plataforma de streaming em Java, que simulava o funcionamento de um serviço de transmissão de séries e filmes. A plataforma foi desenvolvida utilizando conceitos de orientação a objetos e estruturas de dados para armazenar e gerenciar o catálogo de conteúdos disponíveis.
+
+No sistema, os usuários podiam se cadastrar como clientes e ter acesso a um perfil personalizado. Cada cliente tinha a possibilidade de visualizar o catálogo completo de séries e filmes, podendo realizar pesquisas por gênero, título ou idioma. Além disso, era possível adicionar conteúdos à lista de favoritos e avaliar cada filme ou série assistida.
 
 ## Alunos integrantes da equipe
 
