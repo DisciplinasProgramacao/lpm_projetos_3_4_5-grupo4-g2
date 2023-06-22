@@ -322,7 +322,7 @@ public class App {
                         }
 
                         if(naoAvaliado) {
-                            menuAvaliar(plataforma, midia);
+                            menuAvaliarEspecialista(plataforma, midia);
                         }
                     }
                     break;

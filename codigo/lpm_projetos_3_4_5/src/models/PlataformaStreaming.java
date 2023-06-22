@@ -380,7 +380,7 @@ public class PlataformaStreaming {
 
     public void gerarRelatorio10MidiasMelhoresVotos() {
         List<Midia> midiasOrdenadas = midias.stream()
-                .filter(midia -> midia.getAvaliacoes().size() > 4)
+                .filter(midia -> midia.getAvaliacoes().size() > 100)
                 .sorted(Comparator.comparingDouble(midia -> midia.getMedia()))
                 .collect(Collectors.toList());
 
@@ -415,7 +415,7 @@ public class PlataformaStreaming {
 
     public void gerarRelatorio10MidiasMelhoresVotosPorGenero(String genero) {
         List<Midia> midiasOrdenadas = midias.stream()
-        .filter(midia -> midia.getAvaliacoes().size() > 4)
+        .filter(midia -> midia.getAvaliacoes().size() > 100)
         .filter(midia -> genero.equals(midia.getGenero()))
         .sorted(Comparator.comparingDouble(midia -> midia.getAudiencia()))
         .collect(Collectors.toList());
