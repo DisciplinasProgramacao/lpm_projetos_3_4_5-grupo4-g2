@@ -360,7 +360,7 @@ public class PlataformaStreaming {
         for(Cliente c : clientes) {
             if(!"Admin".equals(c.getProfissao())) {
                 apenasEspectadores.add(c);
-                if(c.getAvaliadas().size() >= 4) {
+                if(c.getAvaliadas().size() >= 15) {
                     apenas15MaisAvaliacoes.add(c);
                 }
             }

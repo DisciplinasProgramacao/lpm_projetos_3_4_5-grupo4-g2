@@ -25,14 +25,6 @@ public class App {
         System.out.flush();
     }
 
-    private static void spendTime(int time) {
-        try {
-            Thread.sleep(time);
-        } catch(Exception e){
-            e.getMessage();
-        }
-    }
-
     // MENU DE ACESSO
     public static void menuDeAcesso(PlataformaStreaming plataforma) throws Exception {
 
@@ -104,15 +96,16 @@ public class App {
                         } else {
                             clearScreen();
                             System.out.println("Usuario ou senha invalidos!");
-                            spendTime(5000);
+                            scanner.nextLine();
                         }
                     } catch(Exception e){
                         e.getMessage();
                     }
                     break;
                 default:
+                    clearScreen();
                     System.out.println("Opção inválida. Digite novamente.");
-                    spendTime(3000);
+                    scanner.nextLine();
                     break;
             }
         }
@@ -154,8 +147,8 @@ public class App {
                 case 0:
                     clearScreen();
                     System.out.println("Deslogando usuário.");
+                    scanner.nextLine();
 
-                    spendTime(1500);
                     plataforma.logoff();
                     break;
                 case 1:
@@ -201,7 +194,7 @@ public class App {
 
                     clearScreen();
                     midia = plataforma.assistirMidia(nome);
-                    spendTime(4000);
+                    scanner.nextLine();
                     boolean naoAvaliado = true;
                     
                     if(midia != null) {
@@ -219,8 +212,9 @@ public class App {
                     }
                     break;
                 default:
+                    clearScreen();
                     System.out.println("Opção inválida. Digite novamente.");
-                    spendTime(3000);
+                    scanner.nextLine();
                     break;
             }
         }
@@ -262,8 +256,8 @@ public class App {
                 case 0:
                     clearScreen();
                     System.out.println("Deslogando usuário.");
+                    scanner.nextLine();
 
-                    spendTime(1500);
                     plataforma.logoff();
                     break;
                 case 1:
@@ -309,7 +303,7 @@ public class App {
 
                     clearScreen();
                     midia = plataforma.assistirMidia(nome);
-                    spendTime(4000);
+                    scanner.nextLine();
                     boolean naoAvaliado = true;
 
                     if(midia != null) {
@@ -327,8 +321,9 @@ public class App {
                     }
                     break;
                 default:
+                    clearScreen();
                     System.out.println("Opção inválida. Digite novamente.");
-                    spendTime(3000);
+                    scanner.nextLine();
                     break;
             }
         }
@@ -367,8 +362,8 @@ public class App {
                 case 0:
                     clearScreen();
                     System.out.println("Deslogando usuário.");
-
-                    spendTime(1500);
+                    scanner.nextLine();
+                    
                     plataforma.logoff();
                     break;
                 case 1:
@@ -395,8 +390,9 @@ public class App {
                     menuListaDeRelatorios(plataforma);
                     break;
                 default:
+                    clearScreen();
                     System.out.println("Opção inválida. Digite novamente.");
-                    spendTime(3000);
+                    scanner.nextLine();
                     break;
             }
         }
@@ -440,7 +436,9 @@ public class App {
                     scanner.nextLine();
                     break;
                 default:
+                    clearScreen();
                     System.out.println("Opção inválida. Digite novamente.");
+                    scanner.nextLine();
                     break;
             }
         }
@@ -515,7 +513,9 @@ public class App {
                     scanner.nextLine();
                     break;
                 default:
+                    clearScreen();
                     System.out.println("Opção inválida. Digite novamente.");
+                    scanner.nextLine();
                     break;
             }
         }
@@ -546,8 +546,9 @@ public class App {
                     scanner.nextLine();
 
                     if(nota < 1 || nota > 5) {
+                        clearScreen();
                         System.out.println("Nota inválida.");
-                        spendTime(3000);
+                        scanner.nextLine();
                         opcao = -1;
                         break;
                     }
@@ -556,8 +557,9 @@ public class App {
                     plataforma.cadastrarAvaliacao(avaliacao, midia);
                     break;
                 default:
+                    clearScreen();
                     System.out.println("Essa não é uma opacao válida. Digite novamente");
-                    spendTime(3000);
+                    scanner.nextLine();
                     break;
             }
         }
@@ -588,8 +590,9 @@ public class App {
                     scanner.nextLine();
 
                     if(nota < 1 || nota > 5) {
+                        clearScreen();
                         System.out.println("Nota inválida.");
-                        spendTime(3000);
+                        scanner.nextLine();
                         opcao = -1;
                         break;
                     }
@@ -601,8 +604,9 @@ public class App {
                     plataforma.cadastrarAvaliacao(avaliacao, midia);
                     break;
                 default:
+                    clearScreen();
                     System.out.println("Essa não é uma opacao válida. Digite novamente");
-                    spendTime(3000);
+                    scanner.nextLine();
                     break;
             }
         }
@@ -637,8 +641,9 @@ public class App {
                     profissao = "Ator";
                     break;
                 default:
+                    clearScreen();
                     System.out.println("Essa não é uma opacao válida. Digite novamente");
-                    spendTime(3000);
+                    scanner.nextLine();
                     break;
             }
         }
@@ -696,7 +701,7 @@ public class App {
                 default:
                     clearScreen();
                     System.out.println("Essa não é uma opacao válida. Digite novamente");
-                    spendTime(3000);
+                    scanner.nextLine();
                     break;
             }
         }
